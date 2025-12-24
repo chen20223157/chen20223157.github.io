@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>阿里开发规范解读：打造高质量代码的基石 | 欢迎来到chen的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="在当今软件开发的快节奏环境中，代码质量的重要性愈发凸显。阿里巴巴作为全球知名的科技企业，其制定的开发规范在业界具有广泛的影响力。本文将深入探讨阿里开发规范，涵盖其官网地址以及各个重要方面的详细内容。 阿里开发规范官网阿里巴巴开发规范的官方网站为GitHub - alibaba&#x2F;p3c: Alibaba Java Coding Guidelines pmd implements and I">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里开发规范解读：打造高质量代码的基石">
+<meta property="og:url" content="http://example.com/2025/12/23/%E9%98%BF%E9%87%8C%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E8%A7%A3%E8%AF%BB%EF%BC%9A%E6%89%93%E9%80%A0%E9%AB%98%E8%B4%A8%E9%87%8F%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9F%BA%E7%9F%B3/index.html">
+<meta property="og:site_name" content="欢迎来到chen的博客">
+<meta property="og:description" content="在当今软件开发的快节奏环境中，代码质量的重要性愈发凸显。阿里巴巴作为全球知名的科技企业，其制定的开发规范在业界具有广泛的影响力。本文将深入探讨阿里开发规范，涵盖其官网地址以及各个重要方面的详细内容。 阿里开发规范官网阿里巴巴开发规范的官方网站为GitHub - alibaba&#x2F;p3c: Alibaba Java Coding Guidelines pmd implements and I">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-23T11:39:42.000Z">
+<meta property="article:modified_time" content="2025-12-24T02:41:46.714Z">
+<meta property="article:author" content="little chen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="欢迎来到chen的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">欢迎来到chen的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-阿里开发规范解读：打造高质量代码的基石" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/23/%E9%98%BF%E9%87%8C%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E8%A7%A3%E8%AF%BB%EF%BC%9A%E6%89%93%E9%80%A0%E9%AB%98%E8%B4%A8%E9%87%8F%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9F%BA%E7%9F%B3/" class="article-date">
+  <time class="dt-published" datetime="2025-12-23T11:39:42.000Z" itemprop="datePublished">2025-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      阿里开发规范解读：打造高质量代码的基石
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在当今软件开发的快节奏环境中，代码质量的重要性愈发凸显。阿里巴巴作为全球知名的科技企业，其制定的开发规范在业界具有广泛的影响力。本文将深入探讨阿里开发规范，涵盖其官网地址以及各个重要方面的详细内容。</p>
+<h2 id="阿里开发规范官网"><a href="#阿里开发规范官网" class="headerlink" title="阿里开发规范官网"></a>阿里开发规范官网</h2><p>阿里巴巴开发规范的官方网站为<a target="_blank" rel="noopener" href="https://github.com/alibaba/p3c">GitHub - alibaba&#x2F;p3c: Alibaba Java Coding Guidelines pmd implements and IDE plugin</a> 。在这个网站上，开发者可以获取到最新版本的开发手册，包括 Java、Android 等多种语言和平台的规范文档。同时，官网还提供了丰富的资源，如插件下载、示例代码、社区讨论等，方便开发者深入学习和交流。</p>
+<h2 id="Java-开发规范"><a href="#Java-开发规范" class="headerlink" title="Java 开发规范"></a>Java 开发规范</h2><h3 id="命名风格"><a href="#命名风格" class="headerlink" title="命名风格"></a>命名风格</h3><ol>
+<li>强制规则<ul>
+<li>所有编程相关的命名均不能以下划线或美元符号开始，也不能以下划线或美元符号结束。例如，<code>_name</code>、<code>name_</code>、<code>$Object</code> 等命名方式都是不允许的。</li>
+<li>严禁使用拼音与英文混合的方式，更不允许直接使用中文命名。正确的英文拼写和语法能极大提升代码的可读性，避免歧义。像 <code>ali</code>、<code>alibaba</code>、<code>taobao</code> 等国际通用名称是符合规范的，而 <code>DaZhePromotion</code>（打折）、<code>getPingfenByName()</code>（评分）等则不符合要求。</li>
+<li>代码和注释中要严格避免使用任何人类语言中的种族歧视性或侮辱性词语。例如，应避免使用 <code>blackList</code>、<code>whiteList</code>、<code>slave</code>、<code>SB</code>、<code>WTF</code> 等词汇，可采用 <code>blockList</code>、<code>allowList</code>、<code>secondary</code> 等替代。</li>
+<li>类名使用 UpperCamelCase 风格，但 DO &#x2F; PO &#x2F; DTO &#x2F; BO &#x2F; VO &#x2F; UID 等除外。例如，<code>ForceCode</code>、<code>UserDO</code>、<code>HtmlDTO</code> 是正确的，而 <code>forcecode</code>、<code>UserDo</code> 则错误。</li>
+<li>方法名、参数名、成员变量、局部变量统一使用 lowerCamelCase 风格，如 <code>localValue</code>、<code>getHttpMessage()</code>、<code>inputUserId</code>。</li>
+<li>常量命名全部大写，单词间用下划线隔开，语义要完整清楚。例如，<code>MAX_COUNT</code>、<code>DEFAULT_TIMEOUT</code>。</li>
+<li>抽象类命名使用 Abstract 或 Base 开头；异常类命名使用 Exception 结尾；测试类命名以要测试的类的名称开始，以 Test 结尾。</li>
+<li>类型与中括号紧挨相连来定义数组，如 <code>int[] arrayDemo</code>，而不是 <code>int arrayDemo[]</code>。</li>
+<li>POJO 类中的布尔类型变量，不要加 is 前缀，否则部分框架解析可能会引起序列化错误。比如，定义为 <code>Boolean isDeleted</code> 的属性，其方法也是 <code>isDeleted()</code>，框架反向解析时可能会误以为对应的属性名称是 <code>deleted</code>，导致属性获取不到并抛出异常。</li>
+<li>包名统一使用小写，点分隔符之间有且仅有一个自然语义的英语单词，且统一使用单数形式，类名若有复数含义可使用复数形式。例如，应用工具类包名为 <code>com.alibaba.ei.kunlun.aap.util</code>，类名为 <code>MessageUtils</code>。</li>
+<li>避免在子父类的成员变量之间、不同代码块的局部变量之间采用完全相同的命名，以免降低代码的可理解性。</li>
+<li>杜绝完全不规范的英文缩写，避免望文不知义。例如，不能将 <code>AbstractClass</code> 缩写成 <code>AbsClass</code>，将 <code>condition</code> 缩写成 <code>condi</code>。</li>
+</ul>
+</li>
+<li>推荐规则<ul>
+<li>为了使代码自解释，自定义编程元素命名时应使用完整的单词组合来表达。例如，JDK 中对某个对象引用的 volatile 字段进行原子更新的类名为 <code>AtomicReferenceFieldUpdater</code>。</li>
+<li>在常量与变量命名时，表示类型的名词放在词尾，提升辨识度。例如，<code>userList</code>、<code>orderId</code>。</li>
+<li>如果模块、接口、类、方法使用了设计模式，命名时应体现出具体模式，便于阅读者快速理解架构设计思想。比如，<code>OrderFactory</code>（工厂模式）、<code>ResourceObserver</code>（观察者模式）。</li>
+<li>接口类中的方法和属性不要加任何修饰符号（public 也不要加），保持代码简洁性，并加上有效的 Javadoc 注释。尽量不在接口里定义常量，若要定义，需确保该常量与接口方法相关且是整个应用的基础常量。</li>
+<li>对于 Service 和 DAO 类，基于 SOA 理念，暴露出来的服务必须是接口，内部实现类用 Impl 后缀与接口区别，如 <code>CacheServiceImpl</code> 实现 <code>CacheService</code> 接口。若是形容能力的接口名称，可取对应的形容词（通常是 - able 结尾）为接口名，如 <code>AbstractTranslator</code> 实现 <code>Translatable</code> 接口。</li>
+</ul>
+</li>
+<li>参考规则<ul>
+<li>枚举类名带上 Enum 后缀，枚举成员名称全大写，单词间用下划线隔开。例如，<code>ProcessStatusEnum</code> 的成员名称 <code>SUCCESS</code>、<code>UNKNOWN_REASON</code>。</li>
+<li>Service &#x2F; DAO 层方法命名有特定规约：获取单个对象的方法用 get 做前缀；获取多个对象的方法用 list 做前缀，复数结尾，如 <code>listObjects</code>；获取统计值的方法用 count 做前缀；插入的方法用 save &#x2F;insert 做前缀；删除的方法用 remove &#x2F;delete 做前缀；修改的方法用 update 做前缀。领域模型命名也有规约，数据对象为 <code>xxxDO</code>（xxx 为数据表名），数据传输对象为 <code>xxxDTO</code>（xxx 为业务领域相关名称），展示对象为 <code>xxxVO</code>（xxx 一般为网页名称），POJO 是 DO &#x2F; DTO &#x2F; BO &#x2F; VO 的统称，禁止命名成 <code>xxxPOJO</code>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="常量定义"><a href="#常量定义" class="headerlink" title="常量定义"></a>常量定义</h3><ol>
+<li>强制规则<ul>
+<li>不允许任何魔法值（未经定义的常量）直接出现在代码中。例如，不能在代码中直接写 <code>if (status == 1)</code>，而应先定义常量 <code>public static final int STATUS_SUCCESS = 1;</code>，然后使用 <code>if (status == STATUS_SUCCESS)</code>。</li>
+<li>不要使用一个常量类维护所有常量，应按常量功能进行归类，分开维护。比如，缓存相关常量放在类 <code>CacheConsts</code> 下，系统配置相关常量放在类 <code>ConfigConsts</code> 下。</li>
+</ul>
+</li>
+<li>推荐规则<ul>
+<li>常量的复用层次有区别时，应分开定义成不同层次的常量，避免低层次常量被高层次复用，造成常量污染。例如，<code>PageInfo</code> 类中的 <code>PAGE_SIZE</code> 常量，不同业务模块可能有不同的分页需求，应根据业务模块的层次分别定义。</li>
+<li>如果变量值仅在一个范围内变化，且带有名称之外的延伸属性，应定义为枚举类型。例如，订单状态可定义为枚举类型 <code>public enum OrderStatus { PENDING, PAID, SHIPPED, COMPLETED }</code>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="代码格式"><a href="#代码格式" class="headerlink" title="代码格式"></a>代码格式</h3><ol>
+<li>强制规则<ul>
+<li>如果大括号内为空，简洁写成 <code>{}</code> 即可，中间无需换行和空格；非空代码块时，左大括号前不换行，左小括号和右边相邻字符之间不出现空格，右小括号和左边相邻字符之间也不出现空格，左大括号前需要加空格。例如：</li>
+</ul>
+</li>
+</ol>
+<p>java</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (condition) &#123;</span><br><span class="line">    // 代码逻辑</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li>任何二目、三目运算符的左右两边都需要加一个空格，包括赋值运算符 <code>=</code>、逻辑运算符 <code>&amp;&amp;</code>、加减乘除符号等。例如，<code>int result = a + b;</code>。</li>
+<li>采用 4 个空格缩进，禁止使用 tab 字符。在 IDEA 中设置 tab 为 4 个空格时，请勿勾选 <code>Use tab character</code>；在 eclipse 中，必须勾选 <code>insert spaces for tabs</code>。</li>
+<li>在进行类型强制转换时，右括号与强制转换值之间不需要任何空格隔开。例如，<code>int num = (int) value;</code>。</li>
+<li>单行字符数限制不超过 120 个，超出需要换行，换行时遵循以下原则：第二行相对第一行缩进 4 个空格，从第三行开始不再继续缩进；运算符与下文一起换行；方法调用时，多个参数需要换行时，在逗号后进行；在括号前不要换行。例如：</li>
+</ul>
+<p>java</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">long result = aVeryLongVariableName + anotherVeryLongVariableName</span><br><span class="line">              + yetAnotherVeryLongVariableName;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li>方法参数在定义和传入时，多个参数逗号后边必须加空格。例如，<code>public void method(int param1, int param2) {}</code>。</li>
+<li>IDE 的 text file encoding 设置为 UTF - 8，文件的换行符使用 Unix 格式，不要使用 Windows 格式。</li>
+</ul>
+<ol>
+<li>推荐规则<ul>
+<li>单个方法的总行数不超过 80 行，包括方法签名、结束右大括号、方法内代码、注释、空行、回车及任何不可见字符。将个性和共性逻辑分开，提取成额外方法，使主干代码更清晰，便于复用和维护。</li>
+<li>不同逻辑、不同语义、不同业务的代码之间插入一个空行分隔开来，提升代码可读性，但不要插入多个空行。</li>
+</ul>
+</li>
+</ol>
+<h3 id="OOP-规约"><a href="#OOP-规约" class="headerlink" title="OOP 规约"></a>OOP 规约</h3><ol>
+<li>强制规则<ul>
+<li>避免通过一个类的对象引用访问此类的静态变量或静态方法，直接用类名访问即可，无谓增加编译器解析成本。例如，应使用 <code>ClassName.staticMethod()</code>，而不是 <code>new ClassName().staticMethod()</code>。</li>
+<li>所有的覆写方法，必须加 <code>@Override</code> 注解，明确标识该方法是对父类方法的重写，提高代码的可读性和可维护性。</li>
+<li>相同参数类型、相同业务含义，才可以使用 Java 的可变参数，避免使用 <code>Object</code>。可变参数必须放置在参数列表的最后。例如：</li>
+</ul>
+</li>
+</ol>
+<p>java</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void method(int... numbers) &#123;</span><br><span class="line">    // 方法逻辑</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li>外部正在调用或者二方库依赖的接口，不允许修改方法签名，避免对接口调用方产生影响。接口过时必须加 <code>@Deprecated</code> 注解，并清晰说明采用的新接口或者新服务。</li>
+<li>不能使用过时的类或方法。若使用，应及时查找新的实现方式。例如，<code>java.util.Date</code> 的部分方法已过时，应使用 <code>java.time.LocalDate</code> 等新的日期时间类。</li>
+<li><code>Object</code> 的 <code>equals</code> 方法容易抛空指针异常，应使用常量或确定有值的对象来调用 <code>equals</code>。例如，<code>&quot;string&quot;.equals(str)</code>，而不是 <code>str.equals(&quot;string&quot;)</code>。</li>
+<li>所有相同类型的包装类对象之间值的比较，全部使用 <code>equals</code> 方法比较。因为在 <code>-128</code> 至 <code>127</code> 范围内的赋值，<code>Integer</code> 对象是在 <code>IntegerCache.cache</code> 产生，会复用已有对象，此区间内的 <code>Integer</code> 值可直接使用 <code>==</code> 判断，但区间之外的所有数据，都会在堆上产生，不会复用已有对象，所以推荐使用 <code>equals</code> 方法判断。</li>
+<li>所有的 POJO 类属性必须使用包装数据类型；RPC 方法的返回值和参数必须使用包装数据类型；所有的局部变量推荐使用基本数据类型。POJO 类属性没有初值可提醒使用者显式赋值，避免 NPE 问题。例如，数据库查询结果可能为 null，用基本数据类型接收有 NPE 风险。而包装数据类型的 null 值能表示额外信息，如远程调用失败、异常退出。</li>
+<li>定义 DO &#x2F; DTO &#x2F; VO 等 POJO 类时，不要设定任何属性默认值，避免数据提取时未置入具体值，更新其他字段时附带更新此字段，导致数据错误。</li>
+<li>序列化类新增属性时，若要保持兼容性，不要修改 <code>serialVersionUID</code> 字段，避免反序列失败；若完全不兼容升级，为避免反序列化混乱，应修改 <code>serialVersionUID</code> 值，注意 <code>serialVersionUID</code> 不一致会抛出序列化运行时异常。</li>
+<li>构造方法里面禁止加入任何业务逻辑，如果有初始化逻辑，请放在 <code>init</code> 方法中。</li>
+<li>POJO 类必须写 <code>toString</code> 方法，方便在方法执行抛出异常时，直接调用 POJO 的 <code>toString()</code> 方法打印其属性值，排查问题。使用 IDE 工具生成 <code>toString</code> 方法时，如果继承了另一个 POJO 类，注意在前面加 <code>super.toString()</code>。</li>
+</ul>
+<ol>
+<li>推荐规则<ul>
+<li>当一个类有多个构造方法，或者多个同名方法，这些方法应按顺序放置在一起，类内方法定义顺序依次是：公有方法或保护方法 &gt; 私有方法 &gt; getter&#x2F;setter 方法。</li>
+<li>循环体内，字符串的连接方式，使用 <code>StringBuilder</code> 的 <code>append</code> 方法进行扩展，避免每次循环都创建新的 <code>StringBuilder</code> 对象，造成内存资源浪费。例如：</li>
+</ul>
+</li>
+</ol>
+<p>java</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder sb = new StringBuilder();</span><br><span class="line">for (int i = 0; i &lt; list.size(); i++) &#123;</span><br><span class="line">    sb.append(list.get(i));</span><br><span class="line">&#125;</span><br><span class="line">String result = sb.toString();</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li>类成员与方法访问控制从严：如果不允许外部直接通过 <code>new</code> 来创建对象，构造方法必须是 <code>private</code>；工具类不允许有 <code>public</code> 或 <code>default</code> 构造方法；类非 <code>static</code> 成员变量并且与子类共享，必须是 <code>protected</code>；类非 <code>static</code> 成员变量并且仅在本类使用，必须是 <code>private</code>；类 <code>static</code> 成员变量如果仅在本类使用，必须是 <code>private</code>；若是 <code>static</code> 成员变量，必须考虑是否为 <code>final</code>；类成员方法只供类内部调用，必须是 <code>private</code>；类成员方法只对继承类公开，限制为 <code>protected</code>。严格控制访问范围，有利于模块解耦。</li>
+</ul>
+<h3 id="集合处理"><a href="#集合处理" class="headerlink" title="集合处理"></a>集合处理</h3><ol>
+<li>强制规则<ul>
+<li>关于 <code>equals</code> 方法和 <code>hashCode</code> 方法的处理，只要重写 <code>equals</code>，就必须重写 <code>hashCode</code>。因为 <code>equals</code> 方法用于判断两个对象是否相等，而 <code>hashCode</code> 方法用于在哈希表等集合中确定对象的存储位置，如果两个对象 <code>equals</code> 方法返回 <code>true</code>，但 <code>hashCode</code> 方法返回不同值，会导致在集合中出现逻辑错误。</li>
+<li>集合初始化时，要指定合理的初始容量。例如，<code>ArrayList</code> 若已知大概元素数量，应在初始化时指定容量，避免多次扩容带来的性能开销。<code>ArrayList list = new ArrayList(100);</code></li>
+<li>使用 <code>entrySet</code> 遍历 <code>Map</code> 类集合，而不是 <code>keySet</code>。因为使用 <code>keySet</code> 遍历会先获取键集，再通过键获取值，增加了一次查找操作，而 <code>entrySet</code> 直接返回键值对集合，效率更高。例如：</li>
+</ul>
+</li>
+</ol>
+<p>java</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">for (Map.Entry&lt;String, Integer&gt; entry : map.entrySet()) &#123;</span><br><span class="line">    String key = entry.getKey();</span><br><span class="line">    Integer value = entry.getValue();</span><br><span class="line">    // 处理逻辑</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li>在使用 <code>HashMap</code> 和 <code>HashSet</code> 时，要注意其线程不安全特性。如果在多线程环境下使用，应考虑使用 <code>ConcurrentHashMap</code> 和 <code>CopyOnWriteArraySet</code> 等线程安全的集合类。</li>
+<li>不要在 <code>foreach</code> 循环里进行元素的 <code>remove</code> &#x2F; <code>add</code> 操作。<code>foreach</code> 循环是基于迭代器实现的，在循环中进行元素的增删操作会导致迭代器状态不一致，抛出 <code>ConcurrentModificationException</code>。如果需要删除元素，可使用迭代器的 <code>remove</code> 方法；如果需要添加元素，可考虑使用其他数据结构暂存，循环结束后再进行添加。</li>
+</ul>
+<ol>
+<li>推荐规则<ul>
+<li>集合转数组时，使用 <code>Collection</code> 的 <code>toArray(T[] a)</code> 方法，并传入类型完全一样的数组，大小就是 <code>list.size()</code>。例如：</li>
+</ul>
+</li>
+</ol>
+<p>java</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">list.add(&quot;a&quot;);</span><br><span class="line">list.add(&quot;b&quot;);</span><br><span class="line">String[] array = list.toArray(new String[list.size()]);</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li>使用工具类 <code>Arrays</code> 或 <code>Collections</code> 提供的方法进行集合操作，如 <code>Arrays.asList()</code>、<code>Collections.sort()</code> 等，这些方法经过优化，代码更简洁高效。</li>
+<li>对于频繁进行插入和删除操作的场景，优先使用 <code>LinkedList</code> 而不是 <code>ArrayList</code>，因为 <code>LinkedList</code> 的插入和删除操作时间复杂度为 O (1)，而 <code>ArrayList</code> 为 O (n)。</li>
+</ul>
+<h3 id="并发处理"><a href="#并发处理" class="headerlink" title="并发处理"></a>并发处理</h3><ol>
+<li>强制规则<ul>
+<li>在高并发场景下，对数据的修改操作必须进行同步处理，避免出现数据竞争和不一致问题。可以使用 <code>synchronized</code> 关键字、<code>Lock</code> 接口等进行同步。例如：</li>
+</ul>
+</li>
+</ol>
+<p>java</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private static final Object lock = new Object();</span><br><span class="line">public void modifyData() &#123;</span><br><span class="line">    synchronized (lock) &#123;</span><br><span class="line">        // 数据修改逻辑</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li>避免使用 <code>Executors</code> 创建线程池，而是通过 <code>ThreadPoolExecutor</code> 的构造函数来创建，这样可以明确指定线程池的参数，如核心线程数、最大线程数、存活时间、阻塞队列等，避免因默认参数导致的性能问题和资源耗尽风险。例如：</li>
+</ul>
+<p>java</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ThreadPoolExecutor executor = new ThreadPoolExecutor(</span><br><span class="line">    corePoolSize,</span><br><span class="line">    maximumPoolSize,</span><br><span class="line">    keepAliveTime,</span><br><span class="line">    TimeUnit.MILLISECONDS,</span><br><span class="line">    new LinkedBlockingQueue&lt;&gt;(queueCapacity)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li>线程池的关闭要优雅，调用 <code>shutdown</code> 方法后，等待任务执行完毕，再调用 <code>shutdownNow</code> 方法强制终止未执行的任务。例如：</li>
+</ul>
+<p>java</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">executor.shutdown();</span><br><span class="line">try &#123;</span><br><span class="line">    if (!executor.awaitTermination(60, TimeUnit.SECONDS)) &#123;</span><br><span class="line">        executor.shutdownNow();</span><br><span class="line">        if (!executor.awaitTermination(60, TimeUnit.SECONDS)) &#123;</span><br><span class="line">            System.err.println(&quot;Pool did not terminate&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; catch (InterruptedException ie) &#123;</span><br><span class="line">    executor.shutdownNow();</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/23/%E9%98%BF%E9%87%8C%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E8%A7%A3%E8%AF%BB%EF%BC%9A%E6%89%93%E9%80%A0%E9%AB%98%E8%B4%A8%E9%87%8F%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9F%BA%E7%9F%B3/" data-id="cuidtt8TKNsrcGCIDwbZtF62S" data-title="阿里开发规范解读：打造高质量代码的基石" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/12/23/2025-%E5%B9%B4-8-%E6%9C%88%E7%A7%91%E6%8A%80%E5%89%8D%E6%B2%BF%E8%A7%82%E5%AF%9F%E4%B8%8E%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2025 年 8 月科技前沿观察与未来展望
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/12/23/%E4%B9%9D%E6%9C%88%E7%A7%91%E6%8A%80%E7%9E%AD%E6%9C%9B%EF%BC%9A%E4%B8%AD%E5%9B%BD%E7%A7%91%E6%8A%80%E5%8F%91%E5%B1%95%E8%A7%84%E5%88%92%E5%8A%A8%E6%80%81%E6%B4%9E%E5%AF%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">九月科技瞭望：中国科技发展规划动态洞察</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" rel="tag">代码拉取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" rel="tag">文章，博客框架，技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" rel="tag">服务器，游戏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" rel="tag">权限配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" style="font-size: 10px;">代码拉取</a> <a href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">文章，博客框架，技术</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">服务器，游戏</a> <a href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">权限配置</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">编程语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/12/24/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/">大模型微调</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E6%9C%AF%E9%87%8C%E9%9D%A2%E7%9A%84%E2%80%98mcp%E2%80%99%E6%8A%80%E6%9C%AF/">计算机技术里面的‘mcp’技术</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/2025-8-19/">2025-8-19</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E9%82%A3%E4%BA%9B%E5%9C%A8%E5%85%AC%E5%8F%B8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84-%E8%B6%85%E7%BA%A7%E9%BB%84%E9%87%91-bug-%EF%BC%9A%E6%AF%8F%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%91%98%E9%83%BD%E8%AF%A5%E8%AE%B0%E5%8F%96%E7%9A%84%E8%A1%80%E6%B3%AA%E7%BB%8F%E9%AA%8C/">那些在公司工作中遇到的 &#39;超级黄金 bug&#39;：每个程序员都该记取的血泪经验</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/23/Java%E5%92%8Cgo%E8%AF%AD%E8%A8%80%E7%9A%842025%E5%B9%B4%E5%8F%91%E5%B1%95%E5%89%8D%E6%99%AF%E5%92%8C%E5%B0%B1%E4%B8%9A%E5%BD%A2%E5%8A%BF/">Java和go语言的2025年发展前景和就业形势</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 little chen<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

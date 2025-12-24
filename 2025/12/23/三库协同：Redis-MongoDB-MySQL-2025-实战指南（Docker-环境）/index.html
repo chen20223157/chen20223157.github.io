@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>三库协同：Redis+MongoDB+MySQL 2025 实战指南（Docker 环境） | 欢迎来到chen的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="在现代应用开发中，单一数据库很难满足所有业务场景 —— 关系型数据库的事务可靠性、文档数据库的灵活扩展、内存数据库的极速响应，恰好是互补的优势。本文将以 Docker Compose 为基础，带你搭建 Redis+MongoDB+MySQL 协同架构，详解三者的定位分工、数据流转逻辑，以及 2025 年最新实战场景，让你彻底搞懂 “三库联动” 的核心玩法。 一、先明确核心定位：为什么要一起用？三者">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三库协同：Redis+MongoDB+MySQL 2025 实战指南（Docker 环境）">
+<meta property="og:url" content="http://example.com/2025/12/23/%E4%B8%89%E5%BA%93%E5%8D%8F%E5%90%8C%EF%BC%9ARedis-MongoDB-MySQL-2025-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%88Docker-%E7%8E%AF%E5%A2%83%EF%BC%89/index.html">
+<meta property="og:site_name" content="欢迎来到chen的博客">
+<meta property="og:description" content="在现代应用开发中，单一数据库很难满足所有业务场景 —— 关系型数据库的事务可靠性、文档数据库的灵活扩展、内存数据库的极速响应，恰好是互补的优势。本文将以 Docker Compose 为基础，带你搭建 Redis+MongoDB+MySQL 协同架构，详解三者的定位分工、数据流转逻辑，以及 2025 年最新实战场景，让你彻底搞懂 “三库联动” 的核心玩法。 一、先明确核心定位：为什么要一起用？三者">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-23T11:23:34.000Z">
+<meta property="article:modified_time" content="2025-12-24T03:13:52.653Z">
+<meta property="article:author" content="little chen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="欢迎来到chen的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">欢迎来到chen的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-三库协同：Redis-MongoDB-MySQL-2025-实战指南（Docker-环境）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/23/%E4%B8%89%E5%BA%93%E5%8D%8F%E5%90%8C%EF%BC%9ARedis-MongoDB-MySQL-2025-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%88Docker-%E7%8E%AF%E5%A2%83%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2025-12-23T11:23:34.000Z" itemprop="datePublished">2025-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      三库协同：Redis+MongoDB+MySQL 2025 实战指南（Docker 环境）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在现代应用开发中，单一数据库很难满足所有业务场景 —— 关系型数据库的事务可靠性、文档数据库的灵活扩展、内存数据库的极速响应，恰好是互补的优势。本文将以 <strong>Docker Compose 为基础</strong>，带你搭建 Redis+MongoDB+MySQL 协同架构，详解三者的定位分工、数据流转逻辑，以及 2025 年最新实战场景，让你彻底搞懂 “三库联动” 的核心玩法。</p>
+<h2 id="一、先明确核心定位：为什么要一起用？"><a href="#一、先明确核心定位：为什么要一起用？" class="headerlink" title="一、先明确核心定位：为什么要一起用？"></a>一、先明确核心定位：为什么要一起用？</h2><p>三者的协同核心是 <strong>“各司其职、优势互补”</strong>，避免 “用一个数据库解决所有问题” 的尴尬。先理清各自的角色定位，才能设计合理的架构：</p>
+<table>
+<thead>
+<tr>
+<th>数据库</th>
+<th>类型</th>
+<th>核心优势</th>
+<th>2025 年关键特性</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>MySQL</strong></td>
+<td>关系型数据库</td>
+<td>强事务（ACID）、结构化存储、复杂查询（JOIN &#x2F; 索引）、数据一致性</td>
+<td>8.4 版本原生支持 JSON 字段优化、异步复制性能提升 30%</td>
+<td>用户核心数据（账号、订单、支付）、需事务保障的业务（下单扣库存）、结构化报表</td>
+</tr>
+<tr>
+<td><strong>MongoDB</strong></td>
+<td>文档型 NoSQL</td>
+<td>非结构化 &#x2F; 半结构化存储、灵活 Schema、水平扩展、高写入吞吐量</td>
+<td>7.0 版本向量搜索优化、时序数据存储增强</td>
+<td>用户行为日志、商品详情（多变字段）、内容管理（文章 &#x2F; 评论）、物联网设备数据</td>
+</tr>
+<tr>
+<td><strong>Redis</strong></td>
+<td>内存数据库</td>
+<td>毫秒级响应、支持多种数据结构（Hash&#x2F;Set&#x2F;ZSet）、缓存 &#x2F; 限流 &#x2F; 分布式锁</td>
+<td>7.4 版本持久化性能优化、AI 模型缓存支持</td>
+<td>热点数据缓存（减轻 MySQL 压力）、会话存储（登录态）、实时计数（点赞 &#x2F; 访问量）、秒杀限流</td>
+</tr>
+</tbody></table>
+<p><strong>核心协同逻辑</strong>：MySQL 存 “核心结构化数据”（保证可靠性）→ Redis 缓存 “热点数据”（提升响应速度）→ MongoDB 存 “非结构化 &#x2F; 高写入数据”（保证灵活性），三者通过应用层联动，兼顾性能、可靠性和扩展性。</p>
+<h2 id="二、实战：Docker-Compose-一键部署三库"><a href="#二、实战：Docker-Compose-一键部署三库" class="headerlink" title="二、实战：Docker Compose 一键部署三库"></a>二、实战：Docker Compose 一键部署三库</h2><p>基于之前的 Docker 基础，我们用 <code>docker-compose.yml</code> 快速搭建可协同的三库环境，无需手动配置网络（自动创建自定义网络，三库互通）。</p>
+<h3 id="2-1-编写-docker-compose-yml（2025-优化版）"><a href="#2-1-编写-docker-compose-yml（2025-优化版）" class="headerlink" title="2.1 编写 docker-compose.yml（2025 优化版）"></a>2.1 编写 docker-compose.yml（2025 优化版）</h3><p>yaml</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.9&quot;</span><br><span class="line"></span><br><span class="line"># 自定义网络：三库在同一网络，可通过服务名直接访问</span><br><span class="line">networks:</span><br><span class="line">  app-network:</span><br><span class="line">    driver: bridge</span><br><span class="line"></span><br><span class="line"># 数据卷：持久化三库数据（容器删除后数据不丢失）</span><br><span class="line">volumes:</span><br><span class="line">  mysql-data:  # MySQL数据卷</span><br><span class="line">  mongo-data:  # MongoDB数据卷</span><br><span class="line">  redis-data:  # Redis数据卷</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  # 1. MySQL 8.4（关系型核心存储）</span><br><span class="line">  mysql:</span><br><span class="line">    image: mysql:8.4  # 2025最新稳定版</span><br><span class="line">    container_name: app-mysql</span><br><span class="line">    networks:</span><br><span class="line">      - app-network</span><br><span class="line">    volumes:</span><br><span class="line">      - mysql-data:/var/lib/mysql  # 数据持久化</span><br><span class="line">      - ./init-mysql.sql:/docker-entrypoint-initdb.d/init.sql  # 初始化脚本（可选）</span><br><span class="line">    environment:</span><br><span class="line">      MYSQL_ROOT_PASSWORD: Root@123456  # 根密码</span><br><span class="line">      MYSQL_DATABASE: app_db  # 自动创建数据库</span><br><span class="line">      MYSQL_USER: app_user  # 应用专用用户</span><br><span class="line">      MYSQL_PASSWORD: App@123456  # 应用用户密码</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;3306:3306&quot;</span><br><span class="line">    restart: always</span><br><span class="line">    # 安全配置（生产环境必备）</span><br><span class="line">    command: --default-authentication-plugin=mysql_native_password</span><br><span class="line">    healthcheck:  # 健康检查（确保启动完成）</span><br><span class="line">      test: [&quot;CMD&quot;, &quot;mysqladmin&quot;, &quot;ping&quot;, &quot;-h&quot;, &quot;localhost&quot;, &quot;-uapp_user&quot;, &quot;-pApp@123456&quot;]</span><br><span class="line">      interval: 10s</span><br><span class="line">      timeout: 5s</span><br><span class="line">      retries: 3</span><br><span class="line"></span><br><span class="line">  # 2. MongoDB 7.0（文档型存储）</span><br><span class="line">  mongodb:</span><br><span class="line">    image: mongo:7.0  # 2025最新稳定版</span><br><span class="line">    container_name: app-mongo</span><br><span class="line">    networks:</span><br><span class="line">      - app-network</span><br><span class="line">    volumes:</span><br><span class="line">      - mongo-data:/data/db  # 数据持久化</span><br><span class="line">    environment:</span><br><span class="line">      MONGO_INITDB_ROOT_USERNAME: root</span><br><span class="line">      MONGO_INITDB_ROOT_PASSWORD: Root@123456</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;27017:27017&quot;</span><br><span class="line">    restart: always</span><br><span class="line">    # 安全配置：启用认证（默认不启用，生产必开）</span><br><span class="line">    command: --auth</span><br><span class="line">    healthcheck:</span><br><span class="line">      test: [&quot;CMD&quot;, &quot;mongosh&quot;, &quot;admin&quot;, &quot;-uroot&quot;, &quot;-pRoot@123456&quot;, &quot;--eval&quot;, &quot;db.runCommand(&#x27;ping&#x27;)&quot;]</span><br><span class="line">      interval: 10s</span><br><span class="line">      timeout: 5s</span><br><span class="line">      retries: 3</span><br><span class="line"></span><br><span class="line">  # 3. Redis 7.4（内存缓存/计数）</span><br><span class="line">  redis:</span><br><span class="line">    image: redis:7.4-alpine  # 轻量版，2025最新</span><br><span class="line">    container_name: app-redis</span><br><span class="line">    networks:</span><br><span class="line">      - app-network</span><br><span class="line">    volumes:</span><br><span class="line">      - redis-data:/data  # 持久化（AOF+RDB混合模式）</span><br><span class="line">      - ./redis.conf:/etc/redis/redis.conf  # 自定义配置（可选）</span><br><span class="line">    environment:</span><br><span class="line">      REDIS_PASSWORD: Root@123456  # 密码认证（生产必开）</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;6379:6379&quot;</span><br><span class="line">    restart: always</span><br><span class="line">    command: redis-server /etc/redis/redis.conf --requirepass Root@123456</span><br><span class="line">    healthcheck:</span><br><span class="line">      test: [&quot;CMD&quot;, &quot;redis-cli&quot;, &quot;-a&quot;, &quot;Root@123456&quot;, &quot;ping&quot;]</span><br><span class="line">      interval: 5s</span><br><span class="line">      timeout: 3s</span><br><span class="line">      retries: 3</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="2-2-可选：Redis-配置文件（redis-conf）"><a href="#2-2-可选：Redis-配置文件（redis-conf）" class="headerlink" title="2.2 可选：Redis 配置文件（redis.conf）"></a>2.2 可选：Redis 配置文件（redis.conf）</h3><p>为优化 Redis 性能和持久化，创建 <code>redis.conf</code> 文件（与 <code>docker-compose.yml</code> 同级）：</p>
+<p>conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 持久化配置（2025推荐混合模式）</span><br><span class="line">appendonly yes  # 启用AOF（每修改同步，保证数据不丢失）</span><br><span class="line">appendfsync everysec  # 每秒同步一次（性能+可靠性平衡）</span><br><span class="line">save 900 1  # 900秒内1次修改则RDB快照</span><br><span class="line">save 300 10 # 300秒内10次修改则RDB快照</span><br><span class="line"></span><br><span class="line"># 内存优化</span><br><span class="line">maxmemory 1gb  # 限制最大内存（根据服务器配置调整）</span><br><span class="line">maxmemory-policy allkeys-lru  # 内存满时淘汰最少使用的key</span><br><span class="line"></span><br><span class="line"># 网络安全</span><br><span class="line">bind 0.0.0.0  # 允许所有IP访问（Docker环境安全）</span><br><span class="line">protected-mode yes  # 保护模式（需密码才能访问）</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="2-3-启动与验证"><a href="#2-3-启动与验证" class="headerlink" title="2.3 启动与验证"></a>2.3 启动与验证</h3><p>bash</p>
+<p>运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 启动所有服务（后台运行）</span><br><span class="line">docker compose up -d</span><br><span class="line"></span><br><span class="line"># 查看启动状态（确保所有服务都是healthy）</span><br><span class="line">docker compose ps</span><br><span class="line"></span><br><span class="line"># 验证各服务可用性</span><br><span class="line"># 1. 验证MySQL</span><br><span class="line">docker exec -it app-mysql mysql -uapp_user -pApp@123456 -e &quot;SELECT VERSION();&quot;</span><br><span class="line"></span><br><span class="line"># 2. 验证MongoDB</span><br><span class="line">docker exec -it app-mongo mongosh admin -uroot -pRoot@123456 --eval &quot;db.version();&quot;</span><br><span class="line"></span><br><span class="line"># 3. 验证Redis</span><br><span class="line">docker exec -it app-redis redis-cli -a Root@123456 ping  # 输出PONG则成功</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><strong>关键优势</strong>：</p>
+<ul>
+<li>三库在同一 Docker 网络，应用可通过 <code>mysql</code>、<code>mongodb</code>、<code>redis</code> 服务名直接连接（无需记 IP）；</li>
+<li>数据卷持久化，容器重启 &#x2F; 删除后数据不丢失；</li>
+<li>健康检查确保服务就绪后再供应用访问，避免启动顺序问题。</li>
+</ul>
+<h2 id="三、核心协同场景：三库怎么配合工作？"><a href="#三、核心协同场景：三库怎么配合工作？" class="headerlink" title="三、核心协同场景：三库怎么配合工作？"></a>三、核心协同场景：三库怎么配合工作？</h2><p>以 “电商应用” 为例，详解三个数据库的联动逻辑，结合代码片段（Python 示例）让你直观理解。</p>
+<h3 id="场景-1：用户登录与信息查询"><a href="#场景-1：用户登录与信息查询" class="headerlink" title="场景 1：用户登录与信息查询"></a>场景 1：用户登录与信息查询</h3><p><strong>需求</strong>：用户登录后，会话保持 1 小时，后续查询用户信息优先走缓存，避免频繁查 MySQL。</p>
+<table>
+<thead>
+<tr>
+<th>数据库角色</th>
+<th>具体操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MySQL</td>
+<td>存储用户核心信息（id、用户名、密码哈希、手机号、注册时间）</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>存储登录会话（Session：key&#x3D;user:session:{token}，value &#x3D; 用户 ID，过期 1 小时）、热点用户缓存（key&#x3D;user:info:{id}，value &#x3D; 用户信息 JSON）</td>
+</tr>
+<tr>
+<td>MongoDB</td>
+<td>存储用户行为日志（登录时间、登录设备、浏览记录）</td>
+</tr>
+</tbody></table>
+<p><strong>代码示例（Python）</strong>：</p>
+<p>python</p>
+<p>运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">import redis</span><br><span class="line">import pymysql</span><br><span class="line">from pymongo import MongoClient</span><br><span class="line">import uuid</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"># 1. 连接三库（Docker环境：服务名作为主机）</span><br><span class="line">redis_client = redis.Redis(</span><br><span class="line">    host=&quot;redis&quot;, port=6379, password=&quot;Root@123456&quot;, decode_responses=True</span><br><span class="line">)</span><br><span class="line">mysql_conn = pymysql.connect(</span><br><span class="line">    host=&quot;mysql&quot;, user=&quot;app_user&quot;, password=&quot;App@123456&quot;, db=&quot;app_db&quot;, charset=&quot;utf8&quot;</span><br><span class="line">)</span><br><span class="line">mongo_client = MongoClient(</span><br><span class="line">    &quot;mongodb://root:Root@123456@mongodb:27017/?authSource=admin&quot;</span><br><span class="line">)</span><br><span class="line">mongo_db = mongo_client[&quot;app_log&quot;]  # MongoDB数据库名</span><br><span class="line">user_log_coll = mongo_db[&quot;user_login_log&quot;]  # 登录日志集合</span><br><span class="line"></span><br><span class="line"># 2. 用户登录逻辑</span><br><span class="line">def user_login(username, password):</span><br><span class="line">    # 步骤1：查MySQL验证账号密码（核心数据存在MySQL）</span><br><span class="line">    with mysql_conn.cursor() as cursor:</span><br><span class="line">        sql = &quot;SELECT id, username, phone FROM users WHERE username=%s AND password=%s&quot;</span><br><span class="line">        cursor.execute(sql, (username, password))  # 实际项目中密码需哈希（如bcrypt）</span><br><span class="line">        user = cursor.fetchone()</span><br><span class="line">        if not user:</span><br><span class="line">            return &#123;&quot;code&quot;: 401, &quot;msg&quot;: &quot;账号密码错误&quot;&#125;</span><br><span class="line">    </span><br><span class="line">    user_id, username, phone = user</span><br><span class="line">    # 步骤2：生成Session存入Redis（会话缓存）</span><br><span class="line">    token = str(uuid.uuid4())</span><br><span class="line">    redis_client.setex(f&quot;user:session:&#123;token&#125;&quot;, 3600, user_id)  # 1小时过期</span><br><span class="line">    </span><br><span class="line">    # 步骤3：用户信息存入Redis缓存（热点数据加速）</span><br><span class="line">    redis_client.hset(</span><br><span class="line">        f&quot;user:info:&#123;user_id&#125;&quot;,</span><br><span class="line">        mapping=&#123;&quot;username&quot;: username, &quot;phone&quot;: phone, &quot;update_time&quot;: int(time.time())&#125;</span><br><span class="line">    )</span><br><span class="line">    redis_client.expire(f&quot;user:info:&#123;user_id&#125;&quot;, 86400)  # 缓存24小时</span><br><span class="line">    </span><br><span class="line">    # 步骤4：登录日志存入MongoDB（非结构化数据）</span><br><span class="line">    user_log_coll.insert_one(&#123;</span><br><span class="line">        &quot;user_id&quot;: user_id,</span><br><span class="line">        &quot;username&quot;: username,</span><br><span class="line">        &quot;login_time&quot;: time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;),</span><br><span class="line">        &quot;ip&quot;: &quot;192.168.1.100&quot;,</span><br><span class="line">        &quot;device&quot;: &quot;Chrome/120.0&quot;</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    return &#123;&quot;code&quot;: 200, &quot;data&quot;: &#123;&quot;token&quot;: token, &quot;user_id&quot;: user_id&#125;&#125;</span><br><span class="line"></span><br><span class="line"># 3. 查询用户信息（优先查Redis缓存）</span><br><span class="line">def get_user_info(token):</span><br><span class="line">    # 步骤1：验证Session（Redis快速查询）</span><br><span class="line">    user_id = redis_client.get(f&quot;user:session:&#123;token&#125;&quot;)</span><br><span class="line">    if not user_id:</span><br><span class="line">        return &#123;&quot;code&quot;: 403, &quot;msg&quot;: &quot;登录已过期&quot;&#125;</span><br><span class="line">    </span><br><span class="line">    # 步骤2：查Redis缓存（热点数据）</span><br><span class="line">    user_cache = redis_client.hgetall(f&quot;user:info:&#123;user_id&#125;&quot;)</span><br><span class="line">    if user_cache:</span><br><span class="line">        return &#123;&quot;code&quot;: 200, &quot;data&quot;: user_cache&#125;</span><br><span class="line">    </span><br><span class="line">    # 步骤3：缓存未命中，查MySQL并更新缓存</span><br><span class="line">    with mysql_conn.cursor() as cursor:</span><br><span class="line">        sql = &quot;SELECT username, phone FROM users WHERE id=%s&quot;</span><br><span class="line">        cursor.execute(sql, (user_id,))</span><br><span class="line">        user = cursor.fetchone()</span><br><span class="line">        if not user:</span><br><span class="line">            return &#123;&quot;code&quot;: 404, &quot;msg&quot;: &quot;用户不存在&quot;&#125;</span><br><span class="line">    </span><br><span class="line">    # 更新缓存</span><br><span class="line">    redis_client.hset(f&quot;user:info:&#123;user_id&#125;&quot;, mapping=&#123;&quot;username&quot;: user[0], &quot;phone&quot;: user[1]&#125;)</span><br><span class="line">    redis_client.expire(f&quot;user:info:&#123;user_id&#125;&quot;, 86400)</span><br><span class="line">    </span><br><span class="line">    return &#123;&quot;code&quot;: 200, &quot;data&quot;: &#123;&quot;username&quot;: user[0], &quot;phone&quot;: user[1]&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="场景-2：商品详情与库存管理"><a href="#场景-2：商品详情与库存管理" class="headerlink" title="场景 2：商品详情与库存管理"></a>场景 2：商品详情与库存管理</h3><p><strong>需求</strong>：商品详情字段多变（如规格、图片、描述），热点商品需快速响应，下单时需保证库存一致性。</p>
+<table>
+<thead>
+<tr>
+<th>数据库角色</th>
+<th>具体操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MySQL</td>
+<td>存储商品核心数据（id、名称、价格、库存、分类 ID）、订单数据（需事务）</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>缓存热点商品详情（减轻 MongoDB 压力）、秒杀库存计数（原子操作保证并发安全）</td>
+</tr>
+<tr>
+<td>MongoDB</td>
+<td>存储商品详情（富文本描述、多规格、图片列表、售后政策）</td>
+</tr>
+</tbody></table>
+<p><strong>核心逻辑</strong>：</p>
+<ol>
+<li>商品上架时：MySQL 存入核心信息，MongoDB 存入详情，Redis 缓存热点商品（如销量前 100 的商品）；</li>
+<li>用户浏览时：优先查 Redis → 未命中查 MongoDB → 同时更新 Redis 缓存；</li>
+<li>下单时：MySQL 用事务扣减库存（保证一致性），Redis 同步更新库存缓存（避免缓存脏数据）。</li>
+</ol>
+<p><strong>关键代码片段（下单逻辑）</strong>：</p>
+<p>python</p>
+<p>运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">def create_order(user_id, product_id, quantity):</span><br><span class="line">    # 步骤1：Redis预扣库存（防止超卖，原子操作）</span><br><span class="line">    stock_key = f&quot;product:stock:&#123;product_id&#125;&quot;</span><br><span class="line">    remaining_stock = redis_client.decrby(stock_key, quantity)</span><br><span class="line">    if remaining_stock &lt; 0:</span><br><span class="line">        # 库存不足，回滚Redis</span><br><span class="line">        redis_client.incrby(stock_key, quantity)</span><br><span class="line">        return &#123;&quot;code&quot;: 400, &quot;msg&quot;: &quot;库存不足&quot;&#125;</span><br><span class="line">    </span><br><span class="line">    try:</span><br><span class="line">        # 步骤2：MySQL事务扣减库存+创建订单（保证一致性）</span><br><span class="line">        with mysql_conn.cursor() as cursor:</span><br><span class="line">            mysql_conn.begin()  # 开启事务</span><br><span class="line">            </span><br><span class="line">            # 1. 检查并扣减库存</span><br><span class="line">            sql = &quot;SELECT stock FROM products WHERE id=%s FOR UPDATE&quot;  # 行锁防止并发</span><br><span class="line">            cursor.execute(sql, (product_id,))</span><br><span class="line">            product = cursor.fetchone()</span><br><span class="line">            if not product or product[0] &lt; quantity:</span><br><span class="line">                mysql_conn.rollback()</span><br><span class="line">                redis_client.incrby(stock_key, quantity)  # 回滚Redis</span><br><span class="line">                return &#123;&quot;code&quot;: 400, &quot;msg&quot;: &quot;库存不足&quot;&#125;</span><br><span class="line">            </span><br><span class="line">            # 2. 扣减库存</span><br><span class="line">            update_sql = &quot;UPDATE products SET stock=stock-%s WHERE id=%s&quot;</span><br><span class="line">            cursor.execute(update_sql, (quantity, product_id))</span><br><span class="line">            </span><br><span class="line">            # 3. 创建订单</span><br><span class="line">            order_sql = &quot;INSERT INTO orders (user_id, product_id, quantity, status) VALUES (%s, %s, %s, &#x27;pending&#x27;)&quot;</span><br><span class="line">            cursor.execute(order_sql, (user_id, product_id, quantity))</span><br><span class="line">            order_id = cursor.lastrowid</span><br><span class="line">            </span><br><span class="line">            mysql_conn.commit()  # 提交事务</span><br><span class="line">        </span><br><span class="line">        # 步骤3：MongoDB存入订单详情（非结构化数据）</span><br><span class="line">        mongo_db[&quot;order_details&quot;].insert_one(&#123;</span><br><span class="line">            &quot;order_id&quot;: order_id,</span><br><span class="line">            &quot;user_id&quot;: user_id,</span><br><span class="line">            &quot;product_id&quot;: product_id,</span><br><span class="line">            &quot;quantity&quot;: quantity,</span><br><span class="line">            &quot;create_time&quot;: time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;),</span><br><span class="line">            &quot;payment_info&quot;: &#123;&#125;,  # 后续支付信息补充</span><br><span class="line">            &quot;logistics_info&quot;: &#123;&#125;  # 后续物流信息补充</span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line">        return &#123;&quot;code&quot;: 200, &quot;data&quot;: &#123;&quot;order_id&quot;: order_id&#125;&#125;</span><br><span class="line">    </span><br><span class="line">    except Exception as e:</span><br><span class="line">        mysql_conn.rollback()</span><br><span class="line">        redis_client.incrby(stock_key, quantity)  # 回滚Redis</span><br><span class="line">        return &#123;&quot;code&quot;: 500, &quot;msg&quot;: f&quot;下单失败：&#123;str(e)&#125;&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="场景-3：实时统计与行为分析"><a href="#场景-3：实时统计与行为分析" class="headerlink" title="场景 3：实时统计与行为分析"></a>场景 3：实时统计与行为分析</h3><p><strong>需求</strong>：统计商品实时访问量、用户点赞数，同时收集用户行为数据用于后续分析。</p>
+<table>
+<thead>
+<tr>
+<th>数据库角色</th>
+<th>具体操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Redis</td>
+<td>实时计数（ZSet 排序、Hash 计数），如商品访问量、点赞数</td>
+</tr>
+<tr>
+<td>MongoDB</td>
+<td>存储用户行为明细（点击、浏览、收藏），支持后续聚合分析</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>存储统计结果汇总（如每日访问量、总点赞数），用于报表</td>
+</tr>
+</tbody></table>
+<p><strong>核心逻辑</strong>：</p>
+<ul>
+<li>用户点击商品：Redis <code>incr</code> 原子递增访问量，MongoDB 存入点击明细；</li>
+<li>每日凌晨：定时任务从 Redis 读取统计数据，汇总后写入 MySQL（供报表查询）。</li>
+</ul>
+<h2 id="四、2025-年关键优化：性能与可靠性"><a href="#四、2025-年关键优化：性能与可靠性" class="headerlink" title="四、2025 年关键优化：性能与可靠性"></a>四、2025 年关键优化：性能与可靠性</h2><h3 id="4-1-数据一致性保障"><a href="#4-1-数据一致性保障" class="headerlink" title="4.1 数据一致性保障"></a>4.1 数据一致性保障</h3><p>三库协同的核心痛点是 <strong>数据一致性</strong>，2025 年推荐以下方案：</p>
+<ol>
+<li><strong>缓存更新策略：Cache-Aside 模式</strong><ul>
+<li>读：先查 Redis → 未命中查源数据库（MySQL&#x2F;MongoDB）→ 更新 Redis；</li>
+<li>写：先更源数据库 → 再删 Redis 缓存（而非直接更新，避免并发脏数据）。</li>
+</ul>
+</li>
+<li><strong>Redis 缓存穿透 &#x2F; 击穿 &#x2F; 雪崩防护</strong><ul>
+<li>穿透：不存在的 key 缓存空值（过期 1 分钟），或用布隆过滤器；</li>
+<li>击穿：热点 key 设置永不过期，或用互斥锁；</li>
+<li>雪崩：缓存过期时间加随机值（如 24 小时 ±30 分钟），避免同时过期。</li>
+</ul>
+</li>
+<li><strong>MySQL 与 MongoDB 数据同步</strong><ul>
+<li>关键数据：应用层双写（如订单数据同时写入 MySQL 和 MongoDB 备份）；</li>
+<li>非关键数据：使用 MySQL 触发器 + 消息队列（如 RabbitMQ）异步同步到 MongoDB。</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-2-性能优化技巧"><a href="#4-2-性能优化技巧" class="headerlink" title="4.2 性能优化技巧"></a>4.2 性能优化技巧</h3><ol>
+<li><strong>Redis 优化</strong><ul>
+<li>启用 <code>lazyfree</code>（惰性删除），避免大 key 删除阻塞线程；</li>
+<li>热点数据用 <code>Hash</code> 存储（减少内存占用），而非多个 String；</li>
+<li>2025 新特性：Redis 7.4 支持 <code>MEMORY USAGE</code> 精确计算 key 内存，便于优化。</li>
+</ul>
+</li>
+<li><strong>MongoDB 优化</strong><ul>
+<li>为查询字段创建索引（如 <code>user_id</code>、<code>order_id</code>）；</li>
+<li>大文档拆分（如商品详情和评论分开存储）；</li>
+<li>2025 新特性：MongoDB 7.0 向量搜索支持，可直接存储 AI 嵌入向量，配合 Redis 缓存热门向量查询结果。</li>
+</ul>
+</li>
+<li><strong>MySQL 优化</strong><ul>
+<li>核心表（users、orders）分库分表（如按用户 ID 哈希分表）；</li>
+<li>读写分离（主库写，从库读），2025 年 MySQL 8.4 异步复制延迟降低至毫秒级；</li>
+<li>避免大事务，拆分长事务为短事务。</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-3-安全最佳实践"><a href="#4-3-安全最佳实践" class="headerlink" title="4.3 安全最佳实践"></a>4.3 安全最佳实践</h3><ol>
+<li><strong>容器安全</strong><ul>
+<li>所有数据库容器非 root 运行（在 <code>docker-compose.yml</code> 中添加 <code>user: &quot;1001:1001&quot;</code>）；</li>
+<li>限制容器资源（如 MySQL 内存限制 2GB，Redis 内存限制 1GB），避免耗尽主机资源。</li>
+</ul>
+</li>
+<li><strong>数据库安全</strong><ul>
+<li>禁用 root 用户远程访问，创建应用专用用户（如 MySQL 的 <code>app_user</code>），仅授予必要权限；</li>
+<li>密码定期更换，敏感数据加密存储（如 MySQL 用 <code>AES_ENCRYPT</code> 加密手机号）；</li>
+<li>开启数据库审计日志（MySQL 启用 <code>general_log</code>，MongoDB 启用 <code>auditLog</code>）。</li>
+</ul>
+</li>
+</ol>
+<h2 id="五、什么时候不适合三库协同？"><a href="#五、什么时候不适合三库协同？" class="headerlink" title="五、什么时候不适合三库协同？"></a>五、什么时候不适合三库协同？</h2><p>三库协同虽强，但并非万能，以下场景可简化架构：</p>
+<ol>
+<li><strong>小型应用 &#x2F; 初创项目</strong>：用户量少、数据结构简单，用 MySQL + Redis 即可（MongoDB 可省略）；</li>
+<li><strong>纯静态内容服务</strong>：仅需缓存和简单存储，用 Redis + 对象存储（如 S3）即可；</li>
+<li><strong>高并发写入但无需事务</strong>：用 MongoDB + Redis （MySQL 可省略，如日志收集系统）。</li>
+</ol>
+<h2 id="六、总结与下一步"><a href="#六、总结与下一步" class="headerlink" title="六、总结与下一步"></a>六、总结与下一步</h2><p>Redis+MongoDB+MySQL 的协同架构，本质是 <strong>“用对工具做对事”</strong>：MySQL 保可靠性，Redis 提性能，MongoDB 扩灵活性。通过 Docker Compose 可快速搭建环境，2025 年的数据库新特性（如 MySQL 异步复制优化、MongoDB 向量搜索、Redis 持久化增强）让三者协同更高效。</p>
+<p><strong>下一步学习建议</strong>：</p>
+<ol>
+<li>集成消息队列（如 RabbitMQ&#x2F;Kafka）：解决三库异步同步问题（如 MySQL 数据变更异步同步到 MongoDB）；</li>
+<li>监控告警：用 Prometheus + Grafana 监控三库性能（如 Redis 缓存命中率、MySQL 慢查询、MongoDB 索引使用率）；</li>
+<li>云原生部署：将 Docker 架构迁移到 Kubernetes，实现自动扩缩容、滚动更新（适合中大型项目）。</li>
+</ol>
+<p>如果你的业务涉及高并发、复杂数据结构、实时响应等需求，三库协同架构将是 2025 年的最优解之一。动手尝试本文的 Docker Compose 配置，结合实际项目场景调整，就能快速落地！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/23/%E4%B8%89%E5%BA%93%E5%8D%8F%E5%90%8C%EF%BC%9ARedis-MongoDB-MySQL-2025-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%88Docker-%E7%8E%AF%E5%A2%83%EF%BC%89/" data-id="cuid6WycN-gL_nrpDtLLAEZ9X" data-title="三库协同：Redis+MongoDB+MySQL 2025 实战指南（Docker 环境）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/12/23/DDD%E7%9A%84%E6%8A%80%E6%9C%AF%E4%BB%B7%E5%80%BC%EF%BC%8C%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%91%8A%E8%AF%89%E4%BD%A0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          DDD的技术价值，一篇文章告诉你
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/12/23/Docker-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%EF%BC%9A2025-%E5%B9%B4%E6%9C%80%E6%96%B0%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Docker 从入门到精通：2025 年最新实践指南</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" rel="tag">代码拉取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" rel="tag">文章，博客框架，技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" rel="tag">服务器，游戏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" rel="tag">权限配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" style="font-size: 10px;">代码拉取</a> <a href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">文章，博客框架，技术</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">服务器，游戏</a> <a href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">权限配置</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">编程语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/12/24/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/">大模型微调</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E6%9C%AF%E9%87%8C%E9%9D%A2%E7%9A%84%E2%80%98mcp%E2%80%99%E6%8A%80%E6%9C%AF/">计算机技术里面的‘mcp’技术</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/2025-8-19/">2025-8-19</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E9%82%A3%E4%BA%9B%E5%9C%A8%E5%85%AC%E5%8F%B8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84-%E8%B6%85%E7%BA%A7%E9%BB%84%E9%87%91-bug-%EF%BC%9A%E6%AF%8F%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%91%98%E9%83%BD%E8%AF%A5%E8%AE%B0%E5%8F%96%E7%9A%84%E8%A1%80%E6%B3%AA%E7%BB%8F%E9%AA%8C/">那些在公司工作中遇到的 &#39;超级黄金 bug&#39;：每个程序员都该记取的血泪经验</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/23/Java%E5%92%8Cgo%E8%AF%AD%E8%A8%80%E7%9A%842025%E5%B9%B4%E5%8F%91%E5%B1%95%E5%89%8D%E6%99%AF%E5%92%8C%E5%B0%B1%E4%B8%9A%E5%BD%A2%E5%8A%BF/">Java和go语言的2025年发展前景和就业形势</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 little chen<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

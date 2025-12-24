@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>深入探讨一下数据库中的 《联表查询》 以及至关重要的 《最左匹配原则》 | 欢迎来到chen的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、联表查询的基础1.1 什么是联表查询联表查询（Join Query）是指从两个或多个表中，根据表之间的关联关系（通常是外键），查询出符合条件的数据记录。 举个生活中的例子：  我们有一个 用户表（user），存储了用户的基本信息，如用户 ID（id）、姓名（name）、年龄（age）。 我们还有一个 订单表（order），存储了用户的订单信息，如订单 ID（id）、用户 ID（user_id）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入探讨一下数据库中的 《联表查询》 以及至关重要的 《最左匹配原则》">
+<meta property="og:url" content="http://example.com/2025/12/23/%E6%B7%B1%E5%85%A5%E6%8E%A2%E8%AE%A8%E4%B8%80%E4%B8%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84-%E3%80%8A%E8%81%94%E8%A1%A8%E6%9F%A5%E8%AF%A2%E3%80%8B-%E4%BB%A5%E5%8F%8A%E8%87%B3%E5%85%B3%E9%87%8D%E8%A6%81%E7%9A%84-%E3%80%8A%E6%9C%80%E5%B7%A6%E5%8C%B9%E9%85%8D%E5%8E%9F%E5%88%99%E3%80%8B/index.html">
+<meta property="og:site_name" content="欢迎来到chen的博客">
+<meta property="og:description" content="一、联表查询的基础1.1 什么是联表查询联表查询（Join Query）是指从两个或多个表中，根据表之间的关联关系（通常是外键），查询出符合条件的数据记录。 举个生活中的例子：  我们有一个 用户表（user），存储了用户的基本信息，如用户 ID（id）、姓名（name）、年龄（age）。 我们还有一个 订单表（order），存储了用户的订单信息，如订单 ID（id）、用户 ID（user_id）">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-23T11:26:11.000Z">
+<meta property="article:modified_time" content="2025-12-24T03:11:05.415Z">
+<meta property="article:author" content="little chen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="欢迎来到chen的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">欢迎来到chen的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-深入探讨一下数据库中的-《联表查询》-以及至关重要的-《最左匹配原则》" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/23/%E6%B7%B1%E5%85%A5%E6%8E%A2%E8%AE%A8%E4%B8%80%E4%B8%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84-%E3%80%8A%E8%81%94%E8%A1%A8%E6%9F%A5%E8%AF%A2%E3%80%8B-%E4%BB%A5%E5%8F%8A%E8%87%B3%E5%85%B3%E9%87%8D%E8%A6%81%E7%9A%84-%E3%80%8A%E6%9C%80%E5%B7%A6%E5%8C%B9%E9%85%8D%E5%8E%9F%E5%88%99%E3%80%8B/" class="article-date">
+  <time class="dt-published" datetime="2025-12-23T11:26:11.000Z" itemprop="datePublished">2025-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      深入探讨一下数据库中的 《联表查询》 以及至关重要的 《最左匹配原则》
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、联表查询的基础"><a href="#一、联表查询的基础" class="headerlink" title="一、联表查询的基础"></a>一、联表查询的基础</h2><h3 id="1-1-什么是联表查询"><a href="#1-1-什么是联表查询" class="headerlink" title="1.1 什么是联表查询"></a>1.1 什么是联表查询</h3><p>联表查询（Join Query）是指从两个或多个表中，根据表之间的关联关系（通常是外键），查询出符合条件的数据记录。</p>
+<p>举个生活中的例子：</p>
+<ul>
+<li>我们有一个 <code>用户表</code>（user），存储了用户的基本信息，如用户 ID（id）、姓名（name）、年龄（age）。</li>
+<li>我们还有一个 <code>订单表</code>（order），存储了用户的订单信息，如订单 ID（id）、用户 ID（user_id）、订单金额（amount）、下单时间（create_time）。</li>
+</ul>
+<p>如果我们想查询 “用户张三的所有订单信息”，就需要将 <code>用户表</code> 和 <code>订单表</code> 通过 <code>user.id</code> 和 <code>order.user_id</code> 关联起来进行查询。</p>
+<h3 id="1-2-联表查询的常见类型"><a href="#1-2-联表查询的常见类型" class="headerlink" title="1.2 联表查询的常见类型"></a>1.2 联表查询的常见类型</h3><p>在 SQL 中，常见的联表查询类型有：</p>
+<ol>
+<li><p><strong>内连接（INNER JOIN）</strong>：只返回两个表中能够匹配上关联条件的数据记录。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT u.name, o.id, o.amount</span><br><span class="line">FROM user u</span><br><span class="line">INNER JOIN order o ON u.id = o.user_id</span><br><span class="line">WHERE u.name = &#x27;张三&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+</li>
+<li><p><strong>左连接（LEFT JOIN）</strong>：返回左表中的所有数据记录，以及右表中能够匹配上关联条件的数据记录。如果右表中没有匹配项，则右表的字段值为 NULL。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT u.name, o.id, o.amount</span><br><span class="line">FROM user u</span><br><span class="line">LEFT JOIN order o ON u.id = o.user_id;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+</li>
+<li><p><strong>右连接（RIGHT JOIN）</strong>：与左连接相反，返回右表中的所有数据记录，以及左表中能够匹配上关联条件的数据记录。如果左表中没有匹配项，则左表的字段值为 NULL。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT u.name, o.id, o.amount</span><br><span class="line">FROM user u</span><br><span class="line">RIGHT JOIN order o ON u.id = o.user_id;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+</li>
+<li><p><strong>全连接（FULL JOIN）</strong>：返回两个表中所有的数据记录。如果其中一个表中没有匹配项，则对应的字段值为 NULL。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT u.name, o.id, o.amount</span><br><span class="line">FROM user u</span><br><span class="line">FULL JOIN order o ON u.id = o.user_id;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+</li>
+</ol>
+<hr>
+<h2 id="二、索引基础与复合索引"><a href="#二、索引基础与复合索引" class="headerlink" title="二、索引基础与复合索引"></a>二、索引基础与复合索引</h2><h3 id="2-1-索引的作用"><a href="#2-1-索引的作用" class="headerlink" title="2.1 索引的作用"></a>2.1 索引的作用</h3><p>索引（Index）是数据库中一种特殊的数据结构，它可以帮助数据库系统快速定位到需要查询的数据，从而大大提高查询效率。</p>
+<p>没有索引时，数据库需要进行全表扫描（Full Table Scan），即逐行检查表中的每一条记录，直到找到符合条件的记录。当表中的数据量很大时，全表扫描的效率会非常低。</p>
+<p>有了索引，数据库可以像查字典一样，通过索引快速定位到数据所在的位置，从而避免全表扫描。</p>
+<h3 id="2-2-复合索引"><a href="#2-2-复合索引" class="headerlink" title="2.2 复合索引"></a>2.2 复合索引</h3><p>复合索引（Composite Index）是指基于表中多个列创建的索引。</p>
+<p>例如，在 <code>订单表</code>（order）中，我们可以基于 <code>user_id</code> 和 <code>create_time</code> 两个列创建一个复合索引：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX idx_order_userid_createtime ON order (user_id, create_time);</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>复合索引的创建顺序非常重要，它直接影响到索引的使用效率，这就是我们接下来要重点讨论的 “最左匹配原则”。</p>
+<hr>
+<h2 id="三、最左匹配原则详解"><a href="#三、最左匹配原则详解" class="headerlink" title="三、最左匹配原则详解"></a>三、最左匹配原则详解</h2><h3 id="3-1-什么是最左匹配原则"><a href="#3-1-什么是最左匹配原则" class="headerlink" title="3.1 什么是最左匹配原则"></a>3.1 什么是最左匹配原则</h3><p>最左匹配原则是指，在使用复合索引进行查询时，数据库会从索引的最左侧列开始，依次向右匹配查询条件。只有当查询条件能够匹配到索引的最左侧列，或者连续的左侧列时，索引才会被有效使用。</p>
+<p>换句话说，复合索引 <code>(col1, col2, col3)</code> 可以看作是三个索引的集合：</p>
+<ul>
+<li><code>(col1)</code></li>
+<li><code>(col1, col2)</code></li>
+<li><code>(col1, col2, col3)</code></li>
+</ul>
+<p>当我们的查询条件中包含 <code>col1</code>，或者 <code>col1</code> 和 <code>col2</code>，或者 <code>col1</code>、<code>col2</code> 和 <code>col3</code> 时，索引才会被触发。如果查询条件中不包含 <code>col1</code>，或者跳过了 <code>col1</code> 直接查询 <code>col2</code> 和 <code>col3</code>，那么索引将不会被使用。</p>
+<h3 id="3-2-最左匹配原则的示例"><a href="#3-2-最左匹配原则的示例" class="headerlink" title="3.2 最左匹配原则的示例"></a>3.2 最左匹配原则的示例</h3><p>假设我们有一个 <code>产品表</code>（product），包含以下字段：</p>
+<ul>
+<li>id（产品 ID）</li>
+<li>category_id（分类 ID）</li>
+<li>brand_id（品牌 ID）</li>
+<li>price（价格）</li>
+</ul>
+<p>我们在 <code>category_id</code>、<code>brand_id</code> 和 <code>price</code> 上创建了一个复合索引：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX idx_product_category_brand_price ON product (category_id, brand_id, price);</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>现在，我们来看一下不同查询条件下索引的使用情况：</p>
+<ol>
+<li><p><strong>匹配最左列</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM product WHERE category_id = 1;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li><strong>索引使用情况</strong>：会使用索引 <code>idx_product_category_brand_price</code>。</li>
+<li><strong>原因</strong>：查询条件中包含了索引的最左列 <code>category_id</code>。</li>
+</ul>
+</li>
+<li><p><strong>匹配最左两列</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM product WHERE category_id = 1 AND brand_id = 2;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li><strong>索引使用情况</strong>：会使用索引 <code>idx_product_category_brand_price</code>。</li>
+<li><strong>原因</strong>：查询条件中包含了索引的最左两列 <code>category_id</code> 和 <code>brand_id</code>。</li>
+</ul>
+</li>
+<li><p><strong>匹配所有三列</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM product WHERE category_id = 1 AND brand_id = 2 AND price = 100;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li><strong>索引使用情况</strong>：会使用索引 <code>idx_product_category_brand_price</code>。</li>
+<li><strong>原因</strong>：查询条件中包含了索引的所有三列 <code>category_id</code>、<code>brand_id</code> 和 <code>price</code>。</li>
+</ul>
+</li>
+<li><p><strong>跳过最左列</strong></p>
+<p>sql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM product WHERE brand_id = 2 AND price = 100;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li><strong>索引使用情况</strong>：不会使用索引 <code>idx_product_category_brand_price</code>。</li>
+<li><strong>原因</strong>：查询条件中没有包含索引的最左列 <code>category_id</code>，直接跳过了 <code>category_id</code> 去查询 <code>brand_id</code> 和 <code>price</code>。</li>
+</ul>
+</li>
+<li><p><strong>跳过中间列</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM product WHERE category_id = 1 AND price = 100;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li><strong>索引使用情况</strong>：会使用索引 <code>idx_product_category_brand_price</code>，但只使用了索引的第一列 <code>category_id</code>。</li>
+<li><strong>原因</strong>：查询条件中包含了索引的最左列 <code>category_id</code>，但跳过了中间的 <code>brand_id</code> 列。此时，数据库会使用索引的 <code>category_id</code> 部分来定位数据，然后再对定位到的数据进行 <code>price</code> 过滤。</li>
+</ul>
+</li>
+<li><p><strong>查询条件顺序与索引列顺序不一致</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM product WHERE brand_id = 2 AND category_id = 1;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li><strong>索引使用情况</strong>：会使用索引 <code>idx_product_category_brand_price</code>。</li>
+<li><strong>原因</strong>：虽然查询条件中 <code>brand_id</code> 和 <code>category_id</code> 的顺序与索引列的顺序不一致，但数据库的查询优化器会自动调整查询条件的顺序，使其与索引列的顺序匹配。</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-3-最左匹配原则的原理"><a href="#3-3-最左匹配原则的原理" class="headerlink" title="3.3 最左匹配原则的原理"></a>3.3 最左匹配原则的原理</h3><p>最左匹配原则的原理与复合索引的存储结构有关。</p>
+<p>复合索引在存储时，是按照索引列的顺序依次排序的。例如，对于复合索引 <code>(category_id, brand_id, price)</code>，数据会先按照 <code>category_id</code> 进行排序，然后在相同的 <code>category_id</code> 下，再按照 <code>brand_id</code> 进行排序，最后在相同的 <code>category_id</code> 和 <code>brand_id</code> 下，再按照 <code>price</code> 进行排序。</p>
+<p>当我们执行查询时，数据库会根据查询条件，从索引的最左侧列开始，依次向右查找。如果查询条件中没有包含最左侧列，数据库就无法确定从索引的哪个位置开始查找，只能放弃使用该索引，进行全表扫描。</p>
+<hr>
+<h2 id="四、最左匹配原则的常见误区"><a href="#四、最左匹配原则的常见误区" class="headerlink" title="四、最左匹配原则的常见误区"></a>四、最左匹配原则的常见误区</h2><h3 id="4-1-误区一：查询条件包含索引的所有列，索引就一定会被使用"><a href="#4-1-误区一：查询条件包含索引的所有列，索引就一定会被使用" class="headerlink" title="4.1 误区一：查询条件包含索引的所有列，索引就一定会被使用"></a>4.1 误区一：查询条件包含索引的所有列，索引就一定会被使用</h3><p>虽然查询条件包含索引的所有列是索引被完全使用的理想情况，但这并不意味着索引一定会被使用。</p>
+<p>例如，我们有以下查询：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM product WHERE category_id = 1 AND brand_id = 2 AND price &gt; 100;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>虽然查询条件包含了索引的所有三列，但如果 <code>price &gt; 100</code> 的数据量非常大，数据库的查询优化器可能会认为使用索引的效率并不高，从而选择进行全表扫描。</p>
+<h3 id="4-2-误区二：查询条件的顺序必须与索引列的顺序一致"><a href="#4-2-误区二：查询条件的顺序必须与索引列的顺序一致" class="headerlink" title="4.2 误区二：查询条件的顺序必须与索引列的顺序一致"></a>4.2 误区二：查询条件的顺序必须与索引列的顺序一致</h3><p>正如我们在 3.2 节的示例 6 中看到的，查询条件的顺序与索引列的顺序不一致，索引也可能会被使用。</p>
+<p>这是因为数据库的查询优化器会自动调整查询条件的顺序，使其与索引列的顺序匹配。但是，为了提高代码的可读性和可维护性，建议在编写查询语句时，尽量使查询条件的顺序与索引列的顺序一致。</p>
+<h3 id="4-3-误区三：复合索引的列越多越好"><a href="#4-3-误区三：复合索引的列越多越好" class="headerlink" title="4.3 误区三：复合索引的列越多越好"></a>4.3 误区三：复合索引的列越多越好</h3><p>复合索引的列并不是越多越好。列越多，索引的存储成本就越高，索引的维护开销也越大。此外，当查询条件中没有包含索引的最左侧列时，索引将无法被使用。</p>
+<p>因此，在创建复合索引时，应该根据实际的查询需求，选择合适的列和列的顺序。</p>
+<h3 id="4-4-误区四：只要创建了索引，查询效率就一定会提高"><a href="#4-4-误区四：只要创建了索引，查询效率就一定会提高" class="headerlink" title="4.4 误区四：只要创建了索引，查询效率就一定会提高"></a>4.4 误区四：只要创建了索引，查询效率就一定会提高</h3><p>索引并不是万能的。虽然索引可以提高查询效率，但它也会增加数据插入、更新和删除的开销。</p>
+<p>因此，在创建索引时，需要权衡查询效率和数据修改效率。对于一些查询频率很低，但修改频率很高的表，就不适合创建过多的索引。</p>
+<hr>
+<h2 id="五、实战场景分析"><a href="#五、实战场景分析" class="headerlink" title="五、实战场景分析"></a>五、实战场景分析</h2><h3 id="5-1-场景一：电商网站商品列表查询"><a href="#5-1-场景一：电商网站商品列表查询" class="headerlink" title="5.1 场景一：电商网站商品列表查询"></a>5.1 场景一：电商网站商品列表查询</h3><p>假设我们有一个电商网站，商品表（product）的结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>INT</td>
+<td>商品 ID</td>
+</tr>
+<tr>
+<td>category_id</td>
+<td>INT</td>
+<td>分类 ID</td>
+</tr>
+<tr>
+<td>brand_id</td>
+<td>INT</td>
+<td>品牌 ID</td>
+</tr>
+<tr>
+<td>name</td>
+<td>VARCHAR</td>
+<td>商品名称</td>
+</tr>
+<tr>
+<td>price</td>
+<td>DECIMAL</td>
+<td>价格</td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>DATETIME</td>
+<td>创建时间</td>
+</tr>
+</tbody></table>
+<p>用户在浏览商品列表时，通常会进行以下筛选：</p>
+<ul>
+<li>按分类筛选</li>
+<li>按品牌筛选</li>
+<li>按价格区间筛选</li>
+</ul>
+<p>为了提高商品列表查询的效率，我们可以创建以下复合索引：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX idx_product_category_brand_price ON product (category_id, brand_id, price);</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>这样，当用户进行以下查询时，索引就会被有效使用：</p>
+<ul>
+<li>按分类筛选：<code>WHERE category_id = 1</code></li>
+<li>按分类和品牌筛选：<code>WHERE category_id = 1 AND brand_id = 2</code></li>
+<li>按分类、品牌和价格区间筛选：<code>WHERE category_id = 1 AND brand_id = 2 AND price BETWEEN 100 AND 200</code></li>
+</ul>
+<h3 id="5-2-场景二：用户订单查询"><a href="#5-2-场景二：用户订单查询" class="headerlink" title="5.2 场景二：用户订单查询"></a>5.2 场景二：用户订单查询</h3><p>用户表（user）的结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>INT</td>
+<td>用户 ID</td>
+</tr>
+<tr>
+<td>name</td>
+<td>VARCHAR</td>
+<td>姓名</td>
+</tr>
+<tr>
+<td>age</td>
+<td>INT</td>
+<td>年龄</td>
+</tr>
+<tr>
+<td>email</td>
+<td>VARCHAR</td>
+<td>邮箱</td>
+</tr>
+</tbody></table>
+<p>订单表（order）的结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>INT</td>
+<td>订单 ID</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>INT</td>
+<td>用户 ID</td>
+</tr>
+<tr>
+<td>order_no</td>
+<td>VARCHAR</td>
+<td>订单编号</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>DECIMAL</td>
+<td>订单金额</td>
+</tr>
+<tr>
+<td>status</td>
+<td>INT</td>
+<td>订单状态（0：待支付，1：已支付，2：已发货，3：已完成，4：已取消）</td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>DATETIME</td>
+<td>创建时间</td>
+</tr>
+</tbody></table>
+<p>用户在查询自己的订单时，通常会进行以下筛选：</p>
+<ul>
+<li>按订单状态筛选</li>
+<li>按下单时间筛选</li>
+</ul>
+<p>为了提高订单查询的效率，我们可以在订单表上创建以下复合索引：</p>
+<p>sql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX idx_order_userid_status_createtime ON order (user_id, status, create_time);</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>这样，当用户进行以下查询时，索引就会被有效使用：</p>
+<ul>
+<li>查询所有订单：<code>WHERE user_id = 1</code></li>
+<li>按订单状态筛选：<code>WHERE user_id = 1 AND status = 1</code></li>
+<li>按订单状态和下单时间筛选：<code>WHERE user_id = 1 AND status = 1 AND create_time BETWEEN &#39;2023-01-01&#39; AND &#39;2023-01-31&#39;</code></li>
+</ul>
+<hr>
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>最左匹配原则是复合索引使用的核心原则，它决定了查询条件是否能够有效利用索引。</p>
+<p>为了更好地理解和应用最左匹配原则，我们可以记住以下几点：</p>
+<ol>
+<li><strong>索引的创建顺序很重要</strong>：复合索引的列顺序应该根据查询条件的频率和重要性来确定，将查询频率最高、选择性最好的列放在最前面。</li>
+<li><strong>查询条件要包含索引的最左列</strong>：只有当查询条件中包含索引的最左列时，索引才有可能被使用。</li>
+<li><strong>尽量匹配连续的左侧列</strong>：查询条件中匹配的索引列越连续，索引的使用效率就越高。</li>
+<li><strong>注意查询条件的顺序</strong>：虽然数据库的查询优化器会自动调整查询条件的顺序，但为了提高代码的可读性和可维护性，建议在编写查询语句时，尽量使查询条件的顺序与索引列的顺序一致。</li>
+<li><strong>避免在索引列上进行函数操作或计算</strong>：在索引列上进行函数操作或计算会导致索引失效，例如 <code>WHERE YEAR(create_time) = 2023</code> 就会导致 <code>create_time</code> 上的索引失效。</li>
+<li><strong>定期维护和优化索引</strong>：随着业务数据的变化，索引的效率也可能会发生变化。因此，需要定期对索引进行维护和优化，例如删除无用的索引、重建碎片化的索引等。</li>
+</ol>
+<p>通过合理地创建和使用复合索引，并遵循最左匹配原则，可以大大提高数据库查询的效率，从而提升应用程序的性能。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/23/%E6%B7%B1%E5%85%A5%E6%8E%A2%E8%AE%A8%E4%B8%80%E4%B8%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84-%E3%80%8A%E8%81%94%E8%A1%A8%E6%9F%A5%E8%AF%A2%E3%80%8B-%E4%BB%A5%E5%8F%8A%E8%87%B3%E5%85%B3%E9%87%8D%E8%A6%81%E7%9A%84-%E3%80%8A%E6%9C%80%E5%B7%A6%E5%8C%B9%E9%85%8D%E5%8E%9F%E5%88%99%E3%80%8B/" data-id="cuidFvsVpWnTvdN1brHkNAm8J" data-title="深入探讨一下数据库中的 《联表查询》 以及至关重要的 《最左匹配原则》" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/12/23/%E5%88%B6%E9%80%A0%E4%B8%9A%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%9A%E8%A2%AB%E4%BD%8E%E4%BC%B0%E7%9A%84%E9%BB%84%E9%87%91%E8%B5%9B%E9%81%93%EF%BC%8C%E8%BF%99%E4%BA%9B%E4%BC%98%E7%82%B9%E8%AE%A9%E7%A8%8B%E5%BA%8F%E5%91%98%E8%B6%8A%E8%B5%B0%E8%B6%8A%E7%A8%B3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          制造业软件开发：被低估的黄金赛道，这些优点让程序员越走越稳
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/12/23/%E8%81%94%E8%A1%A8%E6%9F%A5%E8%AF%A2-%E4%BB%A5%E5%8F%8A%E8%87%B3%E5%85%B3%E9%87%8D%E8%A6%81%E7%9A%84-%E6%9C%80%E5%B7%A6%E5%8C%B9%E9%85%8D%E5%8E%9F%E5%88%99/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">联表查询 以及至关重要的 最左匹配原则</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" rel="tag">代码拉取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" rel="tag">文章，博客框架，技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" rel="tag">服务器，游戏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" rel="tag">权限配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" style="font-size: 10px;">代码拉取</a> <a href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">文章，博客框架，技术</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">服务器，游戏</a> <a href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">权限配置</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">编程语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/12/24/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/">大模型微调</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E6%9C%AF%E9%87%8C%E9%9D%A2%E7%9A%84%E2%80%98mcp%E2%80%99%E6%8A%80%E6%9C%AF/">计算机技术里面的‘mcp’技术</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/2025-8-19/">2025-8-19</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E9%82%A3%E4%BA%9B%E5%9C%A8%E5%85%AC%E5%8F%B8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84-%E8%B6%85%E7%BA%A7%E9%BB%84%E9%87%91-bug-%EF%BC%9A%E6%AF%8F%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%91%98%E9%83%BD%E8%AF%A5%E8%AE%B0%E5%8F%96%E7%9A%84%E8%A1%80%E6%B3%AA%E7%BB%8F%E9%AA%8C/">那些在公司工作中遇到的 &#39;超级黄金 bug&#39;：每个程序员都该记取的血泪经验</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/23/Java%E5%92%8Cgo%E8%AF%AD%E8%A8%80%E7%9A%842025%E5%B9%B4%E5%8F%91%E5%B1%95%E5%89%8D%E6%99%AF%E5%92%8C%E5%B0%B1%E4%B8%9A%E5%BD%A2%E5%8A%BF/">Java和go语言的2025年发展前景和就业形势</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 little chen<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
