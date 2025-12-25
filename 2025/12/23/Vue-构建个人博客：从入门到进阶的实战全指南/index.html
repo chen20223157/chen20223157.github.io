@@ -1,0 +1,2814 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Vue 构建个人博客：从入门到进阶的实战全指南 | 欢迎来到chen的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、引言：为什么选择 Vue 开发博客？在静态博客生成器（如 Hexo、Jekyll）和动态博客框架（如 WordPress）占据主流的当下，选择 Vue 手动搭建博客似乎是 “自讨苦吃”。但作为前端开发者，用 Vue 构建博客有三个不可替代的优势：  完全自定义：摆脱模板限制，从 UI 到功能全由自己掌控，打造独一无二的博客风格；  技术练兵场：将 Vue 生态（Vue Router、Pinia">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 构建个人博客：从入门到进阶的实战全指南">
+<meta property="og:url" content="http://example.com/2025/12/23/Vue-%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6%E7%9A%84%E5%AE%9E%E6%88%98%E5%85%A8%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="欢迎来到chen的博客">
+<meta property="og:description" content="一、引言：为什么选择 Vue 开发博客？在静态博客生成器（如 Hexo、Jekyll）和动态博客框架（如 WordPress）占据主流的当下，选择 Vue 手动搭建博客似乎是 “自讨苦吃”。但作为前端开发者，用 Vue 构建博客有三个不可替代的优势：  完全自定义：摆脱模板限制，从 UI 到功能全由自己掌控，打造独一无二的博客风格；  技术练兵场：将 Vue 生态（Vue Router、Pinia">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/12/23/Vue-%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6%E7%9A%84%E5%AE%9E%E6%88%98%E5%85%A8%E6%8C%87%E5%8D%97/article.cover">
+<meta property="og:image" content="http://example.com/2025/12/23/Vue-%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6%E7%9A%84%E5%AE%9E%E6%88%98%E5%85%A8%E6%8C%87%E5%8D%97/currentArticle.cover">
+<meta property="og:image" content="http://example.com/2025/12/23/Vue-%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6%E7%9A%84%E5%AE%9E%E6%88%98%E5%85%A8%E6%8C%87%E5%8D%97/comment.avatar">
+<meta property="article:published_time" content="2025-12-23T11:27:20.000Z">
+<meta property="article:modified_time" content="2025-12-24T03:08:45.976Z">
+<meta property="article:author" content="little chen">
+<meta property="article:tag" content="测试开发,后端开发，测试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/12/23/Vue-%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6%E7%9A%84%E5%AE%9E%E6%88%98%E5%85%A8%E6%8C%87%E5%8D%97/article.cover">
+  
+    <link rel="alternate" href="/atom.xml" title="欢迎来到chen的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">欢迎来到chen的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个专注于技术分享的博客，详情可访问我的csdn——&gt;id:weixin_73527660</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Vue-构建个人博客：从入门到进阶的实战全指南" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/23/Vue-%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6%E7%9A%84%E5%AE%9E%E6%88%98%E5%85%A8%E6%8C%87%E5%8D%97/" class="article-date">
+  <time class="dt-published" datetime="2025-12-23T11:27:20.000Z" itemprop="datePublished">2025-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Vue 构建个人博客：从入门到进阶的实战全指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="一、引言：为什么选择-Vue-开发博客？"><a href="#一、引言：为什么选择-Vue-开发博客？" class="headerlink" title="一、引言：为什么选择 Vue 开发博客？"></a>一、引言：为什么选择 Vue 开发博客？</h1><p>在静态博客生成器（如 Hexo、Jekyll）和动态博客框架（如 WordPress）占据主流的当下，选择 Vue 手动搭建博客似乎是 “自讨苦吃”。但作为前端开发者，用 Vue 构建博客有三个不可替代的优势：</p>
+<ol>
+<li><p><strong>完全自定义</strong>：摆脱模板限制，从 UI 到功能全由自己掌控，打造独一无二的博客风格；</p>
+</li>
+<li><p><strong>技术练兵场</strong>：将 Vue 生态（Vue Router、Pinia、Vite 等）融会贯通，实战中提升工程化能力；</p>
+</li>
+<li><p><strong>前后端分离优势</strong>：前端负责渲染，后端仅提供接口，部署灵活（可静态托管 + 云函数），访问速度更快。</p>
+</li>
+</ol>
+<p>本文将以 Vue 3 + Vite + Pinia + Vue Router 为核心技术栈，从项目初始化到部署上线，完整拆解博客开发的每一个环节，总字数超 8000 字，适合有 Vue 基础、想动手搭建个人博客的开发者。</p>
+<h2 id="二、项目初始化：搭建-Vue-博客基础架构"><a href="#二、项目初始化：搭建-Vue-博客基础架构" class="headerlink" title="二、项目初始化：搭建 Vue 博客基础架构"></a>二、项目初始化：搭建 Vue 博客基础架构</h2><h3 id="2-1-技术栈选型与环境准备"><a href="#2-1-技术栈选型与环境准备" class="headerlink" title="2.1 技术栈选型与环境准备"></a>2.1 技术栈选型与环境准备</h3><h4 id="核心技术栈"><a href="#核心技术栈" class="headerlink" title="核心技术栈"></a>核心技术栈</h4><ul>
+<li><p>框架：Vue 3（Composition API 为主）</p>
+</li>
+<li><p>构建工具：Vite（比 Webpack 更快的热更新与打包）</p>
+</li>
+<li><p>状态管理：Pinia（Vuex 替代方案，更简洁的 API）</p>
+</li>
+<li><p>路由：Vue Router 4（适配 Vue 3 的路由管理）</p>
+</li>
+<li><p>UI 组件库：Element Plus（轻量、可定制，适合博客场景）</p>
+</li>
+<li><p>样式方案：Scss（CSS 预处理器，提高样式复用性）</p>
+</li>
+<li><p>接口请求：Axios（封装请求拦截、响应处理）</p>
+</li>
+<li><p>部署平台：Vercel（静态资源托管）+ 云开发（接口服务）</p>
+</li>
+</ul>
+<h4 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h4><p>确保本地安装 Node.js（v14+）和 npm&#x2F;yarn，执行以下命令初始化项目：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 创建 Vite + Vue 项目</span><br><span class="line">npm create vite@latest my-blog -- --template vue</span><br><span class="line">cd my-blog</span><br><span class="line">npm install</span><br><span class="line"># 安装核心依赖</span><br><span class="line">npm install vue-router@4 pinia axios element-plus @element-plus/icons-vue sass</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-项目目录结构设计"><a href="#2-2-项目目录结构设计" class="headerlink" title="2.2 项目目录结构设计"></a>2.2 项目目录结构设计</h3><p>合理的目录结构是工程化开发的基础，博客项目推荐如下结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">my-blog/</span><br><span class="line">├── public/ # 静态资源（图片、favicon 等）</span><br><span class="line">├── src/</span><br><span class="line">│ ├── api/ # 接口请求封装</span><br><span class="line">│ ├── assets/ # 静态资源（样式、图片等）</span><br><span class="line">│ │ ├── css/ # 全局样式</span><br><span class="line">│ │ └── img/ # 本地图片</span><br><span class="line">│ ├── components/ # 公共组件（Header、Footer、Card 等）</span><br><span class="line">│ ├── layouts/ # 布局组件（主布局、文章详情布局等）</span><br><span class="line">│ ├── pages/ # 页面组件（首页、文章列表、详情页等）</span><br><span class="line">│ ├── router/ # 路由配置</span><br><span class="line">│ ├── store/ # Pinia 状态管理</span><br><span class="line">│ ├── utils/ # 工具函数（时间格式化、MD 解析等）</span><br><span class="line">│ ├── App.vue # 根组件</span><br><span class="line">│ └── main.js # 入口文件</span><br><span class="line">├── .env.development # 开发环境变量</span><br><span class="line">├── .env.production # 生产环境变量</span><br><span class="line">└── vite.config.js # Vite 配置</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-基础配置：Vite-路由-Pinia"><a href="#2-3-基础配置：Vite-路由-Pinia" class="headerlink" title="2.3 基础配置：Vite + 路由 + Pinia"></a>2.3 基础配置：Vite + 路由 + Pinia</h3><h4 id="2-3-1-Vite-配置（vite-config-js）"><a href="#2-3-1-Vite-配置（vite-config-js）" class="headerlink" title="2.3.1 Vite 配置（vite.config.js）"></a>2.3.1 Vite 配置（vite.config.js）</h4><p>配置跨域、别名、端口等，优化开发体验：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import &#123; defineConfig &#125; from &#x27;vite&#x27;</span><br><span class="line">import vue from &#x27;@vitejs/plugin-vue&#x27;</span><br><span class="line">import path from &#x27;path&#x27;</span><br><span class="line">export default defineConfig(&#123;</span><br><span class="line">plugins: [vue()],</span><br><span class="line">resolve: &#123;</span><br><span class="line">// 路径别名</span><br><span class="line">alias: &#123;</span><br><span class="line">&#x27;@&#x27;: path.resolve(__dirname, &#x27;./src&#x27;)</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br><span class="line">server: &#123;</span><br><span class="line">port: 3000, // 开发端口</span><br><span class="line">open: true, // 启动后自动打开浏览器</span><br><span class="line">proxy: &#123;</span><br><span class="line">// 跨域代理（对接后端接口）</span><br><span class="line">&#x27;/api&#x27;: &#123;</span><br><span class="line">target: &#x27;https://xxx.cloudfunctions.net&#x27;, // 后端接口地址</span><br><span class="line">changeOrigin: true,</span><br><span class="line">rewrite: (path) =&gt; path.replace(/^\/api/, &#x27;&#x27;)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br><span class="line">css: &#123;</span><br><span class="line">preprocessorOptions: &#123;</span><br><span class="line">scss: &#123;</span><br><span class="line">additionalData: &#x27;@import &quot;@/assets/css/global.scss&quot;;&#x27; // 全局引入 Scss 变量</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-2-路由配置（src-router-index-js）"><a href="#2-3-2-路由配置（src-router-index-js）" class="headerlink" title="2.3.2 路由配置（src&#x2F;router&#x2F;index.js）"></a>2.3.2 路由配置（src&#x2F;router&#x2F;index.js）</h4><p>博客核心路由包括首页、文章列表、详情页、分类页、标签页、关于页等：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import &#123; createRouter, createWebHistory &#125; from &#x27;vue-router&#x27;</span><br><span class="line">import MainLayout from &#x27;@/layouts/MainLayout.vue&#x27; // 主布局（包含 Header、Footer）</span><br><span class="line">// 懒加载页面组件</span><br><span class="line">const Home = () =&gt; import(&#x27;@/pages/Home.vue&#x27;)</span><br><span class="line">const ArticleList = () =&gt; import(&#x27;@/pages/ArticleList.vue&#x27;)</span><br><span class="line">const ArticleDetail = () =&gt; import(&#x27;@/pages/ArticleDetail.vue&#x27;)</span><br><span class="line">const Category = () =&gt; import(&#x27;@/pages/Category.vue&#x27;)</span><br><span class="line">const Tag = () =&gt; import(&#x27;@/pages/Tag.vue&#x27;)</span><br><span class="line">const About = () =&gt; import(&#x27;@/pages/About.vue&#x27;)</span><br><span class="line">const NotFound = () =&gt; import(&#x27;@/pages/NotFound.vue&#x27;)</span><br><span class="line">const routes = [</span><br><span class="line">&#123;</span><br><span class="line">path: &#x27;/&#x27;,</span><br><span class="line">component: MainLayout,</span><br><span class="line">children: [</span><br><span class="line">&#123; path: &#x27;&#x27;, name: &#x27;Home&#x27;, component: Home &#125;, // 首页</span><br><span class="line">&#123; path: &#x27;articles&#x27;, name: &#x27;ArticleList&#x27;, component: ArticleList &#125;, // 文章列表</span><br><span class="line">&#123; path: &#x27;article/:id&#x27;, name: &#x27;ArticleDetail&#x27;, component: ArticleDetail &#125;, // 文章详情</span><br><span class="line">&#123; path: &#x27;category/:id&#x27;, name: &#x27;Category&#x27;, component: Category &#125;, // 分类页</span><br><span class="line">&#123; path: &#x27;tag/:id&#x27;, name: &#x27;Tag&#x27;, component: Tag &#125;, // 标签页</span><br><span class="line">&#123; path: &#x27;about&#x27;, name: &#x27;About&#x27;, component: About &#125; // 关于页</span><br><span class="line">]</span><br><span class="line">&#125;,</span><br><span class="line">&#123; path: &#x27;/:pathMatch(.*)*&#x27;, name: &#x27;NotFound&#x27;, component: NotFound &#125; // 404 页面</span><br><span class="line">]</span><br><span class="line">const router = createRouter(&#123;</span><br><span class="line">history: createWebHistory(import.meta.env.BASE_URL),</span><br><span class="line">routes,</span><br><span class="line">scrollBehavior: () =&gt; (&#123; top: 0 &#125;) // 路由切换时滚动到顶部</span><br><span class="line">&#125;)</span><br><span class="line">export default router</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-3-Pinia-状态管理（src-store-index-js）"><a href="#2-3-3-Pinia-状态管理（src-store-index-js）" class="headerlink" title="2.3.3 Pinia 状态管理（src&#x2F;store&#x2F;index.js）"></a>2.3.3 Pinia 状态管理（src&#x2F;store&#x2F;index.js）</h4><p>博客需要管理的全局状态：文章列表、分类、标签、用户信息等，用 Pinia 简化状态管理：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">import &#123; createPinia &#125; from &#x27;pinia&#x27;</span><br><span class="line">export default createPinia()</span><br><span class="line">// src/store/modules/article.js（文章模块）</span><br><span class="line">import &#123; defineStore &#125; from &#x27;pinia&#x27;</span><br><span class="line">import &#123; getArticleList, getArticleDetail &#125; from &#x27;@/api/article&#x27;</span><br><span class="line">export const useArticleStore = defineStore(&#x27;article&#x27;, &#123;</span><br><span class="line">state: () =&gt; (&#123;</span><br><span class="line">articleList: [], // 文章列表</span><br><span class="line">currentArticle: null, // 当前文章详情</span><br><span class="line">total: 0, // 文章总数</span><br><span class="line">pageSize: 10, // 每页条数</span><br><span class="line">currentPage: 1 // 当前页码</span><br><span class="line">&#125;),</span><br><span class="line">actions: &#123;</span><br><span class="line">// 获取文章列表</span><br><span class="line">async fetchArticleList(params) &#123;</span><br><span class="line">try &#123;</span><br><span class="line">const res = await getArticleList(params)</span><br><span class="line">this.articleList = res.data.list</span><br><span class="line">this.total = res.data.total</span><br><span class="line">this.currentPage = params.page</span><br><span class="line">&#125; catch (err) &#123;</span><br><span class="line">console.error(&#x27;获取文章列表失败：&#x27;, err)</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br><span class="line">// 获取文章详情</span><br><span class="line">async fetchArticleDetail(id) &#123;</span><br><span class="line">try &#123;</span><br><span class="line">const res = await getArticleDetail(id)</span><br><span class="line">this.currentArticle = res.data</span><br><span class="line">&#125; catch (err) &#123;</span><br><span class="line">console.error(&#x27;获取文章详情失败：&#x27;, err)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br><span class="line">// 同理可创建 category.js、tag.js 等模块</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-4-入口文件配置（src-main-js）"><a href="#2-3-4-入口文件配置（src-main-js）" class="headerlink" title="2.3.4 入口文件配置（src&#x2F;main.js）"></a>2.3.4 入口文件配置（src&#x2F;main.js）</h4><p>引入路由、Pinia、Element Plus 等核心依赖：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import &#123; createApp &#125; from &#x27;vue&#x27;</span><br><span class="line">import App from &#x27;./App.vue&#x27;</span><br><span class="line">import router from &#x27;./router&#x27;</span><br><span class="line">import pinia from &#x27;./store&#x27;</span><br><span class="line">import ElementPlus from &#x27;element-plus&#x27;</span><br><span class="line">import &#x27;element-plus/dist/index.css&#x27;</span><br><span class="line">import &#x27;@/assets/css/global.scss&#x27; // 全局样式</span><br><span class="line">const app = createApp(App)</span><br><span class="line">app.use(pinia)</span><br><span class="line">app.use(router)</span><br><span class="line">app.use(ElementPlus)</span><br><span class="line">app.mount(&#x27;#app&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、博客核心功能实现：从-UI-到逻辑"><a href="#三、博客核心功能实现：从-UI-到逻辑" class="headerlink" title="三、博客核心功能实现：从 UI 到逻辑"></a>三、博客核心功能实现：从 UI 到逻辑</h2><h3 id="3-1-布局组件开发：复用性与一致性"><a href="#3-1-布局组件开发：复用性与一致性" class="headerlink" title="3.1 布局组件开发：复用性与一致性"></a>3.1 布局组件开发：复用性与一致性</h3><p>博客布局通常分为 “主布局”（包含 Header、Footer、侧边栏）和 “独立布局”（如关于页、404 页），以 MainLayout 为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- src/layouts/MainLayout.vue --&gt;</span><br><span class="line">&lt;template&gt;</span><br></pre></td></tr></table></figure>
+
+<div class="main-layout">
+
+<p><code><!-- 顶部导航 --></code></p>
+<p><code>&lt;Header /&gt;</code></p>
+<div class="layout-content">
+
+<div class="container">
+
+<p><code><!-- 侧边栏 + 主内容区（响应式适配） --></code></p>
+<div class="content-wrap">
+
+<p><code>&lt;aside class=&quot;sidebar&quot; :class=&quot;&#123; &#39;hidden&#39;: isMobile &#125;&quot;&gt;</code></p>
+<p><code>&lt;Sidebar /&gt;</code></p>
+<p><code>&lt;/aside&gt;</code></p>
+<p><code>&lt;main class=&quot;main-content&quot;&gt;</code></p>
+<p><code>&lt;router-view /&gt; <!-- 路由出口 --></code></p>
+<p><code>&lt;/main&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code><!-- 页脚 --></code></p>
+<p><code>&lt;Footer /&gt;</code></p>
+<p><code><!-- 移动端侧边栏开关 --></code></p>
+<p><code>&lt;el-fab </code></p>
+<p><code>icon=&quot;Menu&quot; </code></p>
+<p><code>class=&quot;mobile-menu-btn&quot; </code></p>
+<p><code>@click=&quot;toggleMobileMenu&quot;</code></p>
+<p><code>v-show=&quot;isMobile&quot;</code></p>
+<p><code>/&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/template&gt;</code></p>
+<script setup>
+
+`import { ref, watchEffect } from 'vue'`
+
+`import { useRoute } from 'vue-router'`
+
+`import Header from '@/components/Header.vue'`
+
+`import Footer from '@/components/Footer.vue'`
+
+`import Sidebar from '@/components/Sidebar.vue'`
+
+`// 响应式判断是否为移动端`
+
+`const isMobile = ref(window.innerWidth < 768)`
+
+`const isMobileMenuOpen = ref(false)`
+
+`// 监听窗口大小变化`
+
+`window.addEventListener('resize', () => {`
+
+`isMobile.value = window.innerWidth < 768`
+
+`if (window.innerWidth >= 768) isMobileMenuOpen.value = false`
+
+`})`
+
+`// 切换移动端侧边栏`
+
+`const toggleMobileMenu = () => {`
+
+`isMobileMenuOpen.value = !isMobileMenuOpen.value`
+
+`}`
+
+`</script>`
+
+<style scoped lang="scss">
+
+`.main-layout {`
+
+`display: flex;`
+
+`flex-direction: column;`
+
+`min-height: 100vh;`
+
+`.layout-content {`
+
+`flex: 1;`
+
+`padding: 20px 0;`
+
+`.container {`
+
+`width: 1200px;`
+
+`margin: 0 auto;`
+
+`padding: 0 20px;`
+
+`.content-wrap {`
+
+`display: flex;`
+
+`gap: 30px;`
+
+`.sidebar {`
+
+`width: 280px;`
+
+`flex-shrink: 0;`
+
+`&.hidden {`
+
+`display: none;`
+
+`}`
+
+`}`
+
+`.main-content {`
+
+`flex: 1;`
+
+`}`
+
+`}`
+
+`}`
+
+`}`
+
+`.mobile-menu-btn {`
+
+`position: fixed;`
+
+`bottom: 30px;`
+
+`right: 30px;`
+
+`z-index: 999;`
+
+`}`
+
+`}`
+
+`// 响应式适配`
+
+`@media (max-width: 1200px) {`
+
+`.container {`
+
+`width: 900px !important;`
+
+`}`
+
+`}`
+
+`@media (max-width: 900px) {`
+
+`.container {`
+
+`width: 100% !important;`
+
+`}`
+
+`}`
+
+### 3.2 公共组件开发：提高开发效率
+
+#### 3.2.1 Header 组件（导航栏）
+
+包含博客标题、导航菜单、搜索框等核心元素：
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+`<!-- src/components/Header.vue -->`
+
+`<template>`
+
+`<header class="header">`
+
+<div class="container">
+
+<div class="header-wrap">
+
+`<!-- 博客标题 -->`
+
+`<router-link to="/" class="logo">`
+
+`<h1></h1>`
+
+`</router-link>`
+
+`<!-- 导航菜单（桌面端） -->`
+
+`<nav class="nav-desktop">`
+
+`<ul class="nav-list">`
+
+`<li class="nav-item">`
+
+`<router-link `
+
+`to="/" `
+
+`:class="{ active: $route.path === '/' }"`
+
+`>`
+
+`首页`
+
+`</router-link>`
+
+`</li>`
+
+`<li class="nav-item">`
+
+`<router-link `
+
+`to="/articles" `
+
+`:class="{ active: $route.path === '/articles' }"`
+
+`>`
+
+`文章`
+
+`</router-link>`
+
+`</li>`
+
+`<li class="nav-item">`
+
+`<router-link `
+
+`to="/about" `
+
+`:class="{ active: $route.path === '/about' }"`
+
+`>`
+
+`关于我`
+
+`</router-link>`
+
+`</li>`
+
+`</ul>`
+
+`</nav>`
+
+`<!-- 搜索框 -->`
+
+<div class="search-box">
+
+`<el-input `
+
+`v-model="searchKey" `
+
+`placeholder="搜索文章..." `
+
+`icon="Search"`
+
+`@keyup.enter="handleSearch"`
+
+`size="small"`
+
+`/>`
+
+`</div>`
+
+`</div>`
+
+`</div>`
+
+`</header>`
+
+`</template>`
+
+<script setup>
+
+`import { ref } from 'vue'`
+
+`import { useRouter } from 'vue-router'`
+
+`const router = useRouter()`
+
+`const blogTitle = ref('Vue 技术博客') // 博客标题`
+
+`const searchKey = ref('') // 搜索关键词`
+
+`// 搜索功能`
+
+`const handleSearch = () => {`
+
+`if (searchKey.value.trim()) {`
+
+`router.push({`
+
+`path: '/articles',`
+
+`query: { keyword: searchKey.value.trim() }`
+
+`})`
+
+`}`
+
+`}`
+
+`</script>`
+
+<style scoped lang="scss">
+
+`.header {`
+
+`height: 80px;`
+
+`line-height: 80px;`
+
+`border-bottom: 1px solid #eee;`
+
+`.header-wrap {`
+
+`display: flex;`
+
+`justify-content: space-between;`
+
+`align-items: center;`
+
+`}`
+
+`.logo {`
+
+`h1 {`
+
+`font-size: 24px;`
+
+`color: #2c3e50;`
+
+`font-weight: 600;`
+
+`}`
+
+`}`
+
+`.nav-desktop {`
+
+`.nav-list {`
+
+`display: flex;`
+
+`gap: 30px;`
+
+`.nav-item {`
+
+`a {`
+
+`color: #333;`
+
+`font-size: 16px;`
+
+`transition: color 0.3s;`
+
+`&:hover, &.active {`
+
+`color: #42b983; // Vue 主题色`
+
+`}`
+
+`}`
+
+`}`
+
+`}`
+
+`}`
+
+`.search-box {`
+
+`width: 200px;`
+
+`}`
+
+`}`
+
+`</style>`
+
+<h4 id="3-2-2-文章卡片组件（ArticleCard）"><a href="#3-2-2-文章卡片组件（ArticleCard）" class="headerlink" title="3.2.2 文章卡片组件（ArticleCard）"></a>3.2.2 文章卡片组件（ArticleCard）</h4><p>首页、文章列表页复用的核心组件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code><!-- src/components/ArticleCard.vue --></code></p>
+<p><code>&lt;template&gt;</code></p>
+<div class="article-card" @click="goToDetail">
+
+<p><code><!-- 文章封面图 --></code></p>
+<div class="card-img" v-if="article.cover">
+
+<img :src="article.cover" :alt="article.title" />
+
+<p><code>&lt;/div&gt;</code></p>
+<p><code><!-- 文章信息 --></code></p>
+<div class="card-content">
+
+<p><code><!-- 分类标签 --></code></p>
+<p><code>&lt;router-link </code></p>
+<p><code>:to=&quot;&#123; path: &#39;/category/&#39; + article.categoryId &#125;&quot;</code></p>
+<p><code>class=&quot;category-tag&quot;</code></p>
+<p><code>&gt;</code></p>
+<p><code>&#123;&#123; article.categoryName &#125;&#125;</code></p>
+<p><code>&lt;/router-link&gt;</code></p>
+<p><code><!-- 文章标题 --></code></p>
+<p><code>&lt;h3 class=&quot;card-title&quot;&gt;&#123;&#123; article.title &#125;&#125;&lt;/h3&gt;</code></p>
+<p><code><!-- 文章摘要 --></code></p>
+<p class="card-excerpt"></p>
+
+<p><code><!-- 底部信息（作者、时间、阅读量） --></code></p>
+<div class="card-meta">
+
+<p><code>&lt;span class=&quot;meta-item&quot;&gt;</code></p>
+<p><code>&lt;i class=&quot;User&quot;&gt;&lt;/i&gt; &#123;&#123; article.author &#125;&#125;</code></p>
+<p><code>&lt;/span&gt;</code></p>
+<p><code>&lt;span class=&quot;meta-item&quot;&gt;</code></p>
+<p><code>&lt;i class=&quot;Calendar&quot;&gt;&lt;/i&gt; &#123;&#123; formatTime(article.createTime) &#125;&#125;</code></p>
+<p><code>&lt;/span&gt;</code></p>
+<p><code>&lt;span class=&quot;meta-item&quot;&gt;</code></p>
+<p><code>&lt;i class=&quot;Eye&quot;&gt;&lt;/i&gt; &#123;&#123; article.viewCount &#125;&#125; 阅读</code></p>
+<p><code>&lt;/span&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/template&gt;</code></p>
+<script setup>
+
+`import { defineProps } from 'vue'`
+
+`import { useRouter } from 'vue-router'`
+
+`import { formatTime } from '@/utils/format' // 时间格式化工具`
+
+`import { User, Calendar, Eye } from '@element-plus/icons-vue'`
+
+`const router = useRouter()`
+
+`// 接收父组件传递的文章数据`
+
+`const props = defineProps({`
+
+`article: {`
+
+`type: Object,`
+
+`required: true,`
+
+`default: () => ({})`
+
+`}`
+
+`})`
+
+`// 跳转到文章详情页`
+
+`const goToDetail = () => {`
+
+`router.push({`
+
+`path: `/article/${props.article.id}``
+
+`})`
+
+`}`
+
+`</script>`
+
+<style scoped lang="scss">
+
+`.article-card {`
+
+`background: #fff;`
+
+`border-radius: 8px;`
+
+`box-shadow: 0 2px 8px rgba(0,0,0,0.08);`
+
+`transition: transform 0.3s, box-shadow 0.3s;`
+
+`cursor: pointer;`
+
+`&:hover {`
+
+`transform: translateY(-5px);`
+
+`box-shadow: 0 8px 24px rgba(0,0,0,0.12);`
+
+`}`
+
+`.card-img {`
+
+`height: 180px;`
+
+`overflow: hidden;`
+
+`border-top-left-radius: 8px;`
+
+`border-top-right-radius: 8px;`
+
+`img {`
+
+`width: 100%;`
+
+`height: 100%;`
+
+`object-fit: cover;`
+
+`transition: transform 0.5s;`
+
+`&:hover {`
+
+`transform: scale(1.05);`
+
+`}`
+
+`}`
+
+`}`
+
+`.card-content {`
+
+`padding: 20px;`
+
+`.category-tag {`
+
+`display: inline-block;`
+
+`padding: 2px 8px;`
+
+`background: #f5f5f5;`
+
+`color: #42b983;`
+
+`font-size: 12px;`
+
+`border-radius: 4px;`
+
+`margin-bottom: 10px;`
+
+`}`
+
+`.card-title {`
+
+`font-size: 18px;`
+
+`color: #2c3e50;`
+
+`margin-bottom: 10px;`
+
+`line-height: 1.5;`
+
+`}`
+
+`.card-excerpt {`
+
+`font-size: 14px;`
+
+`color: #666;`
+
+`line-height: 1.6;`
+
+`margin-bottom: 15px;`
+
+`display: -webkit-box;`
+
+`-webkit-line-clamp: 2;`
+
+`-webkit-box-orient: vertical;`
+
+`overflow: hidden;`
+
+`}`
+
+`.card-meta {`
+
+`display: flex;`
+
+`gap: 15px;`
+
+`font-size: 12px;`
+
+`color: #999;`
+
+`.meta-item {`
+
+`display: flex;`
+
+`align-items: center;`
+
+`gap: 4px;`
+
+`}`
+
+`}`
+
+`}`
+
+`}`
+
+`</style>`
+
+<h3 id="3-3-核心页面开发：实现博客核心流程"><a href="#3-3-核心页面开发：实现博客核心流程" class="headerlink" title="3.3 核心页面开发：实现博客核心流程"></a>3.3 核心页面开发：实现博客核心流程</h3><h4 id="3-3-1-首页（Home-vue）"><a href="#3-3-1-首页（Home-vue）" class="headerlink" title="3.3.1 首页（Home.vue）"></a>3.3.1 首页（Home.vue）</h4><p>首页展示最新文章、热门分类、推荐标签等核心内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code><!-- src/pages/Home.vue --></code></p>
+<p><code>&lt;template&gt;</code></p>
+<div class="home-page">
+
+<p><code><!-- 轮播图（可选） --></code></p>
+<p><code>&lt;el-carousel height=&quot;300px&quot; :autoplay=&quot;true&quot; indicator-position=&quot;outside&quot;&gt;</code></p>
+<p><code>&lt;el-carousel-item v-for=&quot;(item, index) in bannerList&quot; :key=&quot;index&quot;&gt;</code></p>
+<p><code>&lt;router-link :to=&quot;</code>&#x2F;article&#x2F;${item.id}<code>&quot;&gt;</code></p>
+<p>&lt;img </p>
+<p><code>:src=&quot;item.cover&quot; </code></p>
+<p><code>:alt=&quot;item.title&quot; </code></p>
+<p><code>class=&quot;banner-img&quot;</code></p>
+<p><code>/&gt;</code></p>
+<div class="banner-mask">
+
+<p><code>&lt;h3 class=&quot;banner-title&quot;&gt;&#123;&#123; item.title &#125;&#125;&lt;/h3&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/router-link&gt;</code></p>
+<p><code>&lt;/el-carousel-item&gt;</code></p>
+<p><code>&lt;/el-carousel&gt;</code></p>
+<p><code><!-- 最新文章 --></code></p>
+<p><code>&lt;section class=&quot;latest-articles&quot;&gt;</code></p>
+<div class="section-header">
+
+<p><code>&lt;h2&gt;最新文章&lt;/h2&gt;</code></p>
+<p><code>&lt;router-link to=&quot;/articles&quot; class=&quot;more-link&quot;&gt;查看全部 →&lt;/router-link&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<div class="articles-list">
+
+<p><code>&lt;ArticleCard </code></p>
+<p><code>v-for=&quot;article in articleList&quot; </code></p>
+<p><code>:key=&quot;article.id&quot;</code></p>
+<p><code>:article=&quot;article&quot;</code></p>
+<p><code>/&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/section&gt;</code></p>
+<p><code><!-- 分类与标签 --></code></p>
+<div class="category-tag-wrap">
+
+<p><code>&lt;section class=&quot;category-section&quot;&gt;</code></p>
+<div class="section-header">
+
+<p><code>&lt;h2&gt;热门分类&lt;/h2&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<div class="category-list">
+
+<p><code>&lt;router-link </code></p>
+<p><code>:to=&quot;&#123; path: &#39;/category/&#39; + item.id &#125;&quot;</code></p>
+<p><code>class=&quot;category-item&quot;</code></p>
+<p><code>v-for=&quot;item in categoryList&quot;</code></p>
+<p><code>:key=&quot;item.id&quot;</code></p>
+<p><code>&gt;</code></p>
+<p><code>&#123;&#123; item.name &#125;&#125; (&#123;&#123; item.articleCount &#125;&#125;)</code></p>
+<p><code>&lt;/router-link&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/section&gt;</code></p>
+<p><code>&lt;section class=&quot;tag-section&quot;&gt;</code></p>
+<div class="section-header">
+
+<p><code>&lt;h2&gt;推荐标签&lt;/h2&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<div class="tag-list">
+
+<p><code>&lt;router-link </code></p>
+<p><code>:to=&quot;&#123; path: &#39;/tag/&#39; + item.id &#125;&quot;</code></p>
+<p><code>class=&quot;tag-item&quot;</code></p>
+<p><code>v-for=&quot;item in tagList&quot;</code></p>
+<p><code>:key=&quot;item.id&quot;</code></p>
+<p><code>&gt;</code></p>
+<p><code>&#123;&#123; item.name &#125;&#125; (&#123;&#123; item.articleCount &#125;&#125;)</code></p>
+<p><code>&lt;/router-link&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/section&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/template&gt;</code></p>
+<script setup>
+
+`import { onMounted } from 'vue'`
+
+`import ArticleCard from '@/components/ArticleCard.vue'`
+
+`import { useArticleStore } from '@/store/modules/article'`
+
+`import { useCategoryStore } from '@/store/modules/category'`
+
+`import { useTagStore } from '@/store/modules/tag'`
+
+`const articleStore = useArticleStore()`
+
+`const categoryStore = useCategoryStore()`
+
+`const tagStore = useTagStore()`
+
+`// 轮播图数据（可从接口获取）`
+
+`const bannerList = [`
+
+`{ id: 1, title: 'Vue 3 Composition API 完全指南', cover: '/assets/img/banner1.jpg' },`
+
+`{ id: 2, title: 'Vite 性能优化实战技巧', cover: '/assets/img/banner2.jpg' }`
+
+`]`
+
+`// 页面加载时获取数据`
+
+`onMounted(() => {`
+
+`// 获取最新文章（前6篇）`
+
+`articleStore.fetchArticleList({ page: 1, pageSize: 6 })`
+
+`// 获取热门分类`
+
+`categoryStore.fetchHotCategory()`
+
+`// 获取推荐标签`
+
+`tagStore.fetchRecommendTag()`
+
+`})`
+
+`</script>`
+
+<style scoped lang="scss">
+
+`.home-page {`
+
+`.banner-img {`
+
+`width: 100%;`
+
+`height: 100%;`
+
+`object-fit: cover;`
+
+`}`
+
+`.banner-mask {`
+
+`position: absolute;`
+
+`bottom: 0;`
+
+`left: 0;`
+
+`right: 0;`
+
+`background: linear-gradient(transparent, rgba(0,0,0,0.7));`
+
+`padding: 20px;`
+
+`.banner-title {`
+
+`color: #fff;`
+
+`font-size: 20px;`
+
+`font-weight: 600;`
+
+`}`
+
+`}`
+
+`.latest-articles {`
+
+`margin: 30px 0;`
+
+`.section-header {`
+
+`display: flex;`
+
+`justify-content: space-between;`
+
+`align-items: center;`
+
+`margin-bottom: 20px;`
+
+`h2 {`
+
+`font-size: 20px;`
+
+`color: #2c3e50;`
+
+`font-weight: 600;`
+
+`}`
+
+`.more-link {`
+
+`color: #42b983;`
+
+`font-size: 14px;`
+
+`}`
+
+`}`
+
+`.articles-list {`
+
+`display: grid;`
+
+`grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));`
+
+`gap: 20px;`
+
+`}`
+
+`}`
+
+`.category-tag-wrap {`
+
+`display: flex;`
+
+`gap: 30px;`
+
+`margin-bottom: 30px;`
+
+`.category-section, .tag-section {`
+
+`flex: 1;`
+
+`.section-header {`
+
+`margin-bottom: 15px;`
+
+`h2 {`
+
+`font-size: 18px;`
+
+`color: #2c3e50;`
+
+`font-weight: 600;`
+
+`}`
+
+`}`
+
+`.category-list {`
+
+`display: flex;`
+
+`flex-wrap: wrap;`
+
+`gap: 10px;`
+
+`.category-item {`
+
+`padding: 8px 15px;`
+
+`background: #f5f5f5;`
+
+`border-radius: 20px;`
+
+`font-size: 14px;`
+
+`color: #333;`
+
+`transition: background 0.3s;`
+
+`&:hover {`
+
+`background: #42b983;`
+
+`color: #fff;`
+
+`}`
+
+`}`
+
+`}`
+
+`.tag-list {`
+
+`display: flex;`
+
+`flex-wrap: wrap;`
+
+`gap: 10px;`
+
+`.tag-item {`
+
+`padding: 6px 12px;`
+
+`background: #f8f9fa;`
+
+`border-radius: 4px;`
+
+`font-size: 13px;`
+
+`color: #666;`
+
+`transition: all 0.3s;`
+
+`&:hover {`
+
+`background: #42b983;`
+
+`color: #fff;`
+
+`}`
+
+`}`
+
+`}`
+
+`}`
+
+`}`
+
+`}`
+
+`</style>`
+
+<h4 id="3-3-2-文章详情页（ArticleDetail-vue）"><a href="#3-3-2-文章详情页（ArticleDetail-vue）" class="headerlink" title="3.3.2 文章详情页（ArticleDetail.vue）"></a>3.3.2 文章详情页（ArticleDetail.vue）</h4><p>核心功能：展示文章内容（Markdown 渲染）、目录导航、评论区、相关推荐：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code><!-- src/pages/ArticleDetail.vue --></code></p>
+<p><code>&lt;template&gt;</code></p>
+<div class="article-detail">
+
+<div class="article-header">
+
+<p><code><!-- 分类标签 --></code></p>
+<p><code>&lt;router-link </code></p>
+<p><code>:to=&quot;&#123; path: &#39;/category/&#39; + currentArticle.categoryId &#125;&quot;</code></p>
+<p><code>class=&quot;category-tag&quot;</code></p>
+<p><code>&gt;</code></p>
+<p><code>&#123;&#123; currentArticle.categoryName &#125;&#125;</code></p>
+<p><code>&lt;/router-link&gt;</code></p>
+<p><code><!-- 文章标题 --></code></p>
+<p><code>&lt;h1 class=&quot;article-title&quot;&gt;&#123;&#123; currentArticle.title &#125;&#125;&lt;/h1&gt;</code></p>
+<p><code><!-- 文章元信息 --></code></p>
+<div class="article-meta">
+
+<p><code>&lt;span class=&quot;meta-item&quot;&gt;</code></p>
+<p><code>&lt;i class=&quot;User&quot;&gt;&lt;/i&gt; &#123;&#123; currentArticle.author &#125;&#125;</code></p>
+<p><code>&lt;/span&gt;</code></p>
+<p><code>&lt;span class=&quot;meta-item&quot;&gt;</code></p>
+<p><code>&lt;i class=&quot;Calendar&quot;&gt;&lt;/i&gt; &#123;&#123; formatTime(currentArticle.createTime) &#125;&#125;</code></p>
+<p><code>&lt;/span&gt;</code></p>
+<p><code>&lt;span class=&quot;meta-item&quot;&gt;</code></p>
+<p><code>&lt;i class=&quot;Eye&quot;&gt;&lt;/i&gt; &#123;&#123; currentArticle.viewCount &#125;&#125; 阅读</code></p>
+<p><code>&lt;/span&gt;</code></p>
+<p><code>&lt;span class=&quot;meta-item&quot;&gt;</code></p>
+<p><code>&lt;i class=&quot;Tag&quot;&gt;&lt;/i&gt;</code></p>
+<p><code>&lt;router-link </code></p>
+<p><code>:to=&quot;&#123; path: &#39;/tag/&#39; + tag.id &#125;&quot;</code></p>
+<p><code>class=&quot;tag-link&quot;</code></p>
+<p><code>v-for=&quot;tag in currentArticle.tags&quot;</code></p>
+<p><code>:key=&quot;tag.id&quot;</code></p>
+<p><code>&gt;</code></p>
+<p><code>&#123;&#123; tag.name &#125;&#125;</code></p>
+<p><code>&lt;/router-link&gt;</code></p>
+<p><code>&lt;/span&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code><!-- 文章封面图 --></code></p>
+<div class="article-cover" v-if="currentArticle.cover">
+
+<img :src="currentArticle.cover" :alt="currentArticle.title" />
+
+<p><code>&lt;/div&gt;</code></p>
+<p><code><!-- 文章内容（Markdown 渲染） --></code></p>
+<div class="article-content" v-html="renderedContent"></div>
+
+<p><code><!-- 点赞 + 分享 --></code></p>
+<div class="article-actions">
+
+<p><code>&lt;button class=&quot;like-btn&quot; @click=&quot;handleLike&quot;&gt;</code></p>
+<p><code>&lt;i class=&quot;Thumb&quot; :class=&quot;&#123; liked: isLiked &#125;&quot;&gt;&lt;/i&gt;</code></p>
+<p><code>&lt;span&gt;&#123;&#123; currentArticle.likeCount &#125;&#125; 点赞&lt;/span&gt;</code></p>
+<p><code>&lt;/button&gt;</code></p>
+<div class="share-btn">
+
+<p><code>&lt;i class=&quot;Share&quot;&gt;&lt;/i&gt; 分享</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code><!-- 相关推荐 --></code></p>
+<div class="related-articles">
+
+<p><code>&lt;h3 class=&quot;related-title&quot;&gt;相关推荐&lt;/h3&gt;</code></p>
+<div class="related-list">
+
+<p><code>&lt;ArticleCard </code></p>
+<p><code>v-for=&quot;article in relatedArticles&quot; </code></p>
+<p><code>:key=&quot;article.id&quot;</code></p>
+<p><code>:article=&quot;article&quot;</code></p>
+<p><code>/&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code><!-- 评论区 --></code></p>
+<div class="comment-section">
+
+<p><code>&lt;h3 class=&quot;comment-title&quot;&gt;评论区 (&#123;&#123; commentCount &#125;&#125;)&lt;/h3&gt;</code></p>
+<p><code><!-- 评论输入框 --></code></p>
+<div class="comment-input">
+
+<p><code>&lt;el-input</code></p>
+<p><code>v-model=&quot;commentContent&quot;</code></p>
+<p><code>type=&quot;textarea&quot;</code></p>
+<p><code>:rows=&quot;4&quot;</code></p>
+<p><code>placeholder=&quot;写下你的看法...&quot;</code></p>
+<p><code>/&gt;</code></p>
+<p><code>&lt;el-button type=&quot;primary&quot; @click=&quot;submitComment&quot;&gt;提交评论&lt;/el-button&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code><!-- 评论列表 --></code></p>
+<div class="comment-list">
+
+<div class="comment-item" v-for="comment in commentList" :key="comment.id">
+
+<div class="comment-avatar">
+
+<img :src="comment.avatar" :alt="comment.nickname" />
+
+<p><code>&lt;/div&gt;</code></p>
+<div class="comment-content">
+
+<div class="comment-header">
+
+<p><code>&lt;span class=&quot;comment-nickname&quot;&gt;&#123;&#123; comment.nickname &#125;&#125;&lt;/span&gt;</code></p>
+<p><code>&lt;span class=&quot;comment-time&quot;&gt;&#123;&#123; formatTime(comment.createTime) &#125;&#125;&lt;/span&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p class="comment-text"></p>
+
+<div class="comment-actions">
+
+<p><code>&lt;button class=&quot;reply-btn&quot;&gt;回复&lt;/button&gt;</code></p>
+<p><code>&lt;button class=&quot;like-btn&quot;&gt;</code></p>
+<p><code>&lt;i class=&quot;Thumb&quot;&gt;&lt;/i&gt; &#123;&#123; comment.likeCount &#125;&#125;</code></p>
+<p><code>&lt;/button&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/template&gt;</code></p>
+<script setup>
+
+`import { ref, onMounted, computed } from 'vue'`
+
+`import { useRoute } from 'vue-router'`
+
+`import { useArticleStore } from '@/store/modules/article'`
+
+`import ArticleCard from '@/components/ArticleCard.vue'`
+
+`import { formatTime } from '@/utils/format'`
+
+`import { User, Calendar, Eye, Tag, Thumb, Share } from '@element-plus/icons-vue'`
+
+`import marked from 'marked' // Markdown 解析库`
+
+`import hljs from 'highlight.js' // 代码高亮`
+
+`import 'highlight.js/styles/atom-one-dark.css' // 代码高亮样式`
+
+`// 初始化 Markdown 解析器`
+
+`marked.setOptions({`
+
+`renderer: new marked.Renderer(),`
+
+`highlight: (code, lang) => {`
+
+`if (lang && hljs.getLanguage(lang)) {`
+
+`return hljs.highlight(code, { language: lang }).value`
+
+`}`
+
+`return hljs.highlight(code, { language: 'plaintext' }).value`
+
+`},`
+
+`breaks: true // 支持换行`
+
+`})`
+
+`const route = useRoute()`
+
+`const articleStore = useArticleStore()`
+
+`const articleId = route.params.id // 从路由获取文章 ID`
+
+`// 响应式数据`
+
+`const currentArticle = computed(() => articleStore.currentArticle || {})`
+
+`const renderedContent = computed(() => {`
+
+`// 将 Markdown 转为 HTML`
+
+`return currentArticle.value.content `
+
+`? marked.parse(currentArticle.value.content) `
+
+`: ''`
+
+`})`
+
+`const isLiked = ref(false) // 是否点赞`
+
+`const commentContent = ref('') // 评论内容`
+
+`const commentList = ref([]) // 评论列表`
+
+`const commentCount = ref(0) // 评论总数`
+
+`const relatedArticles = ref([]) // 相关文章`
+
+`// 页面加载时获取数据`
+
+`onMounted(() => {`
+
+`fetchArticleDetail()`
+
+`fetchRelatedArticles()`
+
+`fetchCommentList()`
+
+`})`
+
+`// 获取文章详情`
+
+`const fetchArticleDetail = async () => {`
+
+`await articleStore.fetchArticleDetail(articleId)`
+
+`// 模拟增加阅读量（实际需调用接口）`
+
+`currentArticle.value.viewCount += 1`
+
+`}`
+
+`// 获取相关文章（同分类下的其他文章）`
+
+`const fetchRelatedArticles = () => {`
+
+`// 实际项目中从接口获取，这里模拟数据`
+
+`relatedArticles.value = [`
+
+`{`
+
+`id: 3,`
+
+`title: 'Vue 3 生命周期钩子完全解析',`
+
+`cover: '/assets/img/article3.jpg',`
+
+`categoryId: currentArticle.value.categoryId,`
+
+`categoryName: currentArticle.value.categoryName,`
+
+`author: 'Vue 开发者',`
+
+`createTime: '2024-05-10',`
+
+`viewCount: 120`
+
+`}`
+
+`]`
+
+`}`
+
+`// 获取评论列表`
+
+`const fetchCommentList = () => {`
+
+`// 实际项目中从接口获取，这里模拟数据`
+
+`commentList.value = [`
+
+`{`
+
+`id: 1,`
+
+`nickname: '小明',`
+
+`avatar: '/assets/img/avatar1.jpg',`
+
+`content: '文章写得很详细，收获很大！',`
+
+`createTime: '2024-05-15',`
+
+`likeCount: 5`
+
+`}`
+
+`]`
+
+`commentCount.value = commentList.value.length`
+
+`}`
+
+`// 点赞功能`
+
+`const handleLike = () => {`
+
+`isLiked.value = !isLiked.value`
+
+`currentArticle.value.likeCount += isLiked.value ? 1 : -1`
+
+`// 实际项目中需调用点赞接口`
+
+`}`
+
+`// 提交评论`
+
+`const submitComment = () => {`
+
+`if (!commentContent.value.trim()) return`
+
+`// 模拟添加评论`
+
+`const newComment = {`
+
+`id: commentList.value.length + 1,`
+
+`nickname: '我',`
+
+`avatar: '/assets/img/avatar-default.jpg',`
+
+`content: commentContent.value.trim(),`
+
+`createTime: new Date().toISOString(),`
+
+`likeCount: 0`
+
+`}`
+
+`commentList.value.unshift(newComment)`
+
+`commentCount.value += 1`
+
+`commentContent.value = ''`
+
+`// 实际项目中需调用提交评论接口`
+
+`}`
+
+`</script>`
+
+<style scoped lang="scss">
+
+`.article-detail {`
+
+`background: #fff;`
+
+`border-radius: 8px;`
+
+`padding: 30px;`
+
+`box-shadow: 0 2px 8px rgba(0,0,0,0.08);`
+
+`.article-header {`
+
+`margin-bottom: 20px;`
+
+`.category-tag {`
+
+`display: inline-block;`
+
+`padding: 4px 10px;`
+
+`background: #f0f9f0;`
+
+`color: #42b983;`
+
+`font-size: 13px;`
+
+`border-radius: 4px;`
+
+`margin-bottom: 10px;`
+
+`}`
+
+`.article-title {`
+
+`font-size: 24px;`
+
+`color: #2c3e50;`
+
+`font-weight: 600;`
+
+`line-height: 1.5;`
+
+`margin-bottom: 15px;`
+
+`}`
+
+`.article-meta {`
+
+`display: flex;`
+
+`flex-wrap: wrap;`
+
+`gap: 15px;`
+
+`font-size: 14px;`
+
+`color: #999;`
+
+`.meta-item {`
+
+`display: flex;`
+
+`align-items: center;`
+
+`gap: 5px;`
+
+`}`
+
+`.tag-link {`
+
+`color: #666;`
+
+`margin-right: 8px;`
+
+`&:hover {`
+
+`color: #42b983;`
+
+`}`
+
+`}`
+
+`}`
+
+`}`
+
+`.article-cover {`
+
+`margin-bottom: 30px;`
+
+`img {`
+
+`width: 100%;`
+
+`height: auto;`
+
+`border-radius: 8px;`
+
+`}`
+
+`}`
+
+`.article-content {`
+
+`font-size: 16px;`
+
+`color: #333;`
+
+`line-height: 1.8;`
+
+`margin-bottom: 30px;`
+
+`// Markdown 样式适配`
+
+`h2 {`
+
+`font-size: 20px;`
+
+`margin: 25px 0 15px;`
+
+`color: #2c3e50;`
+
+`}`
+
+`h3 {`
+
+`font-size: 18px;`
+
+`margin: 20px 0 10px;`
+
+`color: #2c3e50;`
+
+`}`
+
+`p {`
+
+`margin-bottom: 15px;`
+
+`}`
+
+`img {`
+
+`max-width: 100%;`
+
+`height: auto;`
+
+`margin: 15px 0;`
+
+`border-radius: 4px;`
+
+`}`
+
+`pre {`
+
+`background: #f8f9fa;`
+
+`padding: 15px;`
+
+`border-radius: 4px;`
+
+`overflow-x: auto;`
+
+`margin: 15px 0;`
+
+`}`
+
+`code {`
+
+`background: #f5f5f5;`
+
+`padding: 2px 4px;`
+
+`border-radius: 4px;`
+
+`font-size: 14px;`
+
+`}`
+
+`blockquote {`
+
+`border-left: 4px solid #42b983;`
+
+`padding: 10px 15px;`
+
+`background: #f0f9f0;`
+
+`margin: 15px 0;`
+
+`}`
+
+`ul, ol {`
+
+`margin: 15px 0;`
+
+`padding-left: 25px;`
+
+`}`
+
+`}`
+
+`.article-actions {`
+
+`display: flex;`
+
+`justify-content: space-between;`
+
+`align-items: center;`
+
+`margin-bottom: 30px;`
+
+`padding: 15px 0;`
+
+`border-top: 1px solid #eee;`
+
+`border-bottom: 1px solid #eee;`
+
+`.like-btn {`
+
+`display: flex;`
+
+`align-items: center;`
+
+`gap: 5px;`
+
+`background: transparent;`
+
+`border: none;`
+
+`color: #666;`
+
+`cursor: pointer;`
+
+`transition: color 0.3s;`
+
+`&.liked {`
+
+`color: #e74c3c;`
+
+`}`
+
+`}`
+
+`.share-btn {`
+
+`display: flex;`
+
+`align-items: center;`
+
+`gap: 5px;`
+
+`color: #666;`
+
+`cursor: pointer;`
+
+`transition: color 0.3s;`
+
+`&:hover {`
+
+`color: #42b983;`
+
+`}`
+
+`}`
+
+`}`
+
+`.related-articles {`
+
+`margin-bottom: 30px;`
+
+`.related-title {`
+
+`font-size: 18px;`
+
+`color: #2c3e50;`
+
+`font-weight: 600;`
+
+`margin-bottom: 15px;`
+
+`}`
+
+`.related-list {`
+
+`display: grid;`
+
+`grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));`
+
+`gap: 15px;`
+
+`}`
+
+`}`
+
+`.comment-section {`
+
+`margin-top: 30px;`
+
+`.comment-title {`
+
+`font-size: 18px;`
+
+`color: #2c3e50;`
+
+`font-weight: 600;`
+
+`margin-bottom: 20px;`
+
+`}`
+
+`.comment-input {`
+
+`margin-bottom: 30px;`
+
+`display: flex;`
+
+`gap: 15px;`
+
+`.el-input {`
+
+`flex: 1;`
+
+`}`
+
+`.el-button {`
+
+`align-self: flex-end;`
+
+`}`
+
+`}`
+
+`.comment-list {`
+
+`gap: 20px;`
+
+`display: flex;`
+
+`flex-direction: column;`
+
+`}`
+
+`.comment-item {`
+
+`display: flex;`
+
+`gap: 15px;`
+
+`padding: 15px 0;`
+
+`border-bottom: 1px solid #f5f5f5;`
+
+`.comment-avatar {`
+
+`width: 40px;`
+
+`height: 40px;`
+
+`border-radius: 50%;`
+
+`overflow: hidden;`
+
+`img {`
+
+`width: 100%;`
+
+`height: 100%;`
+
+`object-fit: cover;`
+
+`}`
+
+`}`
+
+`.comment-content {`
+
+`flex: 1;`
+
+`.comment-header {`
+
+`display: flex;`
+
+`justify-content: space-between;`
+
+`margin-bottom: 5px;`
+
+`.comment-nickname {`
+
+`font-size: 14px;`
+
+`font-weight: 500;`
+
+`color: #2c3e50;`
+
+`}`
+
+`.comment-time {`
+
+`font-size: 12px;`
+
+`color: #999;`
+
+`}`
+
+`}`
+
+`.comment-text {`
+
+`font-size: 14px;`
+
+`color: #333;`
+
+`margin-bottom: 8px;`
+
+`}`
+
+`.comment-actions {`
+
+`display: flex;`
+
+`gap: 15px;`
+
+`font-size: 12px;`
+
+`color: #999;`
+
+`.reply-btn, .like-btn {`
+
+`background: transparent;`
+
+`border: none;`
+
+`color: #999;`
+
+`cursor: pointer;`
+
+`transition: color 0.3s;`
+
+`&:hover {`
+
+`color: #42b983;`
+
+`}`
+
+`}`
+
+`}`
+
+`}`
+
+`}`
+
+`}`
+
+`}`
+
+`</style>`
+
+<h3 id="3-4-接口封装与数据请求"><a href="#3-4-接口封装与数据请求" class="headerlink" title="3.4 接口封装与数据请求"></a>3.4 接口封装与数据请求</h3><h4 id="3-4-1-Axios-封装（src-api-request-js）"><a href="#3-4-1-Axios-封装（src-api-request-js）" class="headerlink" title="3.4.1 Axios 封装（src&#x2F;api&#x2F;request.js）"></a>3.4.1 Axios 封装（src&#x2F;api&#x2F;request.js）</h4><p>统一处理请求拦截、响应拦截、错误处理：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>import axios from &#39;axios&#39;</code></p>
+<p><code>import &#123; ElMessage &#125; from &#39;element-plus&#39;</code></p>
+<p><code>// 创建 Axios 实例</code></p>
+<p><code>const service = axios.create(&#123;</code></p>
+<p><code>baseURL: import.meta.env.VITE_API_BASE_URL, // 从环境变量获取基础地址</code></p>
+<p><code>timeout: 5000 // 请求超时时间</code></p>
+<p><code>&#125;)</code></p>
+<p><code>// 请求拦截器：添加 Token、设置请求头</code></p>
+<p><code>service.interceptors.request.use(</code></p>
+<p><code>(config) =&gt; &#123;</code></p>
+<p><code>// 实际项目中可添加 Token 认证</code></p>
+<p><code>// const token = localStorage.getItem(&#39;token&#39;)</code></p>
+<p><code>// if (token) &#123;</code></p>
+<p><code>// config.headers[&#39;Authorization&#39;] = </code>Bearer ${token}&#96;&#96;</p>
+<p><code>// &#125;</code></p>
+<p><code>return config</code></p>
+<p><code>&#125;,</code></p>
+<p><code>(error) =&gt; &#123;</code></p>
+<p><code>// 请求错误处理</code></p>
+<p><code>ElMessage.error(&#39;请求发送失败，请稍后重试&#39;)</code></p>
+<p><code>return Promise.reject(error)</code></p>
+<p><code>&#125;</code></p>
+<p><code>)</code></p>
+<p><code>// 响应拦截器：统一处理响应数据、错误</code></p>
+<p><code>service.interceptors.response.use(</code></p>
+<p><code>(response) =&gt; &#123;</code></p>
+<p><code>const res = response.data</code></p>
+<p><code>// 假设后端返回格式为 &#123; code: 200, data: &#123;&#125;, message: &#39;&#39; &#125;</code></p>
+<p><code>if (res.code !== 200) &#123;</code></p>
+<p><code>ElMessage.error(res.message || &#39;请求失败&#39;)</code></p>
+<p><code>return Promise.reject(res)</code></p>
+<p><code>&#125; else &#123;</code></p>
+<p><code>return res</code></p>
+<p><code>&#125;</code></p>
+<p><code>&#125;,</code></p>
+<p><code>(error) =&gt; &#123;</code></p>
+<p><code>// 响应错误处理</code></p>
+<p><code>ElMessage.error(&#39;服务器错误，请稍后重试&#39;)</code></p>
+<p><code>return Promise.reject(error)</code></p>
+<p><code>&#125;</code></p>
+<p><code>)</code></p>
+<p><code>export default service</code></p>
+<h4 id="3-4-2-接口请求函数（src-api-article-js）"><a href="#3-4-2-接口请求函数（src-api-article-js）" class="headerlink" title="3.4.2 接口请求函数（src&#x2F;api&#x2F;article.js）"></a>3.4.2 接口请求函数（src&#x2F;api&#x2F;article.js）</h4><p>按模块封装接口，便于维护：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>import request from &#39;./request&#39;</code></p>
+<p><code>// 获取文章列表</code></p>
+<p><code>export const getArticleList = (params) =&gt; &#123;</code></p>
+<p><code>return request(&#123;</code></p>
+<p><code>url: &#39;/article/list&#39;,</code></p>
+<p><code>method: &#39;GET&#39;,</code></p>
+<p><code>params</code></p>
+<p><code>&#125;)</code></p>
+<p><code>&#125;</code></p>
+<p><code>// 获取文章详情</code></p>
+<p><code>export const getArticleDetail = (id) =&gt; &#123;</code></p>
+<p><code>return request(&#123;</code></p>
+<p><code>url: </code>&#x2F;article&#x2F;${id}<code>,</code></p>
+<p><code>method: &#39;GET&#39;</code></p>
+<p><code>&#125;)</code></p>
+<p><code>&#125;</code></p>
+<p><code>// 点赞文章</code></p>
+<p><code>export const likeArticle = (id) =&gt; &#123;</code></p>
+<p><code>return request(&#123;</code></p>
+<p><code>url: </code>&#x2F;article&#x2F;${id}&#x2F;like<code>,</code></p>
+<p><code>method: &#39;POST&#39;</code></p>
+<p><code>&#125;)</code></p>
+<p><code>&#125;</code></p>
+<p><code>// 提交评论</code></p>
+<p><code>export const submitComment = (data) =&gt; &#123;</code></p>
+<p><code>return request(&#123;</code></p>
+<p><code>url: &#39;/comment/submit&#39;,</code></p>
+<p><code>method: &#39;POST&#39;,</code></p>
+<p><code>data</code></p>
+<p><code>&#125;)</code></p>
+<p><code>&#125;</code></p>
+<p><code>// 获取评论列表</code></p>
+<p><code>export const getCommentList = (articleId) =&gt; &#123;</code></p>
+<p><code>return request(&#123;</code></p>
+<p><code>url: </code>&#x2F;comment&#x2F;list&#x2F;${articleId}<code>,</code></p>
+<p><code>method: &#39;GET&#39;</code></p>
+<p><code>&#125;)</code></p>
+<p><code>&#125;</code></p>
+<h2 id="四、博客进阶功能：提升用户体验与实用性"><a href="#四、博客进阶功能：提升用户体验与实用性" class="headerlink" title="四、博客进阶功能：提升用户体验与实用性"></a>四、博客进阶功能：提升用户体验与实用性</h2><h3 id="4-1-Markdown-编辑器集成（后台管理）"><a href="#4-1-Markdown-编辑器集成（后台管理）" class="headerlink" title="4.1 Markdown 编辑器集成（后台管理）"></a>4.1 Markdown 编辑器集成（后台管理）</h3><p>如果需要自己发布文章，需集成 Markdown 编辑器，推荐使用 vue3-markdown-it：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>npm install vue3-markdown-it markdown-it-prism --save</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code><!-- src/components/MarkdownEditor.vue --></code></p>
+<p><code>&lt;template&gt;</code></p>
+<div class="markdown-editor">
+
+<p><code>&lt;el-row :gutter=&quot;20&quot;&gt;</code></p>
+<p><code><!-- 编辑区 --></code></p>
+<p><code>&lt;el-col :span=&quot;12&quot;&gt;</code></p>
+<p><code>&lt;textarea</code></p>
+<p><code>v-model=&quot;content&quot;</code></p>
+<p><code>class=&quot;editor-input&quot;</code></p>
+<p><code>placeholder=&quot;请输入 Markdown 内容...&quot;</code></p>
+<p><code>&gt;&lt;/textarea&gt;</code></p>
+<p><code>&lt;/el-col&gt;</code></p>
+<p><code><!-- 预览区 --></code></p>
+<p><code>&lt;el-col :span=&quot;12&quot;&gt;</code></p>
+<div class="editor-preview">
+
+<p><code>&lt;markdown-it </code></p>
+<p><code>:content=&quot;content&quot;</code></p>
+<p><code>:options=&quot;editorOptions&quot;</code></p>
+<p><code>/&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/el-col&gt;</code></p>
+<p><code>&lt;/el-row&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/template&gt;</code></p>
+<script setup>
+
+`import { ref } from 'vue'`
+
+`import MarkdownIt from 'vue3-markdown-it'`
+
+`import 'vue3-markdown-it/dist/style.css'`
+
+`import prism from 'markdown-it-prism'`
+
+`// 引入代码高亮样式`
+
+`import 'prismjs/themes/prism-tomorrow.css'`
+
+`const props = defineProps({`
+
+`modelValue: {`
+
+`type: String,`
+
+`default: ''`
+
+`}`
+
+`})`
+
+`const emit = defineEmits(['update:modelValue'])`
+
+`const content = ref(props.modelValue)`
+
+`// 监听内容变化，同步到父组件`
+
+`watch(content, (val) => {`
+
+`emit('update:modelValue', val)`
+
+`})`
+
+`// Markdown 编辑器配置`
+
+`const editorOptions = ref({`
+
+`plugins: [prism],`
+
+`html: true, // 支持 HTML 标签`
+
+`breaks: true, // 支持换行`
+
+`linkify: true // 自动识别链接`
+
+`})`
+
+`</script>`
+
+<style scoped lang="scss">
+
+`.markdown-editor {`
+
+`.editor-input {`
+
+`width: 100%;`
+
+`height: 600px;`
+
+`padding: 15px;`
+
+`border: 1px solid #eee;`
+
+`border-radius: 4px;`
+
+`font-size: 14px;`
+
+`line-height: 1.8;`
+
+`resize: none;`
+
+`outline: none;`
+
+`&:focus {`
+
+`border-color: #42b983;`
+
+`}`
+
+`}`
+
+`.editor-preview {`
+
+`height: 600px;`
+
+`padding: 15px;`
+
+`border: 1px solid #eee;`
+
+`border-radius: 4px;`
+
+`overflow-y: auto;`
+
+`// 预览区样式适配`
+
+`h2 {`
+
+`font-size: 20px;`
+
+`margin: 20px 0 10px;`
+
+`}`
+
+`pre {`
+
+`background: #f8f9fa;`
+
+`padding: 10px;`
+
+`border-radius: 4px;`
+
+`overflow-x: auto;`
+
+`}`
+
+`code {`
+
+`background: #f5f5f5;`
+
+`padding: 2px 4px;`
+
+`border-radius: 4px;`
+
+`}`
+
+`}`
+
+`}`
+
+`</style>`
+
+<h3 id="4-2-暗黑模式切换"><a href="#4-2-暗黑模式切换" class="headerlink" title="4.2 暗黑模式切换"></a>4.2 暗黑模式切换</h3><p>提升用户体验，支持亮色 &#x2F; 暗黑模式切换，基于 CSS 变量实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>// src/utils/theme.js</code></p>
+<p><code>// 切换暗黑模式</code></p>
+<p><code>export const toggleDarkMode = () =&gt; &#123;</code></p>
+<p><code>const isDark = document.documentElement.classList.contains(&#39;dark-mode&#39;)</code></p>
+<p><code>if (isDark) &#123;</code></p>
+<p><code>document.documentElement.classList.remove(&#39;dark-mode&#39;)</code></p>
+<p><code>localStorage.setItem(&#39;theme&#39;, &#39;light&#39;)</code></p>
+<p><code>&#125; else &#123;</code></p>
+<p><code>document.documentElement.classList.add(&#39;dark-mode&#39;)</code></p>
+<p><code>localStorage.setItem(&#39;theme&#39;, &#39;dark&#39;)</code></p>
+<p><code>&#125;</code></p>
+<p><code>&#125;</code></p>
+<p><code>// 初始化主题（从本地存储读取）</code></p>
+<p><code>export const initTheme = () =&gt; &#123;</code></p>
+<p><code>const theme = localStorage.getItem(&#39;theme&#39;) || &#39;light&#39;</code></p>
+<p><code>if (theme === &#39;dark&#39;) &#123;</code></p>
+<p><code>document.documentElement.classList.add(&#39;dark-mode&#39;)</code></p>
+<p><code>&#125;</code></p>
+<p><code>&#125;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>// src/assets/css/global.scss</code></p>
+<p><code>// 定义亮色模式变量</code></p>
+<p><code>:root &#123;</code></p>
+<p><code>--bg-color: #fafafa;</code></p>
+<p><code>--text-color: #333;</code></p>
+<p><code>--card-bg: #fff;</code></p>
+<p><code>--border-color: #eee;</code></p>
+<p><code>--primary-color: #42b983;</code></p>
+<p><code>&#125;</code></p>
+<p><code>// 暗黑模式变量</code></p>
+<p><code>.dark-mode &#123;</code></p>
+<p><code>--bg-color: #1a1a1a;</code></p>
+<p><code>--text-color: #e0e0e0;</code></p>
+<p><code>--card-bg: #2d2d2d;</code></p>
+<p><code>--border-color: #444;</code></p>
+<p><code>--primary-color: #66cc99;</code></p>
+<p><code>&#125;</code></p>
+<p><code>// 全局样式应用变量</code></p>
+<p><code>body &#123;</code></p>
+<p><code>background-color: var(--bg-color);</code></p>
+<p><code>color: var(--text-color);</code></p>
+<p><code>font-family: &#39;Helvetica Neue&#39;, Arial, sans-serif;</code></p>
+<p><code>&#125;</code></p>
+<p><code>// 其他组件样式中替换固定颜色为变量</code></p>
+<p>在 Header 组件添加切换按钮：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code><!-- Header.vue 中添加 --></code></p>
+<p><code>&lt;el-button </code></p>
+<p><code>icon=&quot;Moon&quot; </code></p>
+<p><code>size=&quot;small&quot; </code></p>
+<p><code>class=&quot;theme-toggle&quot;</code></p>
+<p><code>@click=&quot;toggleDarkMode&quot;</code></p>
+<p><code>&gt;</code></p>
+<p><code>&#123;&#123; isDark ? '亮色模式' : '暗黑模式' &#125;&#125;</code></p>
+<p><code>&lt;/el-button&gt;</code></p>
+<script setup>
+
+`import { toggleDarkMode, initTheme } from '@/utils/theme'`
+
+`import { ref, onMounted } from 'vue'`
+
+`const isDark = ref(false)`
+
+`onMounted(() => {`
+
+`initTheme()`
+
+`isDark.value = document.documentElement.classList.contains('dark-mode')`
+
+`})`
+
+`// 监听主题变化`
+
+`const toggleDarkMode = () => {`
+
+`window.toggleDarkMode()`
+
+`isDark.value = !isDark.value`
+
+`}`
+
+`</script>`
+
+<h3 id="4-3-文章目录导航"><a href="#4-3-文章目录导航" class="headerlink" title="4.3 文章目录导航"></a>4.3 文章目录导航</h3><p>基于文章标题自动生成目录，支持锚点跳转：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code><!-- src/components/ArticleToc.vue --></code></p>
+<p><code>&lt;template&gt;</code></p>
+<div class="article-toc">
+
+<p><code>&lt;h3 class=&quot;toc-title&quot;&gt;文章目录&lt;/h3&gt;</code></p>
+<p><code>&lt;ul class=&quot;toc-list&quot;&gt;</code></p>
+<p><code>&lt;li </code></p>
+<p><code>class=&quot;toc-item&quot;</code></p>
+<p><code>v-for=&quot;(item, index) in tocList&quot;</code></p>
+<p><code>:key=&quot;index&quot;</code></p>
+<p><code>:class=&quot;&#123; active: currentAnchor === item.id &#125;&quot;</code></p>
+<p><code>&gt;</code></p>
+<p>&lt;a </p>
+<p><code>:href=&quot;</code>#${item.id}<code>&quot;</code></p>
+<p><code>@click.prevent=&quot;scrollToAnchor(item.id)&quot;</code></p>
+<p><code>:style=&quot;&#123; paddingLeft: </code>${(item.level - 2) * 15}px<code> &#125;&quot;</code></p>
+<p><code>&gt;</code></p>
+<p><code>&#123;&#123; item.text &#125;&#125;</code></p>
+<p><code>&lt;/a&gt;</code></p>
+<p><code>&lt;/li&gt;</code></p>
+<p><code>&lt;/ul&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/template&gt;</code></p>
+<script setup>
+
+`import { ref, watch, onMounted } from 'vue'`
+
+`const props = defineProps({`
+
+`// 文章内容 HTML（用于解析标题）`
+
+`content: {`
+
+`type: String,`
+
+`required: true`
+
+`}`
+
+`})`
+
+`const tocList = ref([]) // 目录列表`
+
+`const currentAnchor = ref('') // 当前激活的锚点`
+
+`// 解析文章标题生成目录`
+
+`const parseToc = () => {`
+
+`const tempDiv = document.createElement('div')`
+
+`tempDiv.innerHTML = props.content`
+
+`const headings = tempDiv.querySelectorAll('h2, h3') // 只解析 h2、h3 标题`
+
+`const list = []`
+
+`headings.forEach((heading, index) => {`
+
+`const id = `heading-${index}``
+
+`heading.id = id // 给标题添加 id`
+
+`list.push({`
+
+`id,`
+
+`text: heading.textContent,`
+
+`level: parseInt(heading.tagName.replace('H', '')) // 标题级别（2、3）`
+
+`})`
+
+`})`
+
+`tocList.value = list`
+
+`// 更新文章内容中的标题 id`
+
+`props.content = tempDiv.innerHTML`
+
+`}`
+
+`// 滚动到指定锚点`
+
+`const scrollToAnchor = (id) => {`
+
+`const element = document.getElementById(id)`
+
+`if (element) {`
+
+`element.scrollIntoView({ behavior: 'smooth' })`
+
+`currentAnchor.value = id`
+
+`}`
+
+`}`
+
+`// 监听滚动，更新当前激活的锚点`
+
+`const watchScroll = () => {`
+
+`const scrollTop = window.scrollY + 200`
+
+`const headings = document.querySelectorAll('h2, h3')`
+
+`headings.forEach((heading) => {`
+
+`const offsetTop = heading.offsetTop`
+
+`const nextHeading = heading.nextElementSibling?.tagName.match(/H[2-3]/)`
+
+`? heading.nextElementSibling`
+
+`: null`
+
+`const offsetBottom = nextHeading ? nextHeading.offsetTop : Infinity`
+
+`if (scrollTop >= offsetTop && scrollTop < offsetBottom) {`
+
+`currentAnchor.value = heading.id`
+
+`}`
+
+`})`
+
+`}`
+
+`// 初始化与监听`
+
+`onMounted(() => {`
+
+`parseToc()`
+
+`window.addEventListener('scroll', watchScroll)`
+
+`})`
+
+`watch(() => props.content, parseToc)`
+
+`// 组件卸载时移除滚动监听`
+
+`onUnmounted(() => {`
+
+`window.removeEventListener('scroll', watchScroll)`
+
+`})`
+
+`</script>`
+
+<style scoped lang="scss">
+
+`.article-toc {`
+
+`background: var(--card-bg);`
+
+`border-radius: 8px;`
+
+`padding: 15px;`
+
+`box-shadow: 0 2px 8px rgba(0,0,0,0.08);`
+
+`.toc-title {`
+
+`font-size: 16px;`
+
+`color: var(--text-color);`
+
+`font-weight: 600;`
+
+`margin-bottom: 10px;`
+
+`padding-bottom: 10px;`
+
+`border-bottom: 1px solid var(--border-color);`
+
+`}`
+
+`.toc-list {`
+
+`list-style: none;`
+
+`}`
+
+`.toc-item {`
+
+`margin: 8px 0;`
+
+`a {`
+
+`color: var(--text-color);`
+
+`font-size: 14px;`
+
+`text-decoration: none;`
+
+`transition: color 0.3s;`
+
+`&:hover, &.active {`
+
+`color: var(--primary-color);`
+
+`}`
+
+`}`
+
+`}`
+
+`}`
+
+`</style>`
+
+<h2 id="五、性能优化：让博客加载更快、运行更流畅"><a href="#五、性能优化：让博客加载更快、运行更流畅" class="headerlink" title="五、性能优化：让博客加载更快、运行更流畅"></a>五、性能优化：让博客加载更快、运行更流畅</h2><h3 id="5-1-路由懒加载与组件懒加载"><a href="#5-1-路由懒加载与组件懒加载" class="headerlink" title="5.1 路由懒加载与组件懒加载"></a>5.1 路由懒加载与组件懒加载</h3><p>已在路由配置中使用懒加载（() &#x3D;&gt; import(‘xxx.vue’)），组件懒加载可进一步优化首屏加载：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code><!-- 在需要懒加载的组件处使用 --></code></p>
+<p><code>&lt;template&gt;</code></p>
+<div>
+
+<p><code><!-- 懒加载评论区（滚动到可视区域才加载） --></code></p>
+<p><code>&lt;LazyComment </code></p>
+<p><code>v-if=&quot;isCommentVisible&quot;</code></p>
+<p><code>:articleId=&quot;articleId&quot;</code></p>
+<p><code>/&gt;</code></p>
+<p><code>&lt;/div&gt;</code></p>
+<p><code>&lt;/template&gt;</code></p>
+<script setup>
+
+`import { ref, onMounted } from 'vue'`
+
+`// 懒加载组件`
+
+`const LazyComment = defineAsyncComponent(() => import('@/components/LazyComment.vue'))`
+
+`const articleId = ref(1)`
+
+`const isCommentVisible = ref(false)`
+
+`// 监听滚动，判断组件是否进入可视区域`
+
+`onMounted(() => {`
+
+`const observer = new IntersectionObserver((entries) => {`
+
+`entries.forEach(entry => {`
+
+`if (entry.isIntersecting) {`
+
+`isCommentVisible.value = true`
+
+`observer.unobserve(entry.target)`
+
+`}`
+
+`})`
+
+`})`
+
+`observer.observe(document.getElementById('comment-trigger'))`
+
+`})`
+
+`</script>`
+
+<h3 id="5-2-图片优化"><a href="#5-2-图片优化" class="headerlink" title="5.2 图片优化"></a>5.2 图片优化</h3><ol>
+<li><strong>懒加载</strong>：使用 Element Plus 的 ElImage 组件或原生 loading&#x3D;”lazy”：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;el-image </code></p>
+<p><code>:src=&quot;article.cover&quot; </code></p>
+<p><code>:alt=&quot;article.title&quot;</code></p>
+<p><code>lazy</code></p>
+<p><code>placeholder=&quot;加载中...&quot;</code></p>
+<p><code>/&gt;</code></p>
+<p><code><!-- 原生方式 --></code></p>
+<p>&lt;img </p>
+<p><code>:src=&quot;article.cover&quot; </code></p>
+<p><code>:alt=&quot;article.title&quot;</code></p>
+<p><code>loading=&quot;lazy&quot;</code></p>
+<p><code>width=&quot;100%&quot;</code></p>
+<p><code>height=&quot;auto&quot;</code></p>
+<p><code>/&gt;</code></p>
+<ol>
+<li><strong>图片压缩与 CDN 加速</strong>：</li>
+</ol>
+<ul>
+<li><p>本地图片使用 TinyPNG 压缩后再上传；</p>
+</li>
+<li><p>线上图片使用云存储（如阿里云 OSS、七牛云）+ CDN 加速，配置图片格式转换（WebP）。</p>
+</li>
+</ul>
+<h3 id="5-3-打包优化（vite-config-js）"><a href="#5-3-打包优化（vite-config-js）" class="headerlink" title="5.3 打包优化（vite.config.js）"></a>5.3 打包优化（vite.config.js）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>import &#123; defineConfig &#125; from &#39;vite&#39;</code></p>
+<p><code>import vue from &#39;@vitejs/plugin-vue&#39;</code></p>
+<p><code>import path from &#39;path&#39;</code></p>
+<p><code>import &#123; visualizer &#125; from &#39;rollup-plugin-visualizer&#39; // 打包体积分析</code></p>
+<p><code>import &#123; viteBuildInfo &#125; from &#39;vite-plugin-build-info&#39; // 构建信息</code></p>
+<p><code>export default defineConfig(&#123;</code></p>
+<p><code>plugins: [</code></p>
+<p><code>vue(),</code></p>
+<p><code>// 打包体积分析（生成 stats.html）</code></p>
+<p><code>visualizer(&#123;</code></p>
+<p><code>open: false,</code></p>
+<p><code>filename: &#39;stats.html&#39;</code></p>
+<p><code>&#125;),</code></p>
+<p><code>// 构建信息注入</code></p>
+<p><code>viteBuildInfo()</code></p>
+<p><code>],</code></p>
+<p><code>build: &#123;</code></p>
+<p><code>// 代码分割</code></p>
+<p><code>rollupOptions: &#123;</code></p>
+<p><code>output: &#123;</code></p>
+<p><code>manualChunks: &#123;</code></p>
+<p><code>// 拆分 Element Plus 为单独 chunk</code></p>
+<p><code>&#39;element-plus&#39;: [&#39;element-plus&#39;],</code></p>
+<p><code>// 拆分 Pinia、Vue Router 等依赖</code></p>
+<p><code>&#39;vue-vendor&#39;: [&#39;vue&#39;, &#39;vue-router&#39;, &#39;pinia&#39;]</code></p>
+<p><code>&#125;</code></p>
+<p><code>&#125;</code></p>
+<p><code>&#125;,</code></p>
+<p><code>// 压缩代码</code></p>
+<p><code>minify: &#39;terser&#39;,</code></p>
+<p><code>terserOptions: &#123;</code></p>
+<p><code>compress: &#123;</code></p>
+<p><code>drop_console: true, // 移除 console.log</code></p>
+<p><code>drop_debugger: true // 移除 debugger</code></p>
+<p><code>&#125;</code></p>
+<p><code>&#125;</code></p>
+<p><code>&#125;</code></p>
+<p><code>&#125;)</code></p>
+<h3 id="5-4-缓存策略"><a href="#5-4-缓存策略" class="headerlink" title="5.4 缓存策略"></a>5.4 缓存策略</h3><ol>
+<li><strong>接口缓存</strong>：对不常变化的数据（如分类、标签）进行本地存储缓存：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>// src/api/category.js</code></p>
+<p><code>import request from &#39;./request&#39;</code></p>
+<p><code>export const getHotCategory = async () =&gt; &#123;</code></p>
+<p><code>// 先从本地存储读取</code></p>
+<p><code>const cache = localStorage.getItem(&#39;hotCategory&#39;)</code></p>
+<p><code>if (cache) &#123;</code></p>
+<p><code>return JSON.parse(cache)</code></p>
+<p><code>&#125;</code></p>
+<p><code>// 本地无缓存，调用接口</code></p>
+<p><code>const res = await request(&#123;</code></p>
+<p><code>url: &#39;/category/hot&#39;,</code></p>
+<p><code>method: &#39;GET&#39;</code></p>
+<p><code>&#125;)</code></p>
+<p><code>// 缓存 1 小时（3600 秒）</code></p>
+<p><code>localStorage.setItem(&#39;hotCategory&#39;, JSON.stringify(res))</code></p>
+<p><code>localStorage.setItem(&#39;hotCategoryExpire&#39;, Date.now() + 3600 * 1000)</code></p>
+<p><code>return res</code></p>
+<p><code>&#125;</code></p>
+<ol>
+<li><strong>静态资源缓存</strong>：部署时配置 Nginx 或 Vercel 的缓存策略，对 JS、CSS、图片等文件设置长期缓存。</li>
+</ol>
+<h2 id="六、部署上线：从本地到公网访问"><a href="#六、部署上线：从本地到公网访问" class="headerlink" title="六、部署上线：从本地到公网访问"></a>六、部署上线：从本地到公网访问</h2><h3 id="6-1-静态资源打包"><a href="#6-1-静态资源打包" class="headerlink" title="6.1 静态资源打包"></a>6.1 静态资源打包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>npm run build</code></p>
+<p>打包后生成 dist 目录，包含所有静态资源。</p>
+<h3 id="6-2-部署方案选择"><a href="#6-2-部署方案选择" class="headerlink" title="6.2 部署方案选择"></a>6.2 部署方案选择</h3><h4 id="方案-1：Vercel-部署（推荐）"><a href="#方案-1：Vercel-部署（推荐）" class="headerlink" title="方案 1：Vercel 部署（推荐）"></a>方案 1：Vercel 部署（推荐）</h4><ol>
+<li><p>把代码推送到 GitHub 仓库；</p>
+</li>
+<li><p>注册 Vercel 账号，关联 GitHub 仓库；</p>
+</li>
+<li><p>Vercel 自动识别 Vue 项目，点击 “Deploy” 即可完成部署；</p>
+</li>
+<li><p>可自定义域名（在 Vercel 后台配置 DNS 解析）。</p>
+</li>
+</ol>
+<h4 id="方案-2：云服务器-Nginx-部署"><a href="#方案-2：云服务器-Nginx-部署" class="headerlink" title="方案 2：云服务器 + Nginx 部署"></a>方案 2：云服务器 + Nginx 部署</h4><ol>
+<li><p>购买云服务器（如阿里云、腾讯云），安装 Nginx；</p>
+</li>
+<li><p>将 dist 目录上传到服务器（使用 FTP 或 scp 命令）；</p>
+</li>
+<li><p>配置 Nginx：</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>server &#123;</code></p>
+<p><code>listen 80;</code></p>
+<p><code>server_name your-domain.com; # 你的域名</code></p>
+<p><code>root /usr/share/nginx/html/blog; # dist 目录路径</code></p>
+<p><code>index index.html;</code></p>
+<p><code># 解决 Vue Router 历史模式刷新 404 问题</code></p>
+<p><code>location / &#123;</code></p>
+<p><code>try_files $uri $uri/ /index.html;</code></p>
+<p><code>&#125;</code></p>
+<p><code># 静态资源缓存</code></p>
+<p><code>location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|webp)$ &#123;</code></p>
+<p><code>expires 30d; # 缓存 30 天</code></p>
+<p><code>add_header Cache-Control &quot;public, max-age=2592000&quot;;</code></p>
+<p><code>&#125;</code></p>
+<p><code>&#125;</code></p>
+<ol>
+<li>重启 Nginx：nginx -s reload。</li>
+</ol>
+<h4 id="方案-3：云开发静态网站托管（无服务器）"><a href="#方案-3：云开发静态网站托管（无服务器）" class="headerlink" title="方案 3：云开发静态网站托管（无服务器）"></a>方案 3：云开发静态网站托管（无服务器）</h4><ol>
+<li><p>开通微信云开发或阿里云云开发；</p>
+</li>
+<li><p>使用云开发 CLI 工具上传 dist 目录：</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code># 安装云开发 CLI</code></p>
+<p><code>npm install -g @cloudbase/cli</code></p>
+<p><code># 登录并部署</code></p>
+<p><code>tcb login</code></p>
+<p><code>tcb hosting deploy dist -e your-env-id</code></p>
+<ol>
+<li>绑定自定义域名，开启 HTTPS。</li>
+</ol>
+<h2 id="七、总结与展望"><a href="#七、总结与展望" class="headerlink" title="七、总结与展望"></a>七、总结与展望</h2><h3 id="7-1-开发总结"><a href="#7-1-开发总结" class="headerlink" title="7.1 开发总结"></a>7.1 开发总结</h3><p>用 Vue 构建个人博客的核心是 “前后端分离 + 工程化开发”：</p>
+<ul>
+<li><p>前端通过 Vue 3 + Vite 实现高效开发与渲染；</p>
+</li>
+<li><p>核心功能（文章展示、评论、分类标签）围绕用户需求设计；</p>
+</li>
+<li><p>性能优化从路由、图片、打包、缓存多维度入手；</p>
+</li>
+<li><p>部署灵活，可根据预算选择 Vercel、云服务器或云开发。</p>
+</li>
+</ul>
+<h3 id="7-2-功能扩展方向"><a href="#7-2-功能扩展方向" class="headerlink" title="7.2 功能扩展方向"></a>7.2 功能扩展方向</h3><ol>
+<li><p><strong>后端管理系统</strong>：基于 Vue + Element Plus 开发后台，实现文章发布、分类管理、评论审核；</p>
+</li>
+<li><p><strong>全文搜索</strong>：集成 Elasticsearch 或 Algolia 实现高效全文搜索；</p>
+</li>
+<li><p><strong>访问统计</strong>：接入百度统计或 Google Analytics，分析用户行为；</p>
+</li>
+<li><p><strong>国际化</strong>：使用 Vue I18n 实现多语言切换；</p>
+</li>
+<li><p><strong>PWA 支持</strong>：添加 Service Worker，实现离线访问。</p>
+</li>
+</ol>
+<h3 id="7-3-学习建议"><a href="#7-3-学习建议" class="headerlink" title="7.3 学习建议"></a>7.3 学习建议</h3><ol>
+<li><p>先掌握 Vue 3 核心语法（Composition API、响应式原理）；</p>
+</li>
+<li><p>熟悉 Vue 生态工具（Vite、Pinia、Vue Router）的使用场景；</p>
+</li>
+<li><p>实战中积累性能优化经验，理解 “用户体验优先” 的开发思路；</p>
+</li>
+<li><p>关注 Vue 官方动态（如 Vue 3.4+ 的新特性），持续迭代博客功能。</p>
+</li>
+</ol>
+<p>用 Vue 搭建博客不仅是 “造轮子”，更是对前端技术的综合实践。希望本文的 8000 字实战指南能帮助你打造属于自己的技术博客，在分享知识的同时，提升自身的开发能力！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/23/Vue-%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6%E7%9A%84%E5%AE%9E%E6%88%98%E5%85%A8%E6%8C%87%E5%8D%97/" data-id="cuiduz5aR9M43p1VkLs4pAfdx" data-title="Vue 构建个人博客：从入门到进阶的实战全指南" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/12/23/%E5%BC%80%E6%BA%90%E6%97%A0%E7%95%8C%EF%BC%9ADify-2025-%E6%97%85%E6%B8%B8%E8%A1%8C%E4%B8%9A%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%8C%E4%BB%8E%E6%99%BA%E8%83%BD%E8%A1%8C%E7%A8%8B%E5%88%B0%E6%99%AF%E5%8C%BA%E8%BF%90%E8%90%A5%E5%85%A8%E6%94%BB%E7%95%A5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          开源无界：Dify 2025 旅游行业深度实战指南，从智能行程到景区运营全攻略
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/12/23/RAG-2025-%E6%B7%B1%E5%BA%A6%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%EF%BC%9A%E4%BB%8E%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E5%88%B0%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%90%BD%E5%9C%B0%EF%BC%8C%E8%A7%A3%E9%94%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E6%A0%B8%E5%BF%83%E8%83%BD%E5%8A%9B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">RAG 2025 深度实战指南：从技术原理到企业级落地，解锁大模型应用核心能力</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" rel="tag">代码拉取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" rel="tag">文章，博客框架，技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" rel="tag">服务器，游戏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" rel="tag">权限配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" style="font-size: 10px;">代码拉取</a> <a href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">文章，博客框架，技术</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">服务器，游戏</a> <a href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">权限配置</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">编程语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/12/25/gitLaB%E9%97%AE%E9%A2%98/">gitLaB问题</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/">大模型微调</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E6%9C%AF%E9%87%8C%E9%9D%A2%E7%9A%84%E2%80%98mcp%E2%80%99%E6%8A%80%E6%9C%AF/">计算机技术里面的‘mcp’技术</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/2025-8-19/">2025-8-19</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E9%82%A3%E4%BA%9B%E5%9C%A8%E5%85%AC%E5%8F%B8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84-%E8%B6%85%E7%BA%A7%E9%BB%84%E9%87%91-bug-%EF%BC%9A%E6%AF%8F%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%91%98%E9%83%BD%E8%AF%A5%E8%AE%B0%E5%8F%96%E7%9A%84%E8%A1%80%E6%B3%AA%E7%BB%8F%E9%AA%8C/">那些在公司工作中遇到的 &#39;超级黄金 bug&#39;：每个程序员都该记取的血泪经验</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 little chen<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

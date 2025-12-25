@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MySQL 高频细节问题（覆盖性能、存储、运维、故障排查，补充前文未深入的核心细节） | 欢迎来到chen的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="以下整理了 MySQL 底层运维、性能优化、异常处理中易忽略但关键的细节问题，结合生产环境常见场景解答： 一、存储引擎核心细节1. InnoDB 缓冲池（ib_buffer_pool）的细节 缓冲池预热 ：重启 MySQL 后，缓冲池会清空，导致首次查询性能差。可通过配置实现缓冲池预热：      ini 123# 5.7+ 支持，重启时自动加载缓冲池热数据innodb_buffer_pool_d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL 高频细节问题（覆盖性能、存储、运维、故障排查，补充前文未深入的核心细节）">
+<meta property="og:url" content="http://example.com/2025/12/23/MySQL-%E9%AB%98%E9%A2%91%E7%BB%86%E8%8A%82%E9%97%AE%E9%A2%98%EF%BC%88%E8%A6%86%E7%9B%96%E6%80%A7%E8%83%BD%E3%80%81%E5%AD%98%E5%82%A8%E3%80%81%E8%BF%90%E7%BB%B4%E3%80%81%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%EF%BC%8C%E8%A1%A5%E5%85%85%E5%89%8D%E6%96%87%E6%9C%AA%E6%B7%B1%E5%85%A5%E7%9A%84%E6%A0%B8%E5%BF%83%E7%BB%86%E8%8A%82%EF%BC%89/index.html">
+<meta property="og:site_name" content="欢迎来到chen的博客">
+<meta property="og:description" content="以下整理了 MySQL 底层运维、性能优化、异常处理中易忽略但关键的细节问题，结合生产环境常见场景解答： 一、存储引擎核心细节1. InnoDB 缓冲池（ib_buffer_pool）的细节 缓冲池预热 ：重启 MySQL 后，缓冲池会清空，导致首次查询性能差。可通过配置实现缓冲池预热：      ini 123# 5.7+ 支持，重启时自动加载缓冲池热数据innodb_buffer_pool_d">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-23T10:04:34.000Z">
+<meta property="article:modified_time" content="2025-12-24T03:22:03.144Z">
+<meta property="article:author" content="little chen">
+<meta property="article:tag" content="测试开发,后端开发，测试">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="欢迎来到chen的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">欢迎来到chen的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个专注于技术分享的博客，详情可访问我的csdn——&gt;id:weixin_73527660</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-MySQL-高频细节问题（覆盖性能、存储、运维、故障排查，补充前文未深入的核心细节）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/23/MySQL-%E9%AB%98%E9%A2%91%E7%BB%86%E8%8A%82%E9%97%AE%E9%A2%98%EF%BC%88%E8%A6%86%E7%9B%96%E6%80%A7%E8%83%BD%E3%80%81%E5%AD%98%E5%82%A8%E3%80%81%E8%BF%90%E7%BB%B4%E3%80%81%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%EF%BC%8C%E8%A1%A5%E5%85%85%E5%89%8D%E6%96%87%E6%9C%AA%E6%B7%B1%E5%85%A5%E7%9A%84%E6%A0%B8%E5%BF%83%E7%BB%86%E8%8A%82%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2025-12-23T10:04:34.000Z" itemprop="datePublished">2025-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      MySQL 高频细节问题（覆盖性能、存储、运维、故障排查，补充前文未深入的核心细节）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>以下整理了 MySQL 底层运维、性能优化、异常处理中易忽略但关键的细节问题，结合生产环境常见场景解答：</p>
+<h2 id="一、存储引擎核心细节"><a href="#一、存储引擎核心细节" class="headerlink" title="一、存储引擎核心细节"></a>一、存储引擎核心细节</h2><h3 id="1-InnoDB-缓冲池（ib-buffer-pool）的细节"><a href="#1-InnoDB-缓冲池（ib-buffer-pool）的细节" class="headerlink" title="1. InnoDB 缓冲池（ib_buffer_pool）的细节"></a>1. InnoDB 缓冲池（ib_buffer_pool）的细节</h3><ul>
+<li><p>缓冲池预热</p>
+<p>：重启 MySQL 后，缓冲池会清空，导致首次查询性能差。可通过配置实现缓冲池预热：     </p>
+<p>ini</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 5.7+ 支持，重启时自动加载缓冲池热数据</span><br><span class="line">innodb_buffer_pool_dump_at_shutdown = 1  # 停机时导出缓冲池页信息</span><br><span class="line">innodb_buffer_pool_load_at_startup = 1   # 启动时加载页信息</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+</li>
+<li><p><strong>缓冲池分片</strong>：<code>innodb_buffer_pool_instances</code>（默认 8），当缓冲池 &gt; 16G 时，建议设置实例数 &#x3D; 缓冲池大小 &#x2F; 2G（如 32G 缓冲池设 16 个实例），减少锁竞争。</p>
+</li>
+<li><p><strong>脏页刷新规则</strong>：<code>innodb_flush_neighbors</code>（默认 1），机械硬盘建议设 1（批量刷盘），SSD 建议设 0（减少无效 IO）。</p>
+</li>
+</ul>
+<h3 id="2-InnoDB-事务与锁的细节"><a href="#2-InnoDB-事务与锁的细节" class="headerlink" title="2. InnoDB 事务与锁的细节"></a>2. InnoDB 事务与锁的细节</h3><ul>
+<li><strong>间隙锁（Gap Lock）</strong>：RR 隔离级别下，InnoDB 会对「不存在的区间」加锁（如 <code>WHERE id &gt; 10</code>），导致幻读但避免更新丢失，若需关闭间隙锁，需将隔离级别设为 RC + <code>innodb_locks_unsafe_for_binlog = 1</code>（仅测试环境用）。</li>
+<li><strong>死锁排查</strong>：通过 <code>SHOW ENGINE INNODB STATUS</code> 查看死锁日志，重点关注「WAITING FOR LOCK」和「HOLDS THE LOCK」部分；开启 <code>innodb_print_all_deadlocks = 1</code>，将死锁日志写入错误日志，便于长期排查。</li>
+<li><strong>事务超时</strong>：<code>innodb_lock_wait_timeout</code>（默认 50 秒），建议业务侧设置更小的超时（如 10 秒），避免长事务占锁。</li>
+</ul>
+<h3 id="3-MyISAM-与-InnoDB-核心差异细节"><a href="#3-MyISAM-与-InnoDB-核心差异细节" class="headerlink" title="3. MyISAM 与 InnoDB 核心差异细节"></a>3. MyISAM 与 InnoDB 核心差异细节</h3><table>
+<thead>
+<tr>
+<th>细节维度</th>
+<th>MyISAM</th>
+<th>InnoDB</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>崩溃恢复</td>
+<td>无事务，崩溃后需 <code>myisamchk</code> 修复</td>
+<td>基于 redo&#x2F;undo 日志自动恢复</td>
+</tr>
+<tr>
+<td>锁粒度</td>
+<td>表级锁（写阻塞所有读 &#x2F; 写）</td>
+<td>行级锁（仅锁定修改行）</td>
+</tr>
+<tr>
+<td>索引存储</td>
+<td>索引与数据分离（MYI&#x2F;MYD）</td>
+<td>聚簇索引（主键与数据同页）</td>
+</tr>
+<tr>
+<td>计数优化</td>
+<td><code>COUNT(*)</code> 直接读元数据（快）</td>
+<td><code>COUNT(*)</code> 需遍历聚簇索引（慢）</td>
+</tr>
+</tbody></table>
+<h2 id="二、性能优化细节"><a href="#二、性能优化细节" class="headerlink" title="二、性能优化细节"></a>二、性能优化细节</h2><h3 id="1-索引设计的易忽略细节"><a href="#1-索引设计的易忽略细节" class="headerlink" title="1. 索引设计的易忽略细节"></a>1. 索引设计的易忽略细节</h3><ul>
+<li><p><strong>前缀索引</strong>：对长字符串（如 VARCHAR (255)）建索引时，可只索引前缀（如 <code>INDEX idx_name (name(10))</code>），减少索引大小，但会导致 <code>ORDER BY</code>&#x2F;<code>GROUP BY</code> 无法使用索引。</p>
+</li>
+<li><p><strong>覆盖索引</strong>：查询的所有字段都在索引中（如 <code>SELECT id, name FROM t WHERE name=&#39;test&#39;</code>，索引包含 id+name），避免回表查询，性能提升 10 倍以上。</p>
+</li>
+<li><p>索引失效场景</p>
+<p>： </p>
+<ul>
+<li><code>WHERE</code> 中用函数（如 <code>DATE(create_time) = &#39;2025-12-05&#39;</code>）；</li>
+<li>隐式类型转换（如 <code>WHERE id = &#39;123&#39;</code>，id 为 INT 类型）；</li>
+<li><code>LIKE &#39;%test&#39;</code>（前缀模糊匹配）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-SQL-执行计划（EXPLAIN）细节"><a href="#2-SQL-执行计划（EXPLAIN）细节" class="headerlink" title="2. SQL 执行计划（EXPLAIN）细节"></a>2. SQL 执行计划（EXPLAIN）细节</h3><ul>
+<li><p><strong>type 字段核心值</strong>：<code>system &gt; const &gt; eq_ref &gt; ref &gt; range &gt; ALL</code>，<code>ALL</code> 表示全表扫描（需优化），<code>ref</code> 表示非唯一索引扫描（可接受）；</p>
+</li>
+<li><p>Extra 字段关键值</p>
+<p>： </p>
+<ul>
+<li><code>Using filesort</code>：需排序但无法用索引，需优化索引；</li>
+<li><code>Using temporary</code>：使用临时表（如 GROUP BY 无索引），性能极差；</li>
+<li><code>Using index</code>：覆盖索引（最优）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-连接池与并发细节"><a href="#3-连接池与并发细节" class="headerlink" title="3. 连接池与并发细节"></a>3. 连接池与并发细节</h3><ul>
+<li><strong>连接数配置</strong>：<code>max_connections</code> 并非越大越好，建议公式：<code>max_connections = (CPU 核心数 * 2) + 磁盘数</code>（如 16 核 + 4 磁盘，设 36）；</li>
+<li><strong>连接超时</strong>：<code>wait_timeout</code>（默认 8 小时），建议设 300 秒（5 分钟），释放闲置连接；<code>interactive_timeout</code> 需与 <code>wait_timeout</code> 保持一致；</li>
+<li><strong>连接池复用</strong>：禁止应用程序频繁创建 &#x2F; 销毁连接（每次创建连接耗时 10-20ms），建议用应用层连接池（如 Druid、HikariCP）。</li>
+</ul>
+<h2 id="三、日志与备份细节"><a href="#三、日志与备份细节" class="headerlink" title="三、日志与备份细节"></a>三、日志与备份细节</h2><h3 id="1-Binlog-细节"><a href="#1-Binlog-细节" class="headerlink" title="1. Binlog 细节"></a>1. Binlog 细节</h3><ul>
+<li><p><strong>Binlog 刷盘规则</strong>：<code>sync_binlog = 1</code>（默认 0），设为 1 时每次事务提交都刷盘（保证不丢数据），但性能下降 10%-20%；生产环境建议设 1（核心库）或 100（非核心库）。</p>
+</li>
+<li><p>Binlog 格式选择</p>
+<p>： </p>
+<ul>
+<li>STATEMENT：记录 SQL 语句（日志小，易出现主从不一致）；</li>
+<li>ROW：记录行修改（日志大，主从一致，建议生产用）；</li>
+<li>MIXED：混合模式（自动切换，兼容场景）。</li>
+</ul>
+</li>
+<li><p><strong>Binlog 清理</strong>：禁止手动删除 binlog 文件，需用 <code>PURGE BINARY LOGS BEFORE &#39;2025-12-01 00:00:00&#39;;</code> 或配置 <code>expire_logs_days = 7</code>（自动清理 7 天前日志）。</p>
+</li>
+</ul>
+<h3 id="2-备份恢复细节"><a href="#2-备份恢复细节" class="headerlink" title="2. 备份恢复细节"></a>2. 备份恢复细节</h3><ul>
+<li><p>mysqldump 大库优化</p>
+<p>：备份千万级大表时，添加 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--quick --skip-lock-tables</span><br></pre></td></tr></table></figure>
+
+<p> 避免内存溢出：     </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p --single-transaction --quick --skip-lock-tables test t1 &gt; t1.sql</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+</li>
+<li><p><strong>xtrabackup 增量备份</strong>：增量备份需基于全量备份，且每次增量都依赖上一次备份（链式增量），恢复时需按「全量 + 增量 1 + 增量 2」顺序预处理。</p>
+</li>
+</ul>
+<h2 id="四、运维与故障排查细节"><a href="#四、运维与故障排查细节" class="headerlink" title="四、运维与故障排查细节"></a>四、运维与故障排查细节</h2><h3 id="1-MySQL-启动失败排查细节"><a href="#1-MySQL-启动失败排查细节" class="headerlink" title="1. MySQL 启动失败排查细节"></a>1. MySQL 启动失败排查细节</h3><ul>
+<li><p>核心排查步骤</p>
+<p>：     </p>
+<ol>
+<li>查看错误日志（<code>tail -f /var/log/mysqld.log</code>）；</li>
+<li>检查配置文件语法（<code>mysqld --validate-config</code>）；</li>
+<li>检查 datadir 权限（必须为 <code>mysql:mysql</code>）；</li>
+<li>检查端口占用（<code>netstat -tulpn | grep 3306</code>）；</li>
+</ol>
+</li>
+<li><p>常见启动失败原因</p>
+<p>： </p>
+<ul>
+<li><code>ib_logfile</code> 大小与配置不一致（需删除旧日志文件重启）；</li>
+<li><code>ibdata1</code> 损坏（需恢复备份）；</li>
+<li>配置文件参数错误（如 <code>innodb_buffer_pool_size</code> 设为超过内存的值）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-磁盘-IO-高排查细节"><a href="#2-磁盘-IO-高排查细节" class="headerlink" title="2. 磁盘 IO 高排查细节"></a>2. 磁盘 IO 高排查细节</h3><ul>
+<li><p>定位 IO 高的表 &#x2F; 语句</p>
+<p>：     </p>
+<p>sql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 查看 InnoDB 表 IO 统计</span><br><span class="line">SELECT table_name, data_read, data_written FROM INFORMATION_SCHEMA.INNODB_TABLE_STATS;</span><br><span class="line">-- 查看慢查询中 IO 密集型 SQL</span><br><span class="line">SELECT query, rows_examined, rows_sent FROM mysql.slow_log WHERE rows_examined / rows_sent &gt; 100;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+</li>
+<li><p>IO 优化细节</p>
+<p>： </p>
+<ul>
+<li>开启 <code>innodb_flush_method = O_DIRECT</code>（绕过操作系统缓存，减少 IO 竞争）；</li>
+<li>将临时表空间（ibtmp1）放在 SSD 磁盘；</li>
+<li>避免大事务（一次性插入 &#x2F; 更新百万行），拆分为小批次操作。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-主从同步异常细节"><a href="#3-主从同步异常细节" class="headerlink" title="3. 主从同步异常细节"></a>3. 主从同步异常细节</h3><ul>
+<li><p>常见同步错误</p>
+<p>：     </p>
+<ul>
+<li>主键冲突：从库数据与主库不一致，需找到冲突行并修复；</li>
+<li>权限不足：复制账号缺少 <code>REPLICATION SLAVE</code> 权限；</li>
+<li>Binlog 丢失：主库已清理的 binlog 是从库需要的，需重新搭建从库；</li>
+</ul>
+</li>
+<li><p>同步延迟排查</p>
+<p>： </p>
+<p>sql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 查看从库延迟（Seconds_Behind_Master 为延迟秒数）</span><br><span class="line">SHOW SLAVE STATUS\G</span><br><span class="line">-- 定位延迟原因：是否为大事务/慢 SQL</span><br><span class="line">SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST WHERE COMMAND = &#x27;Binlog Dump&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+</li>
+</ul>
+<h2 id="五、版本与配置细节"><a href="#五、版本与配置细节" class="headerlink" title="五、版本与配置细节"></a>五、版本与配置细节</h2><h3 id="1-MySQL-5-7-vs-8-0-核心差异"><a href="#1-MySQL-5-7-vs-8-0-核心差异" class="headerlink" title="1. MySQL 5.7 vs 8.0 核心差异"></a>1. MySQL 5.7 vs 8.0 核心差异</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>MySQL 5.7</th>
+<th>MySQL 8.0</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>默认认证插件</td>
+<td>mysql_native_password</td>
+<td>caching_sha2_password（需兼容旧客户端）</td>
+</tr>
+<tr>
+<td>数据字典</td>
+<td>基于文件（.frm）</td>
+<td>基于 InnoDB 表（mysql 库）</td>
+</tr>
+<tr>
+<td>窗口函数</td>
+<td>不支持</td>
+<td>支持（ROW_NUMBER ()&#x2F;RANK () 等）</td>
+</tr>
+<tr>
+<td>锁优化</td>
+<td>间隙锁粒度较粗</td>
+<td>新增行锁优化，减少锁竞争</td>
+</tr>
+</tbody></table>
+<h3 id="2-配置文件优先级细节"><a href="#2-配置文件优先级细节" class="headerlink" title="2. 配置文件优先级细节"></a>2. 配置文件优先级细节</h3><p>MySQL 配置文件加载顺序（Linux）：<code>/etc/my.cnf → /etc/mysql/my.cnf → ~/.my.cnf</code>，后加载的配置会覆盖先加载的；命令行参数（如 <code>mysqld --port=3307</code>）优先级最高。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/23/MySQL-%E9%AB%98%E9%A2%91%E7%BB%86%E8%8A%82%E9%97%AE%E9%A2%98%EF%BC%88%E8%A6%86%E7%9B%96%E6%80%A7%E8%83%BD%E3%80%81%E5%AD%98%E5%82%A8%E3%80%81%E8%BF%90%E7%BB%B4%E3%80%81%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%EF%BC%8C%E8%A1%A5%E5%85%85%E5%89%8D%E6%96%87%E6%9C%AA%E6%B7%B1%E5%85%A5%E7%9A%84%E6%A0%B8%E5%BF%83%E7%BB%86%E8%8A%82%EF%BC%89/" data-id="cuidscvy5r-gS52QIP3_THEAz" data-title="MySQL 高频细节问题（覆盖性能、存储、运维、故障排查，补充前文未深入的核心细节）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/12/23/%E5%A6%82%E4%BD%95%E7%A1%AE%E8%AE%A4-MySQL-%E5%A4%87%E4%BB%BD%E6%9D%83%E9%99%90%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8C%96%EF%BC%88%E4%BB%8E%E3%80%8C%E6%9D%83%E9%99%90%E8%AE%BE%E8%AE%A1%E3%80%8D%E3%80%8C%E6%9D%83%E9%99%90%E6%A0%A1%E9%AA%8C%E3%80%8D%E3%80%8C%E6%9D%83%E9%99%90%E5%AE%A1%E8%AE%A1%E3%80%8D%E4%B8%89%E7%BB%B4%E5%BA%A6%E8%90%BD%E5%9C%B0%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          如何确认 MySQL 备份权限的最小化（从「权限设计」「权限校验」「权限审计」三维度落地）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/12/23/%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86-InnoDB-%E4%BA%8B%E5%8A%A1%E6%97%A5%E5%BF%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">如何处理 InnoDB 事务日志</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" rel="tag">代码拉取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" rel="tag">文章，博客框架，技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" rel="tag">服务器，游戏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" rel="tag">权限配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" style="font-size: 10px;">代码拉取</a> <a href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">文章，博客框架，技术</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">服务器，游戏</a> <a href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">权限配置</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">编程语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/12/25/gitLaB%E9%97%AE%E9%A2%98/">gitLaB问题</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/">大模型微调</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E6%9C%AF%E9%87%8C%E9%9D%A2%E7%9A%84%E2%80%98mcp%E2%80%99%E6%8A%80%E6%9C%AF/">计算机技术里面的‘mcp’技术</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/2025-8-19/">2025-8-19</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E9%82%A3%E4%BA%9B%E5%9C%A8%E5%85%AC%E5%8F%B8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84-%E8%B6%85%E7%BA%A7%E9%BB%84%E9%87%91-bug-%EF%BC%9A%E6%AF%8F%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%91%98%E9%83%BD%E8%AF%A5%E8%AE%B0%E5%8F%96%E7%9A%84%E8%A1%80%E6%B3%AA%E7%BB%8F%E9%AA%8C/">那些在公司工作中遇到的 &#39;超级黄金 bug&#39;：每个程序员都该记取的血泪经验</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 little chen<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

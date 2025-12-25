@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>数据库实战全手册（终极版）：从基础到高阶的全场景落地指南 | 欢迎来到chen的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="针对不同数据库特性和进阶需求，本次完善补充了 PostgreSQL&#x2F;Oracle 专属语法、全文索引实战案例及分片扩容方案，形成覆盖主流数据库和全生命周期的实战指南。 一、多数据库索引适配方案1.1 PostgreSQL 索引实现（含特有类型）sql 12345678910111213141516171819202122-- 1. 主键索引（同MySQL，支持复合主键）CREATE T">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库实战全手册（终极版）：从基础到高阶的全场景落地指南">
+<meta property="og:url" content="http://example.com/2025/12/23/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E6%88%98%E5%85%A8%E6%89%8B%E5%86%8C%EF%BC%88%E7%BB%88%E6%9E%81%E7%89%88%EF%BC%89%EF%BC%9A%E4%BB%8E%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E9%98%B6%E7%9A%84%E5%85%A8%E5%9C%BA%E6%99%AF%E8%90%BD%E5%9C%B0%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="欢迎来到chen的博客">
+<meta property="og:description" content="针对不同数据库特性和进阶需求，本次完善补充了 PostgreSQL&#x2F;Oracle 专属语法、全文索引实战案例及分片扩容方案，形成覆盖主流数据库和全生命周期的实战指南。 一、多数据库索引适配方案1.1 PostgreSQL 索引实现（含特有类型）sql 12345678910111213141516171819202122-- 1. 主键索引（同MySQL，支持复合主键）CREATE T">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-23T11:30:20.000Z">
+<meta property="article:modified_time" content="2025-12-24T03:03:26.652Z">
+<meta property="article:author" content="little chen">
+<meta property="article:tag" content="测试开发,后端开发，测试">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="欢迎来到chen的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">欢迎来到chen的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个专注于技术分享的博客，详情可访问我的csdn——&gt;id:weixin_73527660</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-数据库实战全手册（终极版）：从基础到高阶的全场景落地指南" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/23/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E6%88%98%E5%85%A8%E6%89%8B%E5%86%8C%EF%BC%88%E7%BB%88%E6%9E%81%E7%89%88%EF%BC%89%EF%BC%9A%E4%BB%8E%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E9%98%B6%E7%9A%84%E5%85%A8%E5%9C%BA%E6%99%AF%E8%90%BD%E5%9C%B0%E6%8C%87%E5%8D%97/" class="article-date">
+  <time class="dt-published" datetime="2025-12-23T11:30:20.000Z" itemprop="datePublished">2025-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      数据库实战全手册（终极版）：从基础到高阶的全场景落地指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p> 针对不同数据库特性和进阶需求，本次完善补充了 PostgreSQL&#x2F;Oracle 专属语法、全文索引实战案例及分片扩容方案，形成覆盖主流数据库和全生命周期的实战指南。</p>
+<h2 id="一、多数据库索引适配方案"><a href="#一、多数据库索引适配方案" class="headerlink" title="一、多数据库索引适配方案"></a>一、多数据库索引适配方案</h2><h3 id="1-1-PostgreSQL-索引实现（含特有类型）"><a href="#1-1-PostgreSQL-索引实现（含特有类型）" class="headerlink" title="1.1 PostgreSQL 索引实现（含特有类型）"></a>1.1 PostgreSQL 索引实现（含特有类型）</h3><p>sql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">-- 1. 主键索引（同MySQL，支持复合主键）</span><br><span class="line">CREATE TABLE &quot;user&quot; (</span><br><span class="line">  &quot;id&quot; BIGSERIAL PRIMARY KEY COMMENT &#x27;用户ID&#x27;,</span><br><span class="line">  &quot;name&quot; VARCHAR(50) NOT NULL,</span><br><span class="line">  &quot;email&quot; VARCHAR(100) UNIQUE COMMENT &#x27;唯一索引自动创建&#x27;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">-- 2. GIN索引（PostgreSQL特有，适合数组/JSONB类型）</span><br><span class="line">-- 场景：用户标签存储为数组，需频繁查询包含某标签的用户</span><br><span class="line">ALTER TABLE &quot;user&quot; ADD COLUMN &quot;tags&quot; TEXT[];</span><br><span class="line">CREATE INDEX &quot;idx_user_tags_gin&quot; ON &quot;user&quot; USING GIN (&quot;tags&quot;);</span><br><span class="line">-- 查询示例：查找包含&quot;VIP&quot;标签的用户</span><br><span class="line">SELECT * FROM &quot;user&quot; WHERE &quot;tags&quot; @&gt; ARRAY[&#x27;VIP&#x27;]::TEXT[];</span><br><span class="line"></span><br><span class="line">-- 3. 部分索引（只对符合条件的行创建索引，节省空间）</span><br><span class="line">-- 场景：只对未删除的活跃用户创建索引</span><br><span class="line">CREATE INDEX &quot;idx_user_active&quot; ON &quot;user&quot; (&quot;name&quot;) </span><br><span class="line">WHERE &quot;is_deleted&quot; = false;</span><br><span class="line"></span><br><span class="line">-- 4. 表达式索引（对函数结果创建索引）</span><br><span class="line">-- 场景：频繁按邮箱域名查询（如@example.com）</span><br><span class="line">CREATE INDEX &quot;idx_user_email_domain&quot; ON &quot;user&quot; (SPLIT_PART(&quot;email&quot;, &#x27;@&#x27;, 2));</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="1-2-Oracle-索引实现（含分区索引）"><a href="#1-2-Oracle-索引实现（含分区索引）" class="headerlink" title="1.2 Oracle 索引实现（含分区索引）"></a>1.2 Oracle 索引实现（含分区索引）</h3><p>sql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">-- 1. 主键索引（支持延迟验证）</span><br><span class="line">CREATE TABLE &quot;user&quot; (</span><br><span class="line">  &quot;id&quot; NUMBER(19) NOT NULL,</span><br><span class="line">  &quot;name&quot; VARCHAR2(50) NOT NULL,</span><br><span class="line">  CONSTRAINT &quot;pk_user_id&quot; PRIMARY KEY (&quot;id&quot;) DEFERRABLE INITIALLY DEFERRED</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">-- 2. 分区索引（与分区表配合，Oracle高性能核心）</span><br><span class="line">-- 场景：按时间分区的订单表，创建本地分区索引</span><br><span class="line">CREATE TABLE &quot;order&quot; (</span><br><span class="line">  &quot;id&quot; NUMBER(19) NOT NULL,</span><br><span class="line">  &quot;order_no&quot; VARCHAR2(32),</span><br><span class="line">  &quot;create_time&quot; DATE</span><br><span class="line">) </span><br><span class="line">PARTITION BY RANGE (&quot;create_time&quot;) (</span><br><span class="line">  PARTITION &quot;p2024q1&quot; VALUES LESS THAN (TO_DATE(&#x27;2024-04-01&#x27;, &#x27;YYYY-MM-DD&#x27;)),</span><br><span class="line">  PARTITION &quot;p2024q2&quot; VALUES LESS THAN (TO_DATE(&#x27;2024-07-01&#x27;, &#x27;YYYY-MM-DD&#x27;))</span><br><span class="line">);</span><br><span class="line">-- 本地分区索引（每个分区单独创建索引）</span><br><span class="line">CREATE INDEX &quot;idx_order_create_time&quot; ON &quot;order&quot; (&quot;create_time&quot;) LOCAL;</span><br><span class="line"></span><br><span class="line">-- 3. 反转键索引（解决序列值集中插入导致的索引热点）</span><br><span class="line">CREATE INDEX &quot;idx_order_id_rev&quot; ON &quot;order&quot; (REVERSE(&quot;id&quot;));</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="二、全文索引实战指南"><a href="#二、全文索引实战指南" class="headerlink" title="二、全文索引实战指南"></a>二、全文索引实战指南</h2><h3 id="2-1-MySQL-全文索引（5-7-）"><a href="#2-1-MySQL-全文索引（5-7-）" class="headerlink" title="2.1 MySQL 全文索引（5.7+）"></a>2.1 MySQL 全文索引（5.7+）</h3><p>sql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-- 1. 创建全文索引（支持中文需配置ngram分词器）</span><br><span class="line">ALTER TABLE &quot;article&quot; ADD FULLTEXT INDEX &quot;idx_article_content&quot; (&quot;content&quot;) WITH PARSER ngram;</span><br><span class="line"></span><br><span class="line">-- 2. 基础查询（MATCH...AGAINST）</span><br><span class="line">-- 场景：搜索包含&quot;数据库&quot;或&quot;索引&quot;的文章</span><br><span class="line">SELECT * FROM &quot;article&quot; </span><br><span class="line">WHERE MATCH(&quot;content&quot;) AGAINST(&#x27;数据库 索引&#x27; IN BOOLEAN MODE);</span><br><span class="line"></span><br><span class="line">-- 3. 高级查询（排除、必须包含）</span><br><span class="line">-- 场景：必须包含&quot;MySQL&quot;，排除&quot;Oracle&quot;，可选包含&quot;优化&quot;</span><br><span class="line">SELECT * FROM &quot;article&quot; </span><br><span class="line">WHERE MATCH(&quot;content&quot;) AGAINST(&#x27;+MySQL -Oracle 优化&#x27; IN BOOLEAN MODE);</span><br><span class="line"></span><br><span class="line">-- 4. 性能优化：联合全文索引</span><br><span class="line">ALTER TABLE &quot;article&quot; ADD FULLTEXT INDEX &quot;idx_article_title_content&quot; (&quot;title&quot;, &quot;content&quot;);</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="2-2-PostgreSQL-全文搜索（内置强大功能）"><a href="#2-2-PostgreSQL-全文搜索（内置强大功能）" class="headerlink" title="2.2 PostgreSQL 全文搜索（内置强大功能）"></a>2.2 PostgreSQL 全文搜索（内置强大功能）</h3><p>sql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">-- 1. 创建全文索引（自动分词）</span><br><span class="line">ALTER TABLE &quot;article&quot; ADD COLUMN &quot;content_fts&quot; TSVECTOR;</span><br><span class="line">-- 触发函数：自动更新全文搜索向量</span><br><span class="line">CREATE OR REPLACE FUNCTION &quot;update_article_fts&quot;() </span><br><span class="line">RETURNS TRIGGER AS $$</span><br><span class="line">BEGIN</span><br><span class="line">  NEW.&quot;content_fts&quot; = to_tsvector(&#x27;pg_catalog.chinese&#x27;, NEW.&quot;title&quot; || &#x27; &#x27; || NEW.&quot;content&quot;);</span><br><span class="line">  RETURN NEW;</span><br><span class="line">END;</span><br><span class="line">$$ LANGUAGE plpgsql;</span><br><span class="line">-- 创建触发器</span><br><span class="line">CREATE TRIGGER &quot;trg_article_fts&quot; </span><br><span class="line">BEFORE INSERT OR UPDATE ON &quot;article&quot;</span><br><span class="line">FOR EACH ROW EXECUTE FUNCTION &quot;update_article_fts&quot;();</span><br><span class="line">-- 创建GIN索引加速查询</span><br><span class="line">CREATE INDEX &quot;idx_article_fts&quot; ON &quot;article&quot; USING GIN (&quot;content_fts&quot;);</span><br><span class="line"></span><br><span class="line">-- 2. 搜索查询（支持同义词、模糊匹配）</span><br><span class="line">-- 场景：搜索包含&quot;数据库优化&quot;相关内容</span><br><span class="line">SELECT * FROM &quot;article&quot; </span><br><span class="line">WHERE &quot;content_fts&quot; @@ to_tsquery(&#x27;pg_catalog.chinese&#x27;, &#x27;数据库 &amp; 优化&#x27;);</span><br><span class="line"></span><br><span class="line">-- 3. 排序（按匹配度）</span><br><span class="line">SELECT </span><br><span class="line">  &quot;id&quot;, &quot;title&quot;, </span><br><span class="line">  ts_rank(&quot;content_fts&quot;, to_tsquery(&#x27;数据库&#x27;)) AS &quot;rank&quot;</span><br><span class="line">FROM &quot;article&quot;</span><br><span class="line">WHERE &quot;content_fts&quot; @@ to_tsquery(&#x27;数据库&#x27;)</span><br><span class="line">ORDER BY &quot;rank&quot; DESC;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="2-3-全文索引维护与优化-Checklist"><a href="#2-3-全文索引维护与优化-Checklist" class="headerlink" title="2.3 全文索引维护与优化 Checklist"></a>2.3 全文索引维护与优化 Checklist</h3><table>
+<thead>
+<tr>
+<th>操作项</th>
+<th>MySQL 做法</th>
+<th>PostgreSQL 做法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分词器选择</td>
+<td>启用 ngram 插件（中文支持）</td>
+<td>使用 pg_catalog.chinese 词典</td>
+</tr>
+<tr>
+<td>增量更新</td>
+<td>自动维护（DML 操作触发）</td>
+<td>通过触发器更新 TSVECTOR 字段</td>
+</tr>
+<tr>
+<td>性能监控</td>
+<td>查看 Slow Query 日志中的全文查询</td>
+<td>使用 pg_stat_user_indexes 监控索引使用</td>
+</tr>
+<tr>
+<td>大文本优化</td>
+<td>拆分表存储正文</td>
+<td>使用 TOAST 存储大字段，索引只建摘要</td>
+</tr>
+<tr>
+<td>同义词扩展</td>
+<td>需手动维护同义词表</td>
+<td>创建自定义词典（Thesaurus）</td>
+</tr>
+</tbody></table>
+<h2 id="三、分片扩容全流程方案"><a href="#三、分片扩容全流程方案" class="headerlink" title="三、分片扩容全流程方案"></a>三、分片扩容全流程方案</h2><h3 id="3-1-水平分片扩容（按时间范围）"><a href="#3-1-水平分片扩容（按时间范围）" class="headerlink" title="3.1 水平分片扩容（按时间范围）"></a>3.1 水平分片扩容（按时间范围）</h3><h4 id="扩容场景：订单表原按季度分片，现需细化到月度"><a href="#扩容场景：订单表原按季度分片，现需细化到月度" class="headerlink" title="扩容场景：订单表原按季度分片，现需细化到月度"></a>扩容场景：订单表原按季度分片，现需细化到月度</h4><p>yaml</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># Sharding-JDBC 扩容后配置（application.yml）</span><br><span class="line">spring:</span><br><span class="line">  shardingsphere:</span><br><span class="line">    rules:</span><br><span class="line">      sharding:</span><br><span class="line">        tables:</span><br><span class="line">          t_order:</span><br><span class="line">            # 扩容后的数据节点：2024年Q1拆分为1-3月</span><br><span class="line">            actual-data-nodes: ds0.t_order_$&#123;2024..2025&#125;_$&#123;1..12&#125;</span><br><span class="line">            table-strategy:</span><br><span class="line">              standard:</span><br><span class="line">                sharding-column: create_time</span><br><span class="line">                sharding-algorithm-name: t_order_table_inline</span><br><span class="line">        sharding-algorithms:</span><br><span class="line">          t_order_table_inline:</span><br><span class="line">            type: INLINE</span><br><span class="line">            props:</span><br><span class="line">              # 扩容后算法：按年月拆分（原按季度）</span><br><span class="line">              algorithm-expression: t_order_$&#123;create_time.year&#125;_$&#123;create_time.month&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h4 id="数据迁移脚本（保留原数据）"><a href="#数据迁移脚本（保留原数据）" class="headerlink" title="数据迁移脚本（保留原数据）"></a>数据迁移脚本（保留原数据）</h4><p>sql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-- 1. 创建新分片表（如2024年1月）</span><br><span class="line">CREATE TABLE &quot;t_order_2024_1&quot; LIKE &quot;t_order_2024_q1&quot;;</span><br><span class="line"></span><br><span class="line">-- 2. 迁移原Q1数据到新表（按月份拆分）</span><br><span class="line">INSERT INTO &quot;t_order_2024_1&quot;</span><br><span class="line">SELECT * FROM &quot;t_order_2024_q1&quot;</span><br><span class="line">WHERE &quot;create_time&quot; BETWEEN &#x27;2024-01-01&#x27; AND &#x27;2024-01-31&#x27;;</span><br><span class="line"></span><br><span class="line">-- 3. 迁移完成后删除原Q1表（可选）</span><br><span class="line">DROP TABLE &quot;t_order_2024_q1&quot;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="3-2-垂直分片扩容（新增字段表）"><a href="#3-2-垂直分片扩容（新增字段表）" class="headerlink" title="3.2 垂直分片扩容（新增字段表）"></a>3.2 垂直分片扩容（新增字段表）</h3><h4 id="场景：用户表字段过多，拆分出用户行为表"><a href="#场景：用户表字段过多，拆分出用户行为表" class="headerlink" title="场景：用户表字段过多，拆分出用户行为表"></a>场景：用户表字段过多，拆分出用户行为表</h4><p>sql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-- 1. 创建新分片表（用户行为）</span><br><span class="line">CREATE TABLE &quot;user_behavior&quot; (</span><br><span class="line">  &quot;user_id&quot; BIGINT PRIMARY KEY,</span><br><span class="line">  &quot;last_login_time&quot; DATETIME,</span><br><span class="line">  &quot;login_count&quot; INT DEFAULT 0,</span><br><span class="line">  &quot;preferences&quot; JSON,</span><br><span class="line">  CONSTRAINT &quot;fk_user_behavior_id&quot; FOREIGN KEY (&quot;user_id&quot;) REFERENCES &quot;user_base&quot; (&quot;id&quot;)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">-- 2. 迁移历史数据</span><br><span class="line">INSERT INTO &quot;user_behavior&quot; (&quot;user_id&quot;, &quot;last_login_time&quot;)</span><br><span class="line">SELECT &quot;id&quot;, &quot;last_login_time&quot; FROM &quot;user_base&quot;;</span><br><span class="line"></span><br><span class="line">-- 3. 删除原表冗余字段</span><br><span class="line">ALTER TABLE &quot;user_base&quot; DROP COLUMN &quot;last_login_time&quot;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h4 id="应用层适配（MyBatis-示例）"><a href="#应用层适配（MyBatis-示例）" class="headerlink" title="应用层适配（MyBatis 示例）"></a>应用层适配（MyBatis 示例）</h4><p>java</p>
+<p>运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 联合查询Mapper</span><br><span class="line">public interface UserMapper &#123;</span><br><span class="line">    @Select(&quot;SELECT b.*, bv.preferences &quot; +</span><br><span class="line">            &quot;FROM user_base b &quot; +</span><br><span class="line">            &quot;LEFT JOIN user_behavior bv ON b.id = bv.user_id &quot; +</span><br><span class="line">            &quot;WHERE b.id = #&#123;userId&#125;&quot;)</span><br><span class="line">    UserFullInfo selectFullInfo(@Param(&quot;userId&quot;) Long userId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="3-3-扩容注意事项"><a href="#3-3-扩容注意事项" class="headerlink" title="3.3 扩容注意事项"></a>3.3 扩容注意事项</h3><ol>
+<li><strong>停机策略</strong>：<ul>
+<li>小表：选择业务低峰停机迁移（如凌晨 2-4 点），预估停机时间 &#x3D; 数据量 &#x2F; 100 万条 * 5 分钟</li>
+<li>大表：采用双写策略（同时写入新旧表），校验一致后切换读流量</li>
+</ul>
+</li>
+<li><strong>一致性保障</strong>：<ul>
+<li>迁移过程中开启事务，确保原子性</li>
+<li>迁移后执行校验 SQL：<code>SELECT COUNT(*) FROM 旧表 UNION SELECT COUNT(*) FROM 新表</code></li>
+</ul>
+</li>
+<li><strong>性能监控</strong>：<ul>
+<li>扩容后 1 小时内监控：索引使用率（需 &gt; 80%）、联查响应时间（需 &lt; 500ms）</li>
+<li>对比扩容前后的执行计划：<code>EXPLAIN ANALYZE 关键查询SQL</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="四、常见问题扩展解决方案"><a href="#四、常见问题扩展解决方案" class="headerlink" title="四、常见问题扩展解决方案"></a>四、常见问题扩展解决方案</h2><h3 id="4-1-跨数据库兼容问题"><a href="#4-1-跨数据库兼容问题" class="headerlink" title="4.1 跨数据库兼容问题"></a>4.1 跨数据库兼容问题</h3><table>
+<thead>
+<tr>
+<th>问题描述</th>
+<th>解决方案</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分页语法差异</td>
+<td>使用 MyBatis 插件自动转换</td>
+<td>PostgreSQL: LIMIT&#x2F;OFFSET → Oracle: ROWNUM</td>
+</tr>
+<tr>
+<td>字符串函数差异</td>
+<td>封装工具类统一处理</td>
+<td>MySQL: SUBSTRING → Oracle: SUBSTR</td>
+</tr>
+<tr>
+<td>日期函数差异</td>
+<td>使用标准 SQL 或 ORM 框架函数</td>
+<td><code>SELECT CURRENT_DATE</code> 替代数据库特有函数</td>
+</tr>
+</tbody></table>
+<h3 id="4-2-全文索引常见问题"><a href="#4-2-全文索引常见问题" class="headerlink" title="4.2 全文索引常见问题"></a>4.2 全文索引常见问题</h3><table>
+<thead>
+<tr>
+<th>问题现象</th>
+<th>排查方法</th>
+<th>解决措施</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>中文搜索无结果</td>
+<td>检查分词器配置</td>
+<td>MySQL 启用 ngram，PostgreSQL 指定中文词典</td>
+</tr>
+<tr>
+<td>搜索性能差</td>
+<td>查看执行计划是否使用 GIN&#x2F;GiST 索引</td>
+<td>添加合适的全文索引类型</td>
+</tr>
+<tr>
+<td>关键词过长匹配不到</td>
+<td>调整分词长度参数</td>
+<td>MySQL: ngram_token_size&#x3D;2；PostgreSQL: 修改词典长度</td>
+</tr>
+</tbody></table>
+<h2 id="五、工具推荐与资源"><a href="#五、工具推荐与资源" class="headerlink" title="五、工具推荐与资源"></a>五、工具推荐与资源</h2><ol>
+<li><strong>索引优化工具</strong>：<ul>
+<li>Percona Toolkit（MySQL）：<code>pt-index-usage</code>分析索引使用情况</li>
+<li>pg_stat_statements（PostgreSQL）：跟踪慢查询的索引使用</li>
+<li>Oracle SQL Developer：自动生成索引优化建议</li>
+</ul>
+</li>
+<li><strong>分片管理工具</strong>：<ul>
+<li>ShardingSphere-UI：可视化分片配置与监控</li>
+<li>Apache DolphinScheduler：编排分片扩容任务</li>
+<li>MyCat Web：分库分表运维平台</li>
+</ul>
+</li>
+<li><strong>学习资源</strong>：<ul>
+<li>PostgreSQL 全文搜索官方文档：<a target="_blank" rel="noopener" href="https://www.postgresql.org/docs/current/textsearch.html">https://www.postgresql.org/docs/current/textsearch.html</a></li>
+<li>Oracle 分区索引最佳实践：<a target="_blank" rel="noopener" href="https://docs.oracle.com/en/database/oracle/oracle-database/21/vldbg/partitioned-indexes.html">https://docs.oracle.com/en/database/oracle/oracle-database/21/vldbg/partitioned-indexes.html</a></li>
+<li>ShardingSphere 扩容指南：<a target="_blank" rel="noopener" href="https://shardingsphere.apache.org/document/current/cn/features/sharding/usage/">https://shardingsphere.apache.org/document/current/cn/features/sharding/usage/</a></li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/23/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E6%88%98%E5%85%A8%E6%89%8B%E5%86%8C%EF%BC%88%E7%BB%88%E6%9E%81%E7%89%88%EF%BC%89%EF%BC%9A%E4%BB%8E%E5%9F%BA%E7%A1%80%E5%88%B0%E9%AB%98%E9%98%B6%E7%9A%84%E5%85%A8%E5%9C%BA%E6%99%AF%E8%90%BD%E5%9C%B0%E6%8C%87%E5%8D%97/" data-id="cuid5-t0r0zedkxtRa-onCOAQ" data-title="数据库实战全手册（终极版）：从基础到高阶的全场景落地指南" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/12/23/2025-%E5%B9%B4-10-%E6%9C%88%E7%A7%91%E6%8A%80%E5%89%8D%E6%B2%BF%E5%85%A8%E6%99%AF%EF%BC%9A%E4%BB%8E%E9%87%8F%E5%AD%90%E8%B7%83%E8%BF%81%E5%88%B0%E7%94%9F%E5%91%BD%E9%87%8D%E6%9E%84%E7%9A%84%E6%96%87%E6%98%8E%E6%8B%90%E7%82%B9/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          2025 年 10 月科技前沿全景：从量子跃迁到生命重构的文明拐点
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/12/23/RocketMQ/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">RocketMQ</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" rel="tag">代码拉取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" rel="tag">文章，博客框架，技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" rel="tag">服务器，游戏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" rel="tag">权限配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" style="font-size: 10px;">代码拉取</a> <a href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">文章，博客框架，技术</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">服务器，游戏</a> <a href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">权限配置</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">编程语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/12/25/gitLaB%E9%97%AE%E9%A2%98/">gitLaB问题</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/">大模型微调</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E6%9C%AF%E9%87%8C%E9%9D%A2%E7%9A%84%E2%80%98mcp%E2%80%99%E6%8A%80%E6%9C%AF/">计算机技术里面的‘mcp’技术</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/2025-8-19/">2025-8-19</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E9%82%A3%E4%BA%9B%E5%9C%A8%E5%85%AC%E5%8F%B8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84-%E8%B6%85%E7%BA%A7%E9%BB%84%E9%87%91-bug-%EF%BC%9A%E6%AF%8F%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%91%98%E9%83%BD%E8%AF%A5%E8%AE%B0%E5%8F%96%E7%9A%84%E8%A1%80%E6%B3%AA%E7%BB%8F%E9%AA%8C/">那些在公司工作中遇到的 &#39;超级黄金 bug&#39;：每个程序员都该记取的血泪经验</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 little chen<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

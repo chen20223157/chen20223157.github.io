@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>六大排序算法超详细理解 | 欢迎来到chen的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1. 主类与主方法123456789101112131415161718192021222324252627282930313233343536373839404142import java.util.Arrays;  &#x2F;&#x2F; 导入Arrays工具类，用于数组操作public class SortingAlgorithms &#123;  &#x2F;&#x2F; 定义排序算法类    public static vo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="六大排序算法超详细理解">
+<meta property="og:url" content="http://example.com/2025/12/23/%E5%85%AD%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E8%B6%85%E8%AF%A6%E7%BB%86%E7%90%86%E8%A7%A3/index.html">
+<meta property="og:site_name" content="欢迎来到chen的博客">
+<meta property="og:description" content="1. 主类与主方法123456789101112131415161718192021222324252627282930313233343536373839404142import java.util.Arrays;  &#x2F;&#x2F; 导入Arrays工具类，用于数组操作public class SortingAlgorithms &#123;  &#x2F;&#x2F; 定义排序算法类    public static vo">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-23T11:50:25.000Z">
+<meta property="article:modified_time" content="2025-12-24T02:15:43.355Z">
+<meta property="article:author" content="little chen">
+<meta property="article:tag" content="测试开发,后端开发，测试">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="欢迎来到chen的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">欢迎来到chen的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个专注于技术分享的博客，详情可访问我的csdn——&gt;id:weixin_73527660</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-六大排序算法超详细理解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/23/%E5%85%AD%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E8%B6%85%E8%AF%A6%E7%BB%86%E7%90%86%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2025-12-23T11:50:25.000Z" itemprop="datePublished">2025-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      六大排序算法超详细理解
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="1-主类与主方法"><a href="#1-主类与主方法" class="headerlink" title="1. 主类与主方法"></a>1. 主类与主方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Arrays;  // 导入Arrays工具类，用于数组操作</span><br><span class="line"></span><br><span class="line">public class SortingAlgorithms &#123;  // 定义排序算法类</span><br><span class="line">    public static void main(String[] args) &#123;  // 主方法，程序入口</span><br><span class="line">        // 定义原始数组</span><br><span class="line">        int[] array = &#123;64, 34, 25, 12, 22, 11, 90&#125;;</span><br><span class="line">        // 打印原始数组：将数组转换为字符串输出</span><br><span class="line">        System.out.println(&quot;原始数组: &quot; + Arrays.toString(array));</span><br><span class="line">        </span><br><span class="line">        // 冒泡排序演示</span><br><span class="line">        // 复制原始数组（避免排序影响原数组）</span><br><span class="line">        int[] bubbleSortArray = Arrays.copyOf(array, array.length);</span><br><span class="line">        // 调用冒泡排序方法</span><br><span class="line">        bubbleSort(bubbleSortArray);</span><br><span class="line">        // 打印排序结果</span><br><span class="line">        System.out.println(&quot;冒泡排序结果: &quot; + Arrays.toString(bubbleSortArray));</span><br><span class="line">        </span><br><span class="line">        // 选择排序演示（同上，复制数组→排序→打印）</span><br><span class="line">        int[] selectionSortArray = Arrays.copyOf(array, array.length);</span><br><span class="line">        selectionSort(selectionSortArray);</span><br><span class="line">        System.out.println(&quot;选择排序结果: &quot; + Arrays.toString(selectionSortArray));</span><br><span class="line">        </span><br><span class="line">        // 插入排序演示</span><br><span class="line">        int[] insertionSortArray = Arrays.copyOf(array, array.length);</span><br><span class="line">        insertionSort(insertionSortArray);</span><br><span class="line">        System.out.println(&quot;插入排序结果: &quot; + Arrays.toString(insertionSortArray));</span><br><span class="line">        </span><br><span class="line">        // 希尔排序演示</span><br><span class="line">        int[] shellSortArray = Arrays.copyOf(array, array.length);</span><br><span class="line">        shellSort(shellSortArray);</span><br><span class="line">        System.out.println(&quot;希尔排序结果: &quot; + Arrays.toString(shellSortArray));</span><br><span class="line">        </span><br><span class="line">        // 快速排序演示（需要传入起始和结束索引）</span><br><span class="line">        int[] quickSortArray = Arrays.copyOf(array, array.length);</span><br><span class="line">        quickSort(quickSortArray, 0, quickSortArray.length - 1);</span><br><span class="line">        System.out.println(&quot;快速排序结果: &quot; + Arrays.toString(quickSortArray));</span><br><span class="line">        </span><br><span class="line">        // 归并排序演示（需要传入起始和结束索引）</span><br><span class="line">        int[] mergeSortArray = Arrays.copyOf(array, array.length);</span><br><span class="line">        mergeSort(mergeSortArray, 0, mergeSortArray.length - 1);</span><br><span class="line">        System.out.println(&quot;归并排序结果: &quot; + Arrays.toString(mergeSortArray));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><strong>主方法逻辑说明</strong>：</p>
+<ul>
+<li>先定义一个原始数组<code>{64, 34, 25, 12, 22, 11, 90}</code></li>
+<li>对每种排序算法，都先复制原始数组（避免排序操作修改原数组）</li>
+<li>调用对应排序方法，最后打印排序结果</li>
+<li>这样可以保证 6 种排序算法都基于同一个原始数组进行测试，便于对比结果</li>
+</ul>
+<h3 id="2-冒泡排序（Bubble-Sort）"><a href="#2-冒泡排序（Bubble-Sort）" class="headerlink" title="2. 冒泡排序（Bubble Sort）"></a>2. 冒泡排序（Bubble Sort）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 冒泡排序</span><br><span class="line"> * 思路：重复地走访过要排序的数列，一次比较两个元素，如果它们的顺序错误就把它们交换过来</span><br><span class="line"> */</span><br><span class="line">public static void bubbleSort(int[] arr) &#123;</span><br><span class="line">    int n = arr.length;  // 获取数组长度</span><br><span class="line">    // 外层循环：控制需要比较的轮次（n-1轮即可）</span><br><span class="line">    for (int i = 0; i &lt; n - 1; i++) &#123;</span><br><span class="line">        // 标记本轮是否有交换，如果没有则说明数组已排序完成</span><br><span class="line">        boolean swapped = false;</span><br><span class="line">        // 内层循环：每轮比较的范围（随着i增大，已排序的元素增多，比较范围减小）</span><br><span class="line">        for (int j = 0; j &lt; n - i - 1; j++) &#123;</span><br><span class="line">            // 如果当前元素大于下一个元素，交换它们</span><br><span class="line">            if (arr[j] &gt; arr[j + 1]) &#123;</span><br><span class="line">                // 交换元素（借助临时变量）</span><br><span class="line">                int temp = arr[j];</span><br><span class="line">                arr[j] = arr[j + 1];</span><br><span class="line">                arr[j + 1] = temp;</span><br><span class="line">                swapped = true;  // 标记有交换</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 如果本轮没有交换，说明数组已有序，提前退出循环</span><br><span class="line">        if (!swapped) break;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><strong>逐行执行流程（以数组<code>[64, 34, 25, 12, 22, 11, 90]</code>为例）</strong>：</p>
+<ul>
+<li><p><code>n = 7</code>（数组长度为 7）</p>
+</li>
+<li><p>外层循环</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i=0</span><br></pre></td></tr></table></figure>
+
+<p>（第一轮）： </p>
+<ul>
+<li><p><code>swapped = false</code></p>
+</li>
+<li><p>内层循环</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">j</span><br></pre></td></tr></table></figure>
+
+<p>从 0 到 5（</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n-i-1=6</span><br></pre></td></tr></table></figure>
+
+<p>）：     </p>
+<ul>
+<li><code>j=0</code>：<code>64 &gt; 34</code> → 交换 → 数组变为<code>[34, 64, 25, 12, 22, 11, 90]</code>，<code>swapped=true</code></li>
+<li><code>j=1</code>：<code>64 &gt; 25</code> → 交换 → <code>[34, 25, 64, 12, 22, 11, 90]</code></li>
+<li><code>j=2</code>：<code>64 &gt; 12</code> → 交换 → <code>[34, 25, 12, 64, 22, 11, 90]</code></li>
+<li><code>j=3</code>：<code>64 &gt; 22</code> → 交换 → <code>[34, 25, 12, 22, 64, 11, 90]</code></li>
+<li><code>j=4</code>：<code>64 &gt; 11</code> → 交换 → <code>[34, 25, 12, 22, 11, 64, 90]</code></li>
+<li><code>j=5</code>：<code>64 &lt; 90</code> → 不交换</li>
+</ul>
+</li>
+<li><p>第一轮结束后，最大元素<code>90</code>已 “冒泡” 到末尾（位置 6）</p>
+</li>
+</ul>
+</li>
+<li><p>后续轮次以此类推，每轮将剩余元素中的最大值移到对应位置</p>
+</li>
+<li><p>当某轮没有交换时（<code>swapped=false</code>），说明数组已有序，直接退出</p>
+</li>
+</ul>
+<h3 id="3-选择排序（Selection-Sort）"><a href="#3-选择排序（Selection-Sort）" class="headerlink" title="3. 选择排序（Selection Sort）"></a>3. 选择排序（Selection Sort）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 选择排序</span><br><span class="line"> * 思路：每次从待排序的数据元素中选出最小（或最大）的一个元素，存放在序列的起始位置</span><br><span class="line"> */</span><br><span class="line">public static void selectionSort(int[] arr) &#123;</span><br><span class="line">    int n = arr.length;  // 获取数组长度</span><br><span class="line">    // 外层循环：控制当前需要填充的位置（0到n-2）</span><br><span class="line">    for (int i = 0; i &lt; n - 1; i++) &#123;</span><br><span class="line">        // 假设当前位置i的元素是最小值，记录其索引</span><br><span class="line">        int minIndex = i;</span><br><span class="line">        // 内层循环：从i+1开始寻找比当前最小值更小的元素</span><br><span class="line">        for (int j = i + 1; j &lt; n; j++) &#123;</span><br><span class="line">            // 如果找到更小的元素，更新minIndex</span><br><span class="line">            if (arr[j] &lt; arr[minIndex]) &#123;</span><br><span class="line">                minIndex = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 交换：将找到的最小值放到位置i</span><br><span class="line">        int temp = arr[minIndex];</span><br><span class="line">        arr[minIndex] = arr[i];</span><br><span class="line">        arr[i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><strong>逐行执行流程</strong>：</p>
+<ul>
+<li><p><code>n = 7</code></p>
+</li>
+<li><p>外层循环</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i=0</span><br></pre></td></tr></table></figure>
+
+<p>（第一个位置）： </p>
+<ul>
+<li><p><code>minIndex = 0</code>（初始假设<code>arr[0]=64</code>是最小值）</p>
+</li>
+<li><p>内层循环</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">j</span><br></pre></td></tr></table></figure>
+
+<p>从 1 到 6：     </p>
+<ul>
+<li><code>j=1</code>：<code>34 &lt; 64</code> → <code>minIndex=1</code></li>
+<li><code>j=2</code>：<code>25 &lt; 34</code> → <code>minIndex=2</code></li>
+<li><code>j=3</code>：<code>12 &lt; 25</code> → <code>minIndex=3</code></li>
+<li><code>j=4</code>：<code>22 &gt; 12</code> → 不变</li>
+<li><code>j=5</code>：<code>11 &lt; 12</code> → <code>minIndex=5</code></li>
+<li><code>j=6</code>：<code>90 &gt; 11</code> → 不变</li>
+</ul>
+</li>
+<li><p>找到最小值<code>11</code>（索引 5），与<code>arr[0]</code>交换 → 数组变为<code>[11, 34, 25, 12, 22, 64, 90]</code></p>
+</li>
+</ul>
+</li>
+<li><p>外层循环</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i=1</span><br></pre></td></tr></table></figure>
+
+<p>（第二个位置）： </p>
+<ul>
+<li>从<code>j=2</code>开始寻找最小值，最终找到<code>12</code>（索引 3），与<code>arr[1]</code>交换 → <code>[11, 12, 25, 34, 22, 64, 90]</code></li>
+</ul>
+</li>
+<li><p>以此类推，每轮确定一个位置的元素，直到排序完成</p>
+</li>
+</ul>
+<h3 id="4-插入排序（Insertion-Sort）"><a href="#4-插入排序（Insertion-Sort）" class="headerlink" title="4. 插入排序（Insertion Sort）"></a>4. 插入排序（Insertion Sort）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 插入排序</span><br><span class="line"> * 思路：构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入</span><br><span class="line"> */</span><br><span class="line">public static void insertionSort(int[] arr) &#123;</span><br><span class="line">    int n = arr.length;  // 获取数组长度</span><br><span class="line">    // 外层循环：从第二个元素开始（索引1），认为第一个元素已有序</span><br><span class="line">    for (int i = 1; i &lt; n; i++) &#123;</span><br><span class="line">        int key = arr[i];  // 记录当前要插入的元素</span><br><span class="line">        int j = i - 1;  // 从已排序序列的最后一个元素开始比较</span><br><span class="line">        </span><br><span class="line">        // 内层循环：将已排序序列中大于key的元素向后移动</span><br><span class="line">        while (j &gt;= 0 &amp;&amp; arr[j] &gt; key) &#123;</span><br><span class="line">            arr[j + 1] = arr[j];  // 元素后移</span><br><span class="line">            j--;  // 继续向前比较</span><br><span class="line">        &#125;</span><br><span class="line">        // 将key插入到正确位置</span><br><span class="line">        arr[j + 1] = key;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><strong>逐行执行流程</strong>：</p>
+<ul>
+<li><p><code>n = 7</code></p>
+</li>
+<li><p>外层循环</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i=1</span><br></pre></td></tr></table></figure>
+
+<p>（待插入元素</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr[1]=34</span><br></pre></td></tr></table></figure>
+
+<p>）： </p>
+<ul>
+<li><code>key = 34</code>，<code>j = 0</code>（<code>arr[0]=64</code>）</li>
+<li><code>arr[j]=64 &gt; key=34</code> → <code>arr[1] = 64</code>，<code>j=-1</code></li>
+<li>退出循环，<code>arr[0] = key=34</code> → 数组变为<code>[34, 64, 25, 12, 22, 11, 90]</code></li>
+</ul>
+</li>
+<li><p>外层循环</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i=2</span><br></pre></td></tr></table></figure>
+
+<p>（待插入元素</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr[2]=25</span><br></pre></td></tr></table></figure>
+
+<p>）： </p>
+<ul>
+<li><code>key=25</code>，<code>j=1</code>（<code>arr[1]=64</code>）</li>
+<li><code>64 &gt; 25</code> → <code>arr[2]=64</code>，<code>j=0</code></li>
+<li><code>34 &gt; 25</code> → <code>arr[1]=34</code>，<code>j=-1</code></li>
+<li>插入<code>key=25</code>到<code>j+1=0</code> → <code>[25, 34, 64, 12, 22, 11, 90]</code></li>
+</ul>
+</li>
+<li><p>以此类推，每轮将一个元素插入到前面的有序序列中，最终整个数组有序</p>
+</li>
+</ul>
+<h3 id="5-希尔排序（Shell-Sort）"><a href="#5-希尔排序（Shell-Sort）" class="headerlink" title="5. 希尔排序（Shell Sort）"></a>5. 希尔排序（Shell Sort）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 希尔排序</span><br><span class="line"> * 思路：插入排序的改进版，先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序</span><br><span class="line"> */</span><br><span class="line">public static void shellSort(int[] arr) &#123;</span><br><span class="line">    int n = arr.length;  // 获取数组长度</span><br><span class="line">    </span><br><span class="line">    // 初始步长设为n/2，之后每次减半（步长序列）</span><br><span class="line">    for (int gap = n / 2; gap &gt; 0; gap /= 2) &#123;</span><br><span class="line">        // 对每个子序列进行插入排序（从gap位置开始）</span><br><span class="line">        for (int i = gap; i &lt; n; i++) &#123;</span><br><span class="line">            int temp = arr[i];  // 记录当前元素</span><br><span class="line">            int j;  // 用于子序列中比较的索引</span><br><span class="line">            </span><br><span class="line">            // 子序列中，将大于temp的元素向前移动gap位</span><br><span class="line">            for (j = i; j &gt;= gap &amp;&amp; arr[j - gap] &gt; temp; j -= gap) &#123;</span><br><span class="line">                arr[j] = arr[j - gap];</span><br><span class="line">            &#125;</span><br><span class="line">            // 将temp放到子序列中的正确位置</span><br><span class="line">            arr[j] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><strong>逐行执行流程</strong>：</p>
+<ul>
+<li><p><code>n = 7</code>，初始<code>gap = 7/2 = 3</code>（第一步长）</p>
+</li>
+<li><p>按</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gap=3</span><br></pre></td></tr></table></figure>
+
+<p>分组，子序列为： </p>
+<ul>
+<li>组 1：<code>arr[0], arr[3], arr[6]</code> → <code>64, 12, 90</code></li>
+<li>组 2：<code>arr[1], arr[4]</code> → <code>34, 22</code></li>
+<li>组 3：<code>arr[2], arr[5]</code> → <code>25, 11</code></li>
+</ul>
+</li>
+<li><p>对每个子序列进行插入排序后，数组变为<code>[12, 22, 11, 64, 34, 25, 90]</code></p>
+</li>
+<li><p>下一轮<code>gap = 3/2 = 1</code>（步长为 1，相当于普通插入排序）</p>
+</li>
+<li><p>对整个数组进行插入排序，最终得到有序数组</p>
+</li>
+</ul>
+<h3 id="6-快速排序（Quick-Sort）"><a href="#6-快速排序（Quick-Sort）" class="headerlink" title="6. 快速排序（Quick Sort）"></a>6. 快速排序（Quick Sort）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 快速排序</span><br><span class="line"> * 思路：选择一个基准元素，将数组分为两部分，小于基准的放左边，大于基准的放右边，然后递归排序子数组</span><br><span class="line"> */</span><br><span class="line">public static void quickSort(int[] arr, int low, int high) &#123;</span><br><span class="line">    // 如果低位索引小于高位索引，说明仍有元素需要排序</span><br><span class="line">    if (low &lt; high) &#123;</span><br><span class="line">        // 执行分区操作，返回基准元素的正确位置</span><br><span class="line">        int pi = partition(arr, low, high);</span><br><span class="line">        </span><br><span class="line">        // 递归排序基准左边的子数组（小于基准的元素）</span><br><span class="line">        quickSort(arr, low, pi - 1);</span><br><span class="line">        // 递归排序基准右边的子数组（大于基准的元素）</span><br><span class="line">        quickSort(arr, pi + 1, high);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 快速排序的分区操作</span><br><span class="line">private static int partition(int[] arr, int low, int high) &#123;</span><br><span class="line">    int pivot = arr[high];  // 选择最右边的元素作为基准</span><br><span class="line">    int i = (low - 1);  // i表示小于基准的元素的边界（初始为low-1）</span><br><span class="line">    </span><br><span class="line">    // 遍历数组，将小于等于基准的元素放到左边</span><br><span class="line">    for (int j = low; j &lt; high; j++) &#123;</span><br><span class="line">        // 如果当前元素小于或等于基准</span><br><span class="line">        if (arr[j] &lt;= pivot) &#123;</span><br><span class="line">            i++;  // 扩大小于基准的边界</span><br><span class="line">            </span><br><span class="line">            // 交换arr[i]和arr[j]（将当前元素放到小于基准的区域）</span><br><span class="line">            int temp = arr[i];</span><br><span class="line">            arr[i] = arr[j];</span><br><span class="line">            arr[j] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 将基准元素放到正确位置（i+1）</span><br><span class="line">    int temp = arr[i + 1];</span><br><span class="line">    arr[i + 1] = arr[high];</span><br><span class="line">    arr[high] = temp;</span><br><span class="line">    </span><br><span class="line">    return i + 1;  // 返回基准元素的索引</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><strong>逐行执行流程</strong>：</p>
+<ul>
+<li><p>初始调用<code>quickSort(arr, 0, 6)</code>（数组<code>[64, 34, 25, 12, 22, 11, 90]</code>）</p>
+</li>
+<li><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">low=0 &lt; high=6</span><br></pre></td></tr></table></figure>
+
+<p>，调用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partition(arr, 0, 6)</span><br></pre></td></tr></table></figure>
+
+<p>： </p>
+<ul>
+<li><p><code>pivot = arr[6] = 90</code>（基准元素）</p>
+</li>
+<li><p><code>i = -1</code></p>
+</li>
+<li><p>遍历</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">j=0</span><br></pre></td></tr></table></figure>
+
+<p>到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5</span><br></pre></td></tr></table></figure>
+
+<p>：     </p>
+<ul>
+<li>所有元素都<code>&lt;=90</code>，每次<code>i</code>递增并交换，最终<code>i=5</code></li>
+</ul>
+</li>
+<li><p>交换<code>arr[6]</code>和<code>arr[6]</code>（基准位置不变），返回<code>pi=6</code></p>
+</li>
+</ul>
+</li>
+<li><p>递归调用<code>quickSort(arr, 0, 5)</code>（左子数组）和<code>quickSort(arr, 7, 6)</code>（右子数组，不执行）</p>
+</li>
+<li><p>对左子数组<code>[64, 34, 25, 12, 22, 11]</code>重复上述过程，直到所有子数组排序完成</p>
+</li>
+</ul>
+<h3 id="7-归并排序（Merge-Sort）"><a href="#7-归并排序（Merge-Sort）" class="headerlink" title="7. 归并排序（Merge Sort）"></a>7. 归并排序（Merge Sort）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 归并排序</span><br><span class="line"> * 思路：将数组分成两半，对每一半递归排序，然后将排序好的两半合并</span><br><span class="line"> */</span><br><span class="line">public static void mergeSort(int[] arr, int left, int right) &#123;</span><br><span class="line">    // 如果左索引小于右索引，说明数组长度大于1，需要继续分割</span><br><span class="line">    if (left &lt; right) &#123;</span><br><span class="line">        // 找到中间点（避免溢出：等价于(left+right)/2）</span><br><span class="line">        int mid = left + (right - left) / 2;</span><br><span class="line">        </span><br><span class="line">        // 递归排序左半部分（left到mid）</span><br><span class="line">        mergeSort(arr, left, mid);</span><br><span class="line">        // 递归排序右半部分（mid+1到right）</span><br><span class="line">        mergeSort(arr, mid + 1, right);</span><br><span class="line">        </span><br><span class="line">        // 合并两个排序好的子数组</span><br><span class="line">        merge(arr, left, mid, right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 归并排序的合并操作</span><br><span class="line">private static void merge(int[] arr, int left, int mid, int right) &#123;</span><br><span class="line">    // 计算两个子数组的大小</span><br><span class="line">    int n1 = mid - left + 1;  // 左子数组长度</span><br><span class="line">    int n2 = right - mid;     // 右子数组长度</span><br><span class="line">    </span><br><span class="line">    // 创建临时数组存储左右子数组</span><br><span class="line">    int[] L = new int[n1];</span><br><span class="line">    int[] R = new int[n2];</span><br><span class="line">    </span><br><span class="line">    // 复制数据到临时数组</span><br><span class="line">    System.arraycopy(arr, left, L, 0, n1);  // 左子数组：arr[left..mid] → L[0..n1-1]</span><br><span class="line">    for (int j = 0; j &lt; n2; ++j) &#123;</span><br><span class="line">        R[j] = arr[mid + 1 + j];  // 右子数组：arr[mid+1..right] → R[0..n2-1]</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 合并临时数组</span><br><span class="line">    </span><br><span class="line">    // 初始化临时数组的索引</span><br><span class="line">    int i = 0, j = 0;</span><br><span class="line">    </span><br><span class="line">    // 合并后数组的起始索引</span><br><span class="line">    int k = left;</span><br><span class="line">    </span><br><span class="line">    // 比较两个临时数组的元素，按从小到大放入原数组</span><br><span class="line">    while (i &lt; n1 &amp;&amp; j &lt; n2) &#123;</span><br><span class="line">        if (L[i] &lt;= R[j]) &#123;</span><br><span class="line">            arr[k] = L[i];</span><br><span class="line">            i++;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            arr[k] = R[j];</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 复制左子数组剩余元素（如果有）</span><br><span class="line">    while (i &lt; n1) &#123;</span><br><span class="line">        arr[k] = L[i];</span><br><span class="line">        i++;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 复制右子数组剩余元素（如果有）</span><br><span class="line">    while (j &lt; n2) &#123;</span><br><span class="line">        arr[k] = R[j];</span><br><span class="line">        j++;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><strong>逐行执行流程</strong>：</p>
+<ul>
+<li>初始调用<code>mergeSort(arr, 0, 6)</code>（数组<code>[64, 34, 25, 12, 22, 11, 90]</code>）</li>
+<li><code>left=0 &lt; right=6</code>，<code>mid = 0 + (6-0)/2 = 3</code></li>
+<li>递归调用<code>mergeSort(arr, 0, 3)</code>（左半部分<code>[64,34,25,12]</code>）和<code>mergeSort(arr,4,6)</code>（右半部分<code>[22,11,90]</code>）</li>
+<li>左半部分继续分割为<code>[64,34]</code>和<code>[25,12]</code>，直到每个子数组长度为 1</li>
+<li>右半部分分割为<code>[22]</code>和<code>[11,90]</code>，<code>[11,90]</code>再分割为<code>[11]</code>和<code>[90]</code></li>
+<li>开始合并： <ul>
+<li>合并<code>[11]</code>和<code>[90]</code> → <code>[11,90]</code></li>
+<li>合并<code>[22]</code>和<code>[11,90]</code> → <code>[11,22,90]</code></li>
+<li>左半部分合并后得到<code>[12,25,34,64]</code></li>
+<li>最终合并<code>[12,25,34,64]</code>和<code>[11,22,90]</code> → 有序数组</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这六种排序算法各有特点：</p>
+<ul>
+<li><strong>冒泡 &#x2F; 选择 &#x2F; 插入排序</strong>：时间复杂度 O (n²)，适合小规模数据</li>
+<li><strong>希尔排序</strong>：时间复杂度 O (n^1.3)，是插入排序的改进</li>
+<li><strong>快速排序</strong>：平均时间复杂度 O (nlogn)，实际应用中最快</li>
+<li><strong>归并排序</strong>：时间复杂度 O (nlogn)，稳定但需要额外空间</li>
+</ul>
+<p>通过逐行解释和流程模拟，希望能帮助你理解每种算法的执行细节。如果需要更深入分析某一步，可以进一步提问。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/23/%E5%85%AD%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E8%B6%85%E8%AF%A6%E7%BB%86%E7%90%86%E8%A7%A3/" data-id="cuidiCnkm5biAG4Z031sfPDJn" data-title="六大排序算法超详细理解" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/12/23/2025-%E5%B9%B4-8-%E6%9C%88%E5%89%8D%E6%B2%BF%E7%A7%91%E6%8A%80%E5%8A%A8%E6%80%81%E5%85%A8%E8%A7%A3%E6%9E%90/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          2025 年 8 月前沿科技动态全解析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/12/23/%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8AI%E6%9D%A5%E8%BE%85%E5%8A%A9%E8%87%AA%E5%B7%B1%E5%8A%9E%E5%85%AC%EF%BC%9F%E8%AE%A9%E6%88%91%E4%BB%AC%E6%9D%A5%E4%B8%80%E5%9D%97%E8%81%8A%E8%81%8A/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">怎么使用AI来辅助自己办公？让我们来一块聊聊</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" rel="tag">代码拉取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" rel="tag">文章，博客框架，技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" rel="tag">服务器，游戏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" rel="tag">权限配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" style="font-size: 10px;">代码拉取</a> <a href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">文章，博客框架，技术</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">服务器，游戏</a> <a href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">权限配置</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">编程语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/12/25/gitLaB%E9%97%AE%E9%A2%98/">gitLaB问题</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/">大模型微调</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E6%9C%AF%E9%87%8C%E9%9D%A2%E7%9A%84%E2%80%98mcp%E2%80%99%E6%8A%80%E6%9C%AF/">计算机技术里面的‘mcp’技术</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/2025-8-19/">2025-8-19</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E9%82%A3%E4%BA%9B%E5%9C%A8%E5%85%AC%E5%8F%B8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84-%E8%B6%85%E7%BA%A7%E9%BB%84%E9%87%91-bug-%EF%BC%9A%E6%AF%8F%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%91%98%E9%83%BD%E8%AF%A5%E8%AE%B0%E5%8F%96%E7%9A%84%E8%A1%80%E6%B3%AA%E7%BB%8F%E9%AA%8C/">那些在公司工作中遇到的 &#39;超级黄金 bug&#39;：每个程序员都该记取的血泪经验</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 little chen<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

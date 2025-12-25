@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>聊聊 java 开发中那些离不开 的重要依赖 | 欢迎来到chen的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="​    作为一名常年和 Java 打交道的开发者，日常项目里总会引入各种各样的依赖。这些依赖就像工具箱里的 “瑞士军刀”，帮我们省去了重复造轮子的麻烦，让开发效率翻倍。今天就来盘点几个我在工作中高频使用的重要依赖，聊聊它们的核心作用和使用场景。 一、日志门面 + 实现：SLF4J + Logback​    日志几乎是所有 Java 项目的 “标配”，而 SLF4J（Simple Logging">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聊聊 java 开发中那些离不开 的重要依赖">
+<meta property="og:url" content="http://example.com/2025/12/23/%E7%A6%BB%E4%B8%8D%E5%BC%80-%E7%9A%84%E9%87%8D%E8%A6%81%E4%BE%9D%E8%B5%96/index.html">
+<meta property="og:site_name" content="欢迎来到chen的博客">
+<meta property="og:description" content="​    作为一名常年和 Java 打交道的开发者，日常项目里总会引入各种各样的依赖。这些依赖就像工具箱里的 “瑞士军刀”，帮我们省去了重复造轮子的麻烦，让开发效率翻倍。今天就来盘点几个我在工作中高频使用的重要依赖，聊聊它们的核心作用和使用场景。 一、日志门面 + 实现：SLF4J + Logback​    日志几乎是所有 Java 项目的 “标配”，而 SLF4J（Simple Logging">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-23T11:46:17.000Z">
+<meta property="article:modified_time" content="2025-12-24T02:25:14.858Z">
+<meta property="article:author" content="little chen">
+<meta property="article:tag" content="测试开发,后端开发，测试">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="欢迎来到chen的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">欢迎来到chen的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个专注于技术分享的博客，详情可访问我的csdn——&gt;id:weixin_73527660</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-离不开-的重要依赖" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/23/%E7%A6%BB%E4%B8%8D%E5%BC%80-%E7%9A%84%E9%87%8D%E8%A6%81%E4%BE%9D%E8%B5%96/" class="article-date">
+  <time class="dt-published" datetime="2025-12-23T11:46:17.000Z" itemprop="datePublished">2025-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      聊聊 java 开发中那些离不开 的重要依赖
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>​    作为一名常年和 Java 打交道的开发者，日常项目里总会引入各种各样的依赖。这些依赖就像工具箱里的 “瑞士军刀”，帮我们省去了重复造轮子的麻烦，让开发效率翻倍。今天就来盘点几个我在工作中高频使用的重要依赖，聊聊它们的核心作用和使用场景。</p>
+<h2 id="一、日志门面-实现：SLF4J-Logback"><a href="#一、日志门面-实现：SLF4J-Logback" class="headerlink" title="一、日志门面 + 实现：SLF4J + Logback"></a>一、日志门面 + 实现：SLF4J + Logback</h2><p>​    日志几乎是所有 Java 项目的 “标配”，而 <strong>SLF4J</strong>（Simple Logging Facade for Java）和 <strong>Logback</strong> 的组合，堪称日志领域的 “黄金搭档”。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- SLF4J 核心接口 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.7.36&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- Logback 实现（包含核心 + 经典绑定） --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.11&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- 可选：Logback 核心模块（logback-classic 已包含，无需重复导入） --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;logback-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.11&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li><strong>SLF4J</strong> 不是具体的日志实现，而是一个日志门面（接口层）。它定义了一套统一的日志接口，让我们可以在不修改代码的情况下，灵活切换底层的日志实现（比如 Logback、Log4j2 等）。最常用的就是它的 <code>LoggerFactory</code> 和 <code>Logger</code> 接口，一行 <code>Logger logger = LoggerFactory.getLogger(MyClass.class);</code> 就能搞定日志对象的获取。</li>
+<li><strong>Logback</strong> 则是 SLF4J 的 “最佳拍档”，作为具体的日志实现，它性能优秀、配置灵活，还原生支持 SLF4J，无需额外的适配层。通过 XML 或 Groovy 配置文件，我们可以轻松定义日志输出格式、输出目的地（控制台、文件）、日志级别（DEBUG&#x2F;INFO&#x2F;WARN&#x2F;ERROR），甚至实现日志滚动（按大小、按时间切割旧日志）。</li>
+</ul>
+<p>​    <strong>为什么选它们？</strong> 相比古老的 Log4j，Logback 启动更快、内存占用更低，而且 SLF4J 的 “门面模式” 完美解决了不同框架日志接口混乱的问题（比如 Spring 用 JCL，MyBatis 用 Log4j 等），统一用 SLF4J 接口即可无缝适配。</p>
+<h2 id="二、JSON-处理：Jackson"><a href="#二、JSON-处理：Jackson" class="headerlink" title="二、JSON 处理：Jackson"></a>二、JSON 处理：Jackson</h2><p>​    在前后端交互、接口调用、数据存储中，JSON 格式无处不在，而 <strong>Jackson</strong> 就是 Java 中处理 JSON 的 “扛把子” 工具。</p>
+<p>Jackson 的核心功能包括：</p>
+<ul>
+<li><p><strong>对象与 JSON 互转</strong>：通过 <code>ObjectMapper</code> 类的 <code>writeValueAsString()</code>（对象转 JSON）和 <code>readValue()</code>（JSON 转对象）方法，轻松实现 POJO 与 JSON 的序列化和反序列化。</p>
+</li>
+<li><p><strong>复杂场景支持</strong>：处理泛型（比如 <code>List&lt;User&gt;</code>）、日期格式化（通过 <code>@JsonFormat</code> 注解指定格式）、忽略 null 值或特定字段（<code>@JsonIgnore</code>）、自定义序列化逻辑等。</p>
+</li>
+<li><p><strong>高性能</strong>：相比 Gson 等其他 JSON 库，Jackson 在处理大量数据时性能更优，而且是 Spring Boot 的默认 JSON 解析器，与 Spring 生态无缝集成。</p>
+</li>
+<li><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Jackson 核心：包含数据绑定、核心、注解模块 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.13.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- 可选：单独导入核心模块（databind 已包含） --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jackson-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.13.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- 可选：单独导入注解模块（databind 已包含） --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jackson-annotations&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.13.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+</li>
+</ul>
+<p><strong>简化方案</strong>：在 Spring Boot 项目中，直接导入 <code>spring-boot-starter-json</code> 即可自动引入 Jackson 全套依赖。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-json&lt;/artifactId&gt;</span><br><span class="line">    &lt;!-- 版本由 Spring Boot 父工程管理，无需手动指定 --&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>​    <strong>使用小技巧</strong>：在 Spring Boot 中，只需引入 <code>spring-boot-starter-json</code> 依赖（内置 Jackson），就能在 Controller 中直接返回对象（自动转为 JSON），接收 JSON 参数时也能自动绑定到对象，非常方便。</p>
+<h2 id="三、工具类库：Apache-Commons-Lang3"><a href="#三、工具类库：Apache-Commons-Lang3" class="headerlink" title="三、工具类库：Apache Commons Lang3"></a>三、工具类库：Apache Commons Lang3</h2><p>​    开发中经常需要处理字符串、日期、集合等基础操作，<strong>Apache Commons Lang3</strong> 就像一个 “增强版的 Java 基础工具库”，帮我们简化这些繁琐工作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.12.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>它的常用工具类包括：</p>
+<ul>
+<li><code>StringUtils</code>：处理字符串的 “神器”，比如 <code>isEmpty()</code>（判断空字符串）、<code>trim()</code>（去除首尾空格）、<code>join()</code>（拼接数组为字符串）、<code>substringBetween()</code>（提取两个标记间的子串）等，避免了手动判空的冗余代码。</li>
+<li><code>DateUtils</code>&#x2F;<code>DateFormatUtils</code>：日期处理工具，支持日期加减（<code>addDays()</code>）、日期格式化（<code>format()</code>）、字符串转日期（<code>parseDate()</code>）等，比原生 <code>SimpleDateFormat</code> 更易用且线程安全。</li>
+<li><code>ObjectUtils</code>：对象操作工具，比如 <code>defaultIfNull()</code>（为空时返回默认值）、<code>equals()</code>（安全比较两个对象是否相等）。</li>
+<li><code>Validate</code>：参数校验工具，比如 <code>notNull()</code>（校验对象非空，否则抛异常），简化方法入参校验逻辑。</li>
+</ul>
+<p>​    <strong>为什么离不开它？</strong> 原生 Java 的 <code>String</code>、<code>Date</code> 类方法不够丰富，自己封装又容易出错，Commons Lang3 经过多年迭代，稳定性和易用性都经过了实践检验，能显著减少重复代码。</p>
+<h2 id="四、数据库访问：MyBatis-MyBatis-Plus"><a href="#四、数据库访问：MyBatis-MyBatis-Plus" class="headerlink" title="四、数据库访问：MyBatis + MyBatis-Plus"></a>四、数据库访问：MyBatis + MyBatis-Plus</h2><p>​    对于需要操作数据库的 Java 项目，<strong>MyBatis</strong> 是一款轻量级且灵活的持久层框架，而 <strong>MyBatis-Plus</strong> 则是在 MyBatis 基础上的 “增强工具”，让 CRUD 操作更简单。</p>
+<h4 id="纯-MyBatis-配置："><a href="#纯-MyBatis-配置：" class="headerlink" title="纯 MyBatis 配置："></a>纯 MyBatis 配置：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.5.10&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- MyBatis 与 Spring 集成（若使用 Spring） --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.0.7&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h4 id="MyBatis-Plus-配置（推荐，已包含-MyBatis-依赖）："><a href="#MyBatis-Plus-配置（推荐，已包含-MyBatis-依赖）：" class="headerlink" title="MyBatis-Plus 配置（推荐，已包含 MyBatis 依赖）："></a>MyBatis-Plus 配置（推荐，已包含 MyBatis 依赖）：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Spring Boot 项目推荐使用 starter --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.5.3.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- 非 Spring Boot 项目使用核心包 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-plus&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.5.3.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li><strong>MyBatis</strong> 的核心是 “SQL 映射”，通过 XML 或注解定义 SQL 语句，将 Java 方法与 SQL 绑定，实现参数映射和结果集映射。相比 JPA 的 “全自动 ORM”，MyBatis 让开发者更能掌控 SQL，适合复杂查询场景。</li>
+<li><strong>MyBatis-Plus</strong> 则在 MyBatis 基础上增加了 “CRUD 接口自动生成” 功能，通过继承 <code>BaseMapper&lt;T&gt;</code> 接口，无需编写 SQL 就能实现单表的增删改查（比如 <code>insert()</code>、<code>selectById()</code>、<code>updateById()</code> 等），还支持条件构造器（<code>QueryWrapper</code>）、分页插件、逻辑删除等实用功能，大大减少了重复的 XML 和 Mapper 代码。</li>
+</ul>
+<p>​    <strong>适用场景</strong>：如果项目需要灵活控制 SQL，选 MyBatis；如果单表操作多、想快速开发，MyBatis-Plus 能节省大量时间，两者结合堪称 “数据库访问利器”。</p>
+<h2 id="五、单元测试：JUnit-5-Mockito"><a href="#五、单元测试：JUnit-5-Mockito" class="headerlink" title="五、单元测试：JUnit 5 + Mockito"></a>五、单元测试：JUnit 5 + Mockito</h2><p>代码质量离不开测试，<strong>JUnit 5</strong> 和 <strong>Mockito</strong> 是 Java 单元测试的 “黄金组合”。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- JUnit 5 核心 API --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;junit-jupiter-api&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.9.2&lt;/version&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- JUnit 5 运行引擎（必须导入，否则测试无法运行） --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;junit-jupiter-engine&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.9.2&lt;/version&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- Mockito 核心 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mockito&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mockito-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.8.1&lt;/version&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- Mockito 与 JUnit 5 集成 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mockito&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mockito-junit-jupiter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.8.1&lt;/version&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><strong>简化方案</strong>：Spring Boot 项目直接导入 starter：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">    &lt;!-- 已包含 JUnit 5、Mockito 等常用测试依赖 --&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<ul>
+<li><strong>JUnit 5</strong> 是 Java 单元测试的标准框架，相比 JUnit 4，它支持 Lambda 表达式、更灵活的注解（比如 <code>@Test</code>、<code>@BeforeEach</code>、<code>@AfterEach</code>、<code>@ParameterizedTest</code> 等），还能通过 <code>Assertions</code> 类进行断言判断（如 <code>assertEquals()</code>、<code>assertTrue()</code>），验证代码逻辑是否正确。</li>
+<li><strong>Mockito</strong> 则是一款 Mock 框架，能帮我们创建 “虚拟对象”（Mock 对象），模拟依赖组件的行为。比如在测试 Service 层时，我们可以 Mock 掉 Dao 层的接口，指定它的返回值，专注于测试 Service 本身的逻辑，而不用依赖真实数据库。</li>
+</ul>
+<p>​    <strong>测试的意义</strong>：好的单元测试能提前发现 Bug，尤其在重构代码时，通过运行测试用例可以快速验证功能是否正常，让代码更健壮。Spring Boot 中引入 <code>spring-boot-starter-test</code> 依赖，就能直接使用 JUnit 5 和 Mockito 进行测试。</p>
+<h2 id="六、HTTP-客户端：OkHttp"><a href="#六、HTTP-客户端：OkHttp" class="headerlink" title="六、HTTP 客户端：OkHttp"></a>六、HTTP 客户端：OkHttp</h2><p>在需要调用外部 API 或进行 HTTP 通信时，<strong>OkHttp</strong>是一个非常优秀的选择。它是 Square 公司开发的高效 HTTP 客户端，相比 Java 原生的 HttpURLConnection，使用更简单，性能更出色。</p>
+<p>核心特性：</p>
+<ul>
+<li>支持 HTTP&#x2F;2，允许同一主机的所有请求共享一个连接</li>
+<li>连接池减少请求延迟</li>
+<li>透明的 GZIP 压缩减少响应数据大小</li>
+<li>缓存响应数据，避免重复请求</li>
+</ul>
+<p><strong>Maven 导入配置</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.squareup.okhttp3&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;okhttp&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.10.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>使用场景：第三方 API 调用、推送服务、数据同步等需要 HTTP 通信的场景，Spring Cloud 中很多组件也依赖于 OkHttp。</p>
+<h2 id="七、集合工具：Google-Guava"><a href="#七、集合工具：Google-Guava" class="headerlink" title="七、集合工具：Google Guava"></a>七、集合工具：Google Guava</h2><p><strong>Guava</strong>是 Google 开发的 Java 核心库增强工具，尤其在集合操作方面提供了强大的支持，弥补了 Java 原生集合类的不足。</p>
+<p>常用功能：</p>
+<ul>
+<li>增强集合类型：Multimap（一键多值映射）、BiMap（双向映射）、Table（表格集合）</li>
+<li>不可变集合：<code>ImmutableList</code>、<code>ImmutableMap</code>等，线程安全且性能好</li>
+<li>字符串处理：<code>Splitter</code>、<code>Joiner</code>等工具类</li>
+<li>缓存工具：<code>CacheBuilder</code>构建本地缓存</li>
+</ul>
+<p><strong>Maven 导入配置</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.google.guava&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;guava&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;31.1-jre&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>Guava 的设计非常优雅，很多方法能大幅简化代码，比如用<code>Maps.newHashMap()</code>替代繁琐的<code>new HashMap&lt;&gt;()</code>，用<code>Lists.newArrayList()</code>创建列表等。</p>
+<h2 id="八、Excel-处理：EasyExcel"><a href="#八、Excel-处理：EasyExcel" class="headerlink" title="八、Excel 处理：EasyExcel"></a>八、Excel 处理：EasyExcel</h2><p>在需要导入导出 Excel 文件的业务场景中，<strong>EasyExcel</strong>是阿里开源的一款高效工具，相比 POI，它能有效解决大文件处理时的内存溢出问题。</p>
+<p>核心优势：</p>
+<ul>
+<li>低内存占用，支持百万级数据读写</li>
+<li>简单易用的 API，注解式配置</li>
+<li>支持 Excel 格式自定义、图片处理、复杂表头</li>
+</ul>
+<p><strong>Maven 导入配置</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;easyexcel&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.3.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>使用场景：报表导出、数据批量导入、Excel 模板生成等，尤其是需要处理大量数据的情况，EasyExcel 的性能优势明显。</p>
+<h2 id="九、加密工具：Apache-Commons-Codec"><a href="#九、加密工具：Apache-Commons-Codec" class="headerlink" title="九、加密工具：Apache Commons Codec"></a>九、加密工具：Apache Commons Codec</h2><p><strong>Commons Codec</strong>提供了常用的编码解码功能，比如 MD5、SHA、Base64 等，避免了自己实现加密算法的风险。</p>
+<p>主要功能：</p>
+<ul>
+<li>加密算法：MD5、SHA-1、SHA-256 等</li>
+<li>编码方式：Base64、URL 编码、十六进制编码</li>
+<li>哈希算法：HMAC 系列算法</li>
+</ul>
+<p><strong>Maven 导入配置</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;commons-codec&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;commons-codec&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.15&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>在用户密码加密、数据签名、接口验签等场景中非常实用，使用简单且安全性有保障。</p>
+<h2 id="十、PDF-处理：iTextPDF"><a href="#十、PDF-处理：iTextPDF" class="headerlink" title="十、PDF 处理：iTextPDF"></a>十、PDF 处理：iTextPDF</h2><p>当需要在系统中生成 PDF 文档（如合同、报表、发票）时，<strong>iTextPDF</strong>是一个功能全面的选择。</p>
+<p>主要功能：</p>
+<ul>
+<li>创建 PDF 文档并设置格式</li>
+<li>添加文本、图片、表格、水印</li>
+<li>PDF 加密、解密、合并、拆分</li>
+</ul>
+<p><strong>Maven 导入配置</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.itextpdf&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;itextpdf&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.5.13.3&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>注意：iTextPDF 5.x 版本是开源免费的，6.x 以上版本需要商业授权，个人和非商业项目可以使用 5.x 版本。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​    以上这些依赖几乎是我每个 Java 项目的 “必选项”：用 SLF4J + Logback 记录日志，Jackson 处理 JSON，Commons Lang3 简化工具类操作，MyBatis 系列操作数据库，JUnit 5 + Mockito 保障代码质量。它们就像成熟的 “积木”，让我们不用重复造轮子，专注于业务逻辑的实现。</p>
+<p>​    当然，Java 生态中还有很多优秀的依赖（比如处理集合的 Guava、HTTP 客户端 OkHttp 等），具体选择要根据项目需求。但掌握这些核心依赖，能让你的开发效率和代码质量提升一个档次，快去试试吧！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/23/%E7%A6%BB%E4%B8%8D%E5%BC%80-%E7%9A%84%E9%87%8D%E8%A6%81%E4%BE%9D%E8%B5%96/" data-id="cuidny9axbzQnRp-JF4IADC4u" data-title="聊聊 java 开发中那些离不开 的重要依赖" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/12/23/Trae2-0%EF%BC%9AAI-%E7%BC%96%E7%A8%8B%E6%96%B0%E6%97%B6%E4%BB%A3%E7%9A%84%E5%BC%95%E9%A2%86%E8%80%85/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Trae2.0：AI 编程新时代的引领者
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/12/23/%E4%BB%8E-0-%E5%88%B0-1-%E4%B8%8A%E6%89%8B-Spring-AI%EF%BC%9A%E8%AE%A9-Java-%E5%BC%80%E5%8F%91%E8%80%85%E8%BD%BB%E6%9D%BE%E7%8E%A9%E8%BD%AC-AI-%E5%8A%9F%E8%83%BD/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">从 0 到 1 上手 Spring AI：让 Java 开发者轻松玩转 AI 功能</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" rel="tag">代码拉取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" rel="tag">文章，博客框架，技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" rel="tag">服务器，游戏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" rel="tag">权限配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" style="font-size: 10px;">代码拉取</a> <a href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">文章，博客框架，技术</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">服务器，游戏</a> <a href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">权限配置</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">编程语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/12/25/gitLaB%E9%97%AE%E9%A2%98/">gitLaB问题</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/">大模型微调</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E6%9C%AF%E9%87%8C%E9%9D%A2%E7%9A%84%E2%80%98mcp%E2%80%99%E6%8A%80%E6%9C%AF/">计算机技术里面的‘mcp’技术</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/2025-8-19/">2025-8-19</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E9%82%A3%E4%BA%9B%E5%9C%A8%E5%85%AC%E5%8F%B8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84-%E8%B6%85%E7%BA%A7%E9%BB%84%E9%87%91-bug-%EF%BC%9A%E6%AF%8F%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%91%98%E9%83%BD%E8%AF%A5%E8%AE%B0%E5%8F%96%E7%9A%84%E8%A1%80%E6%B3%AA%E7%BB%8F%E9%AA%8C/">那些在公司工作中遇到的 &#39;超级黄金 bug&#39;：每个程序员都该记取的血泪经验</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 little chen<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

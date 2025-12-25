@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Redis | 欢迎来到chen的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Redis 是面试中高频出现的中间件，涉及基础数据结构、持久化、高可用、缓存问题等多个维度。以下是常见面试题及核心要点： 一、基础概念与特性 什么是 Redis？它有哪些核心特性？  定义：Redis 是开源的高性能键值对内存数据库，支持多种数据结构，可用于缓存、分布式锁、消息队列等场景。 核心特性：      基于内存操作，速度快（毫秒级响应）； 支持丰富的数据结构（String、Hash、Li">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="http://example.com/2025/12/23/Redis/index.html">
+<meta property="og:site_name" content="欢迎来到chen的博客">
+<meta property="og:description" content="Redis 是面试中高频出现的中间件，涉及基础数据结构、持久化、高可用、缓存问题等多个维度。以下是常见面试题及核心要点： 一、基础概念与特性 什么是 Redis？它有哪些核心特性？  定义：Redis 是开源的高性能键值对内存数据库，支持多种数据结构，可用于缓存、分布式锁、消息队列等场景。 核心特性：      基于内存操作，速度快（毫秒级响应）； 支持丰富的数据结构（String、Hash、Li">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-23T11:30:00.000Z">
+<meta property="article:modified_time" content="2025-12-24T03:04:06.977Z">
+<meta property="article:author" content="little chen">
+<meta property="article:tag" content="测试开发,后端开发，测试">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="欢迎来到chen的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">欢迎来到chen的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个专注于技术分享的博客，详情可访问我的csdn——&gt;id:weixin_73527660</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Redis" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/23/Redis/" class="article-date">
+  <time class="dt-published" datetime="2025-12-23T11:30:00.000Z" itemprop="datePublished">2025-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Redis
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Redis 是面试中高频出现的中间件，涉及基础数据结构、持久化、高可用、缓存问题等多个维度。以下是常见面试题及核心要点：</p>
+<h3 id="一、基础概念与特性"><a href="#一、基础概念与特性" class="headerlink" title="一、基础概念与特性"></a>一、基础概念与特性</h3><ol>
+<li><p><strong>什么是 Redis？它有哪些核心特性？</strong></p>
+<ul>
+<li>定义：Redis 是开源的<strong>高性能键值对内存数据库</strong>，支持多种数据结构，可用于缓存、分布式锁、消息队列等场景。</li>
+<li>核心特性：     <ul>
+<li>基于内存操作，速度快（毫秒级响应）；</li>
+<li>支持丰富的数据结构（String、Hash、List、Set、Sorted Set 等）；</li>
+<li>支持持久化（RDB、AOF），避免内存数据丢失；</li>
+<li>支持主从复制、哨兵、集群，保证高可用；</li>
+<li>单线程模型（核心逻辑单线程，避免线程切换开销）；</li>
+<li>支持 Lua 脚本、事务、发布订阅等。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Redis 为什么这么快？</strong></p>
+<ul>
+<li><strong>内存存储</strong>：数据存在内存中，避免磁盘 IO 开销（磁盘 IO 是毫秒级，内存是纳秒级）。</li>
+<li><strong>单线程模型</strong>：核心读写逻辑用单线程，避免多线程切换和锁竞争（Redis 6.0 后 IO 线程可并行处理网络请求，但核心逻辑仍单线程）。</li>
+<li><strong>高效数据结构</strong>：针对不同场景优化数据结构（如 String 用 SDS 动态字符串，Hash 用哈希表 + 压缩列表）。</li>
+<li><strong>IO 多路复用</strong>：用 epoll&#x2F;kqueue 等 IO 多路复用模型，单线程处理多个客户端连接，减少阻塞。</li>
+</ul>
+</li>
+<li><p><strong>Redis 支持哪些数据结构？各自的应用场景是什么？</strong></p>
+<table>
+<thead>
+<tr>
+<th>数据结构</th>
+<th>底层实现（简化）</th>
+<th>核心特性</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String（字符串）</td>
+<td>简单动态字符串（SDS）</td>
+<td>二进制安全，支持拼接、自增 &#x2F; 减</td>
+<td>缓存（如用户信息）、计数器、分布式 ID</td>
+</tr>
+<tr>
+<td>Hash（哈希）</td>
+<td>哈希表 + 压缩列表（小数据）</td>
+<td>键值对集合，适合存储对象</td>
+<td>存储用户信息（name&#x2F;age&#x2F;addr）</td>
+</tr>
+<tr>
+<td>List（列表）</td>
+<td>双向链表 + 压缩列表（小数据）</td>
+<td>有序，可重复，支持两端操作</td>
+<td>消息队列（lpush + rpop）、最新列表</td>
+</tr>
+<tr>
+<td>Set（集合）</td>
+<td>哈希表 + 整数集合（小整数）</td>
+<td>无序，不可重复，支持交集 &#x2F; 并集</td>
+<td>好友关系（共同好友）、去重</td>
+</tr>
+<tr>
+<td>Sorted Set（有序集合）</td>
+<td>跳表 + 哈希表</td>
+<td>有序（按 score 排序），不可重复</td>
+<td>排行榜（如销量排名）、延时队列</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>Redis 的单线程模型是怎样的？为什么单线程还能处理高并发？</strong></p>
+<ul>
+<li>单线程模型：Redis 核心的 “网络 IO” 和 “数据操作” 逻辑由<strong>一个主线程</strong>处理，避免多线程的上下文切换和锁开销。</li>
+<li>高并发原因：     <ul>
+<li>内存操作速度极快，单线程足以处理大部分请求；</li>
+<li>用 IO 多路复用（如 epoll）同时监听多个客户端连接，主线程通过 “事件循环” 处理就绪的 IO 事件（读 &#x2F; 写），无需阻塞等待。</li>
+</ul>
+</li>
+<li>注意：Redis 6.0 引入 “多 IO 线程”，仅负责网络数据的读写（解析命令、返回结果），核心的数据处理仍单线程，进一步提升并发能力。</li>
+</ul>
+</li>
+</ol>
+<h3 id="二、持久化机制"><a href="#二、持久化机制" class="headerlink" title="二、持久化机制"></a>二、持久化机制</h3><ol>
+<li><p>**Redis 的持久化机制有哪些？（RDB vs AOF）**持久化用于将内存数据写入磁盘，避免宕机丢失，两种核心方式：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>RDB（快照）</th>
+<th>AOF（ Append Only File）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原理</td>
+<td>定时生成内存全量数据的二进制快照（<code>dump.rdb</code>）</td>
+<td>记录所有写命令到日志文件（<code>appendonly.aof</code>），恢复时重放命令</td>
+</tr>
+<tr>
+<td>触发方式</td>
+<td>手动（<code>save</code>&#x2F;<code>bgsave</code>）、自动（配置 <code>save &lt;秒&gt; &lt;次数&gt;</code>）</td>
+<td>实时追加（依赖 <code>appendfsync</code> 策略）</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>文件小，恢复速度快；适合备份</td>
+<td>数据丢失少（最多丢失 1 秒）；命令可读</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>快照间隔内数据可能丢失；<code>bgsave</code> fork 子进程耗资源</td>
+<td>文件大，恢复慢；写命令追加可能影响性能</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>数据允许短期丢失，需快速恢复</td>
+<td>数据安全性要求高（如金融场景）</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>RDB 的 <code>save</code> 和 <code>bgsave</code> 有什么区别？</strong></p>
+<ul>
+<li><code>save</code>：主线程执行，会阻塞 Redis 服务（期间无法处理客户端请求），适合停机备份。</li>
+<li><code>bgsave</code>：主线程 <code>fork</code> 一个子进程负责生成 RDB 文件，主线程继续处理请求（非阻塞），是默认推荐方式。</li>
+<li>注意：<code>fork</code> 子进程时会复制内存页表（写时复制），若内存大，<code>fork</code> 可能短暂阻塞主线程。</li>
+</ul>
+</li>
+<li><p><strong>AOF 的重写机制是什么？为什么需要重写？</strong></p>
+<ul>
+<li>原因：AOF 文件会因重复命令（如多次 <code>set key value</code>）越来越大，导致恢复慢、占用磁盘空间。</li>
+<li>重写机制：通过 <code>bgrewriteaof</code> 命令（或自动触发），生成一个 “精简版” AOF 文件 —— 直接记录数据的最终状态（如将 <code>set a 1; set a 2</code> 合并为 <code>set a 2</code>）。</li>
+<li>流程：主线程 <code>fork</code> 子进程，子进程遍历内存数据生成新 AOF 命令；重写期间新命令写入 “重写缓冲区”，完成后追加到新文件，替换旧文件。</li>
+</ul>
+</li>
+<li><p><strong>Redis 4.0 后的混合持久化是什么？</strong></p>
+<ul>
+<li>混合持久化：RDB 作为 AOF 文件的开头（存储全量数据快照），后续追加 AOF 增量命令。</li>
+<li>优势：结合 RDB 恢复快和 AOF 数据全的优点 —— 恢复时先加载 RDB 基础数据，再执行 AOF 增量命令，兼顾速度和安全性。</li>
+</ul>
+</li>
+</ol>
+<h3 id="三、高可用与分布式"><a href="#三、高可用与分布式" class="headerlink" title="三、高可用与分布式"></a>三、高可用与分布式</h3><ol>
+<li><p><strong>Redis 主从复制的原理是什么？</strong></p>
+<ul>
+<li>主从复制：通过复制将主节点（Master）的数据同步到从节点（Slave），实现读写分离（Master 写，Slave 读）和数据备份。</li>
+<li>核心流程：     <ol>
+<li>从节点连接主节点，发送 <code>SYNC</code> 命令（Redis 2.8 前）或 <code>PSYNC</code> 命令（支持部分同步）。</li>
+<li>主节点 <code>bgsave</code> 生成 RDB 文件，发送给从节点；从节点清空旧数据，加载 RDB。</li>
+<li>主节点将 RDB 生成期间的写命令记录到 “复制缓冲区”，发送给从节点；从节点执行这些命令，与主节点数据一致。</li>
+<li>后续主节点的写命令会实时同步到从节点（增量复制）。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>哨兵（Sentinel）的作用是什么？工作流程是怎样的？</strong></p>
+<ul>
+<li><p>作用：监控主从节点状态，当主节点宕机时自动将从节点升级为新主节点（故障转移），保证 Redis 高可用。</p>
+</li>
+<li><p>工作流程：     </p>
+<ol>
+<li><p><strong>监控</strong>：哨兵定期向主从节点发送 <code>PING</code> 命令，判断节点是否存活（主观下线）。</p>
+</li>
+<li><p><strong>判断</strong>：若主节点主观下线，哨兵集群投票（超过半数同意），标记为主节点 “客观下线”。</p>
+</li>
+<li><p>故障转移</p>
+<p>：         </p>
+<ul>
+<li>从哨兵中选举一个 “领导者” 负责处理故障转移。</li>
+<li>从所有从节点中选一个 “最优从节点”（如数据最新、优先级高）作为新主节点。</li>
+<li>让其他从节点复制新主节点，原主节点恢复后作为从节点。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>Redis 集群（Cluster）的架构是什么？如何实现分片？</strong></p>
+<ul>
+<li>架构：Redis 集群是分布式存储方案，由多个主从节点组成（每个主节点可带从节点），解决单节点容量和性能瓶颈。</li>
+<li>分片机制：     <ul>
+<li>集群将数据分为 16384 个 “槽位（slot）”，每个主节点负责一部分槽位（如 3 主节点，各负责～5461 个槽）。</li>
+<li>数据存储时，通过 <code>CRC16(key) % 16384</code> 计算 key 所属槽位，再路由到负责该槽位的主节点。</li>
+</ul>
+</li>
+<li>高可用：主节点宕机后，其从节点会升级为新主节点，接管槽位。</li>
+</ul>
+</li>
+<li><p><strong>Redis 集群如何处理槽位迁移？</strong></p>
+<ul>
+<li>槽位迁移：当集群扩容 &#x2F; 缩容时，需要将槽位从旧主节点迁移到新主节点，保证数据均衡。</li>
+<li>流程（简化）：     <ol>
+<li>源节点将槽位中的 key 逐个迁移到目标节点（先迁移，再更新槽位映射）。</li>
+<li>迁移期间，客户端访问该槽位的 key 时，源节点会返回 <code>ASK</code> 重定向，指引客户端到目标节点。</li>
+<li>所有 key 迁移完成后，更新集群槽位映射表（所有节点同步新映射）。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="四、缓存问题与解决方案"><a href="#四、缓存问题与解决方案" class="headerlink" title="四、缓存问题与解决方案"></a>四、缓存问题与解决方案</h3><ol>
+<li><p><strong>什么是缓存穿透？如何解决？</strong></p>
+<ul>
+<li>缓存穿透：查询<strong>不存在的数据</strong>（如 id&#x3D;-1 的用户），缓存和数据库都无结果，导致请求每次都穿透到数据库，压垮 DB。</li>
+<li>解决方案：     <ul>
+<li><strong>空值缓存</strong>：缓存不存在的 key（如 <code>id=-1 → null</code>），设置短期过期时间（避免缓存大量空值）。</li>
+<li><strong>布隆过滤器</strong>：提前将所有存在的 key 存入布隆过滤器，请求先过过滤器，不存在则直接返回（误判率低，适合海量数据）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>什么是缓存击穿？如何解决？</strong></p>
+<ul>
+<li>缓存击穿：<strong>热点 key 突然过期</strong>，此时大量请求同时穿透到数据库，导致 DB 压力骤增。</li>
+<li>解决方案：     <ul>
+<li><strong>热点 key 永不过期</strong>：在缓存层不设置过期时间，由业务层定期更新（适合非实时数据）。</li>
+<li><strong>互斥锁</strong>：第一个请求获取锁后查询 DB 并更新缓存，其他请求等待锁释放后从缓存获取（用 Redis 的 <code>setnx</code> 实现锁）。</li>
+<li><strong>预热与过期时间错开</strong>：提前加载热点数据，设置随机过期时间（避免大量 key 同时过期）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>什么是缓存雪崩？如何解决？</strong></p>
+<ul>
+<li>缓存雪崩：<strong>大量 key 同时过期</strong>，或缓存集群宕机，导致所有请求穿透到数据库，DB 被压垮。</li>
+<li>解决方案：     <ul>
+<li><strong>过期时间错开</strong>：给 key 过期时间加随机值（如 <code>expire + 1~5 分钟</code>），避免同时过期。</li>
+<li><strong>缓存集群高可用</strong>：部署主从 + 哨兵或集群，避免单点故障（如一台缓存机宕机，其他节点仍可用）。</li>
+<li><strong>限流降级</strong>：用 Sentinel&#x2F;Hystrix 对 DB 限流，超出阈值则返回降级数据（如 “系统繁忙”）。</li>
+<li><strong>多级缓存</strong>：本地缓存（如 Caffeine）+ 分布式缓存（Redis），减少分布式缓存压力。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>缓存与数据库一致性如何保证？</strong></p>
+<ul>
+<li><p>核心原则：</p>
+<p>最终一致性</p>
+<p>（强一致性难实现，需权衡性能）。常见方案：         </p>
+<ul>
+<li><p>更新策略</p>
+<p>：先更数据库，再删缓存（而非更新缓存）—— 避免 “脏写”（如 A 更新 DB 后更新缓存，B 同时更新 DB 并覆盖缓存，导致 A 的更新丢失）。             </p>
+<p>java</p>
+<p>运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 伪代码</span><br><span class="line">updateDB();    // 先更新数据库</span><br><span class="line">deleteCache(); // 再删除缓存（下次查询会从 DB 加载最新数据到缓存）</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+</li>
+<li><p><strong>延迟双删</strong>：解决 “删除缓存失败” 的问题 —— 更新 DB 后删缓存，隔一段时间（如 500ms）再删一次（应对第一次删除失败）。</p>
+</li>
+<li><p><strong>读写分离场景</strong>：主从复制延迟可能导致 “查从库时缓存未更新”，可在删除缓存后，短暂禁止从库读（或设置缓存过期时间小于主从延迟）。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="五、过期策略与内存管理"><a href="#五、过期策略与内存管理" class="headerlink" title="五、过期策略与内存管理"></a>五、过期策略与内存管理</h3><ol>
+<li><p><strong>Redis 的过期键删除策略是什么？</strong></p>
+<ul>
+<li>Redis 用<strong>三种策略结合</strong>处理过期键：</li>
+<li><strong>惰性删除</strong>：访问 key 时才检查是否过期，过期则删除（节省 CPU，可能浪费内存）。</li>
+<li><strong>定期删除</strong>：每隔一段时间（默认 100ms），随机抽查部分过期 key 并删除（平衡 CPU 和内存）。</li>
+<li><strong>内存淘汰机制</strong>：当内存达到 <code>maxmemory</code> 阈值，触发淘汰策略（如删除部分 key 释放内存）。</li>
+</ul>
+</li>
+<li><p><strong>Redis 的内存淘汰机制有哪些？</strong></p>
+<ul>
+<li><p>当内存满时，根据配置的 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maxmemory-policy</span><br></pre></td></tr></table></figure>
+
+<p> 淘汰 key：         </p>
+<ul>
+<li><code>volatile-lru</code>：从<strong>设置了过期时间</strong>的 key 中，淘汰最近最少使用的。</li>
+<li><code>allkeys-lru</code>：从<strong>所有 key</strong> 中，淘汰最近最少使用的（最常用）。</li>
+<li><code>volatile-lfu</code>：从设置过期时间的 key 中，淘汰最不经常使用的。</li>
+<li><code>allkeys-lfu</code>：从所有 key 中，淘汰最不经常使用的。</li>
+<li><code>volatile-random</code>：从设置过期时间的 key 中，随机淘汰。</li>
+<li><code>allkeys-random</code>：从所有 key 中，随机淘汰。</li>
+<li><code>volatile-ttl</code>：从设置过期时间的 key 中，淘汰剩余 TTL 最小的。</li>
+<li><code>noeviction</code>：不淘汰，返回错误（默认，不推荐）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="六、高级特性与实践"><a href="#六、高级特性与实践" class="headerlink" title="六、高级特性与实践"></a>六、高级特性与实践</h3><ol>
+<li><p><strong>Redis 如何实现分布式锁？</strong></p>
+<ul>
+<li><p>分布式锁用于解决分布式系统中资源竞争问题（如秒杀库存），Redis 实现核心是 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set</span><br></pre></td></tr></table></figure>
+
+<p> 命令：         </p>
+<p>bash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 加锁：key=lock:xxx，value=唯一标识（如UUID），NX（不存在才设置），PX（过期时间，防死锁）</span><br><span class="line">SET lock:product:1001 uuid-xxx NX PX 30000</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+</li>
+<li><p>解锁：需用 Lua 脚本保证原子性（先判断 value 是否为自己的标识，再删除）：     </p>
+<p>lua</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if redis.call(&#x27;get&#x27;, KEYS[1]) == ARGV[1] then</span><br><span class="line">    return redis.call(&#x27;del&#x27;, KEYS[1])</span><br><span class="line">else</span><br><span class="line">    return 0</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+</li>
+<li><p>问题：单点 Redis 可能宕机，可用 RedLock 算法（多个 Redis 实例加锁，超过半数成功才认为锁有效）。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Redis 的大 key 有什么危害？如何处理？</strong></p>
+<ul>
+<li>危害：     <ul>
+<li>占用大量内存，导致内存分布不均；</li>
+<li>序列化 &#x2F; 反序列化耗时，影响性能；</li>
+<li>删除大 key 可能阻塞主线程（如 <code>del</code> 一个百万元素的 Hash）。</li>
+</ul>
+</li>
+<li>处理：     <ul>
+<li><strong>拆分大 key</strong>：如将大 Hash 拆分为多个小 Hash（<code>user:1000 → user:1000:info</code>、<code>user:1000:orders</code>）。</li>
+<li><strong>渐进式删除</strong>：用 <code>hscan</code>&#x2F;<code>sscan</code> 分批删除大 key 的元素（如每次删 100 个），避免阻塞。</li>
+<li><strong>监控预警</strong>：通过 <code>redis-cli --bigkeys</code> 定期检测大 key，设置阈值（如 &gt;10MB 告警）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Redis 事务的特性是什么？有什么局限性？</strong></p>
+<ul>
+<li><p>特性：Redis 事务通过 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">multi</span><br></pre></td></tr></table></figure>
+
+<p>（开始）、</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec</span><br></pre></td></tr></table></figure>
+
+<p>（执行）、</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">discard</span><br></pre></td></tr></table></figure>
+
+<p>（取消）实现，支持：         </p>
+<ul>
+<li>批量执行命令（<code>exec</code> 时一次性执行）；</li>
+<li>原子性（要么全执行，要么全不执行，中间命令失败不回滚）。</li>
+</ul>
+</li>
+<li><p>局限性：     </p>
+<ul>
+<li>没有隔离级别（事务执行期间，其他客户端的命令可能插入）；</li>
+<li>命令错误分为 “语法错”（<code>exec</code> 前报错，事务取消）和 “运行错”（如对 String 用 <code>hset</code>，<code>exec</code> 会继续执行，不回滚）；</li>
+<li>不支持回滚（设计上为了性能，避免回滚日志开销）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/23/Redis/" data-id="cuidcEu8WbgjHr8J86zTF68E8" data-title="Redis" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/12/23/RocketMQ/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          RocketMQ
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/12/23/MongoDB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">MongoDB</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" rel="tag">代码拉取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" rel="tag">文章，博客框架，技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" rel="tag">服务器，游戏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" rel="tag">权限配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E6%8B%89%E5%8F%96/" style="font-size: 10px;">代码拉取</a> <a href="/tags/%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6%EF%BC%8C%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">文章，博客框架，技术</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">服务器，游戏</a> <a href="/tags/%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">权限配置</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">编程语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">十二月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/12/25/gitLaB%E9%97%AE%E9%A2%98/">gitLaB问题</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83/">大模型微调</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%8A%80%E6%9C%AF%E9%87%8C%E9%9D%A2%E7%9A%84%E2%80%98mcp%E2%80%99%E6%8A%80%E6%9C%AF/">计算机技术里面的‘mcp’技术</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/2025-8-19/">2025-8-19</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/24/%E9%82%A3%E4%BA%9B%E5%9C%A8%E5%85%AC%E5%8F%B8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84-%E8%B6%85%E7%BA%A7%E9%BB%84%E9%87%91-bug-%EF%BC%9A%E6%AF%8F%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%91%98%E9%83%BD%E8%AF%A5%E8%AE%B0%E5%8F%96%E7%9A%84%E8%A1%80%E6%B3%AA%E7%BB%8F%E9%AA%8C/">那些在公司工作中遇到的 &#39;超级黄金 bug&#39;：每个程序员都该记取的血泪经验</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 little chen<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
